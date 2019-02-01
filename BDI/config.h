@@ -8,12 +8,40 @@
 
 #pragma once
 
+#include <QVersionNumber>
+
 #include "qtfs.hpp"
 #include "qtjson.hpp"
+
+struct Repository {
+	QString name;
+	QString main;
+	QString scnd;
+	QString active;
+};
+
+struct Paths {
+	QString releaseInfo;
+};
+
+struct Urls {
+	QString github;
+	QString bd;
+	QString api;
+	Paths paths;
+};
 
 class Config final {
 public:
 	Config();
 
 	void deserialize(const QString &configPath = "config.json");
+
+private:
+	Repository _repository;
+	Urls _urls;
+	int _apiVersion;
+	QVersionNumber _installerVersion;
 };
+
+
