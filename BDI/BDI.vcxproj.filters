@@ -28,6 +28,9 @@
       <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
       <Extensions>ui</Extensions>
     </Filter>
+    <Filter Include="Headers\incl">
+      <UniqueIdentifier>{d91ac03e-9835-4f47-8201-dfce38263744}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +71,9 @@
   <ItemGroup>
     <ClInclude Include="config.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qtfs.hpp">
+      <Filter>Headers\incl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
