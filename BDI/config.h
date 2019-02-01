@@ -43,5 +43,3 @@ private:
 	int _apiVersion;
 	QVersionNumber _installerVersion;
 };
-
-
