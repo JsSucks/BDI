@@ -75,5 +75,8 @@
     <ClInclude Include="qtfs.hpp">
       <Filter>Headers\incl</Filter>
     </ClInclude>
+    <ClInclude Include="qtjson.hpp">
+      <Filter>Headers\incl</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

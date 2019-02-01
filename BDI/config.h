@@ -8,7 +8,12 @@
 
 #pragma once
 
+#include "qtfs.hpp"
+#include "qtjson.hpp"
+
 class Config final {
 public:
 	Config();
+
+	void deserialize(const QString &configPath = "config.json");
 };

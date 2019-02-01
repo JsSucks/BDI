@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="qtfs.hpp" />
+    <ClInclude Include="qtjson.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

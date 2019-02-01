@@ -11,3 +11,11 @@
 Config::Config() {
 	
 }
+
+void Config::deserialize(const QString &configPath) {
+	QFile configFile(configPath);
+	if(!configFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		// TODO Log error after logger refactor
+		return;
+	}	
+}
