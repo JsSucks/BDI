@@ -9,6 +9,7 @@
 #pragma once
 
 #include <QVersionNumber>
+#include <QUrl>
 
 #include "qtfs.hpp"
 #include "qtjson.hpp"
@@ -33,11 +34,17 @@ struct Urls {
 
 class Config final {
 public:
-	Config();
+	static Config &get() {
+		static Config instance;
+		return instance;
+	}
 
 	void deserialize(const QString &configPath = "config.json");
 
+	QUrl repository() const;
+
 private:
+	Config() { };
 	Repository _repository;
 	Urls _urls;
 	int _apiVersion;

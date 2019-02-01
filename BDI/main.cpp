@@ -9,10 +9,14 @@
 
 #include "mainwindow.h"
 #include <QtWidgets/QApplication>
+#include "config.h"
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
+	Config::get().deserialize();
+
 	MainWindow w;
 	w.show();
+
 	return a.exec();
 }

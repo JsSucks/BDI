@@ -8,9 +8,10 @@
 
 #include "config.h"
 
-Config::Config() {
-	
+QUrl Config::repository() const {
+	return QUrl(_urls.github + "/" + _repository.active + "/" + _repository.name);
 }
+
 
 void Config::deserialize(const QString &configPath) {
 	QFile configFile(configPath);
@@ -31,7 +32,7 @@ void Config::deserialize(const QString &configPath) {
 		repository["name"].toString(),
 		repository["main"].toString(),
 		repository["scnd"].toString(),
-		repository["active"].toString()
+		repository[repository["active"].toString()].toString()
 	};
 
 	auto urls = obj["urls"].toObject();
