@@ -1,6 +1,6 @@
 Third party licenses:
 
-Qt
+## Qt
 
 GNU LESSER GENERAL PUBLIC LICENSE
 The Qt Toolkit is Copyright (C) 2019 The Qt Company Ltd.
@@ -168,7 +168,7 @@ apply, that proxy's public statement of acceptance of any version is
 permanent authorization for you to choose that version for the Library.
 
 
-Roboto
+## Roboto
 
 Copyright 2019 Christian Robertson
 
@@ -182,7 +182,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Inconsolata
+## Inconsolata
 
 Copyright (c) 2019 - Raph Levien, 
 with Reserved Font Name Inconsolata
