@@ -36,6 +36,9 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
@@ -60,5 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.MD" />
+    <None Include="config.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="config.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
