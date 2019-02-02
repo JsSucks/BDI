@@ -10,6 +10,7 @@
         <file alias="logoCanary">Resources/images/LogoCanary.svg</file>
         <file alias="logoPtb">Resources/images/LogoPTB.svg</file>
         <file alias="logoStable">Resources/images/LogoStable.svg</file>
+        <file alias="pbargradient">Resources/images/pbargradient.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file alias="Inconsolata">Resources/fonts/Inconsolata-Regular.ttf</file>

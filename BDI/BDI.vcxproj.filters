@@ -37,6 +37,9 @@
     <Filter Include="Sources\ui">
       <UniqueIdentifier>{74f1c796-9b71-467d-b6d7-6bd975f29cec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Custom Controls">
+      <UniqueIdentifier>{8fea2d49-203e-4774-beb8-0077aa4c47dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="config.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pbar.cpp">
+      <Filter>Custom Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +101,9 @@
     </QtMoc>
     <QtMoc Include="splash.h">
       <Filter>Headers\ui</Filter>
+    </QtMoc>
+    <QtMoc Include="pbar.h">
+      <Filter>Custom Controls</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
