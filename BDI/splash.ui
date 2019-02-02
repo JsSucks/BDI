@@ -422,7 +422,7 @@ QPushButton::hover {
                 </widget>
                </item>
                <item>
-                <widget class="Pbar" name="progressBar">
+                <widget class="Pbar" name="pbarSystemChecks">
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
@@ -446,7 +446,7 @@ QPushButton::hover {
                 </widget>
                </item>
                <item>
-                <widget class="Pbar" name="progressBar_2">
+                <widget class="Pbar" name="pbarRemotes">
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
