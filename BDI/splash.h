@@ -9,6 +9,7 @@
 #pragma once
 
 #include <QObject>
+#include <QMouseEvent>
 
 #include "ui_splash.h"
 
@@ -20,6 +21,14 @@ public:
 
 private:
 	Ui::Splash _ui;
+
+protected:
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
+	int _mousePressX;
+	int _mousePressY;
+	bool _drag;
 
 public slots:
 	void attemptClose();

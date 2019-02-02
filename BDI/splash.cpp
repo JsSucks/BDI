@@ -17,3 +17,18 @@ Splash::Splash(QWidget *parent) : QWidget(parent) {
 void Splash::attemptClose() {
 	QApplication::quit();
 }
+
+void Splash::mouseMoveEvent(QMouseEvent* event) {
+	if (!_drag) return;
+	move(event->globalX() - _mousePressX, event->globalY() - _mousePressY);
+}
+
+void Splash::mousePressEvent(QMouseEvent* event) {
+	_drag = true;
+	_mousePressX = event->x();
+	_mousePressY = event->y();
+}
+
+void Splash::mouseReleaseEvent(QMouseEvent* event) {
+	_drag = false;
+}
