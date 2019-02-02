@@ -15,6 +15,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -31,6 +32,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QToolButton *captionBtnX;
+    QStackedWidget *mainStack;
+    QWidget *page;
+    QVBoxLayout *verticalLayout_4;
     QWidget *content;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_3;
@@ -43,12 +47,13 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *footerSpacer;
     QPushButton *btnContinue;
+    QWidget *page_2;
 
     void setupUi(QWidget *Splash)
     {
         if (Splash->objectName().isEmpty())
             Splash->setObjectName(QStringLiteral("Splash"));
-        Splash->resize(410, 252);
+        Splash->resize(410, 235);
         Splash->setStyleSheet(QLatin1String("QWidget {\n"
 "	font-family: \"Roboto\";\n"
 "	color: #AEAEAE;\n"
@@ -58,7 +63,7 @@ public:
 "	background: rgb(62, 204, 156);\n"
 "}\n"
 "\n"
-"#centralWidget {\n"
+"#centralWidget, #page, #page_2 {\n"
 "	background: rgb(30, 30, 38);\n"
 "}\n"
 "\n"
@@ -102,7 +107,15 @@ public:
 
         verticalLayout_3->addWidget(caption);
 
-        content = new QWidget(centralWidget);
+        mainStack = new QStackedWidget(centralWidget);
+        mainStack->setObjectName(QStringLiteral("mainStack"));
+        page = new QWidget();
+        page->setObjectName(QStringLiteral("page"));
+        verticalLayout_4 = new QVBoxLayout(page);
+        verticalLayout_4->setSpacing(0);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        content = new QWidget(page);
         content->setObjectName(QStringLiteral("content"));
         verticalLayout_2 = new QVBoxLayout(content);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
@@ -159,9 +172,9 @@ public:
         verticalLayout_2->addWidget(label_2);
 
 
-        verticalLayout_3->addWidget(content);
+        verticalLayout_4->addWidget(content);
 
-        footer = new QWidget(centralWidget);
+        footer = new QWidget(page);
         footer->setObjectName(QStringLiteral("footer"));
         footer->setMinimumSize(QSize(0, 0));
         horizontalLayout_2 = new QHBoxLayout(footer);
@@ -189,7 +202,14 @@ public:
         horizontalLayout_2->addWidget(btnContinue);
 
 
-        verticalLayout_3->addWidget(footer);
+        verticalLayout_4->addWidget(footer);
+
+        mainStack->addWidget(page);
+        page_2 = new QWidget();
+        page_2->setObjectName(QStringLiteral("page_2"));
+        mainStack->addWidget(page_2);
+
+        verticalLayout_3->addWidget(mainStack);
 
 
         verticalLayout->addWidget(centralWidget);
@@ -197,6 +217,10 @@ public:
 
         retranslateUi(Splash);
         QObject::connect(captionBtnX, SIGNAL(clicked()), Splash, SLOT(attemptClose()));
+        QObject::connect(btnContinue, SIGNAL(clicked()), Splash, SLOT(btnContinueClicked()));
+
+        mainStack->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(Splash);
     } // setupUi

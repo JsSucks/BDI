@@ -32,3 +32,7 @@ void Splash::mousePressEvent(QMouseEvent* event) {
 void Splash::mouseReleaseEvent(QMouseEvent* event) {
 	_drag = false;
 }
+
+void Splash::btnContinueClicked() {
+	_ui.mainStack->setCurrentIndex(1);
+}

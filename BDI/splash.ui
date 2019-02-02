@@ -23,7 +23,7 @@
 	background: rgb(62, 204, 156);
 }
 
-#centralWidget, #stackedWidget, #page, #page_2 {
+#centralWidget, #page, #page_2 {
 	background: rgb(30, 30, 38);
 }
 
@@ -138,7 +138,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QStackedWidget" name="mainStack">
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -362,8 +362,25 @@ QPushButton::hover {
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnContinue</sender>
+   <signal>clicked()</signal>
+   <receiver>Splash</receiver>
+   <slot>btnContinueClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>117</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>attemptClose()</slot>
+  <slot>btnContinueClicked()</slot>
  </slots>
 </ui>

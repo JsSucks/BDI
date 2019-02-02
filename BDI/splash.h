@@ -32,6 +32,7 @@ protected:
 
 public slots:
 	void attemptClose();
+	void btnContinueClicked();
 
 signals:
 	void finished();
