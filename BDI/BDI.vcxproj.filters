@@ -60,6 +60,9 @@
     <ClCompile Include="discord.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="product.cpp">
+      <Filter>Custom Controls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -67,6 +70,9 @@
     </QtUic>
     <QtUic Include="splash.ui">
       <Filter>Ui</Filter>
+    </QtUic>
+    <QtUic Include="product.ui">
+      <Filter>Custom Controls</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +116,9 @@
     </QtMoc>
     <QtMoc Include="discord.h">
       <Filter>Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="product.h">
+      <Filter>Custom Controls</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
