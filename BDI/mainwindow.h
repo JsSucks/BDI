@@ -9,14 +9,17 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+
 #include "ui_mainwindow.h"
 
-class MainWindow : public QMainWindow {
+#include "splash.h"
+
+class MainWindow final : public QMainWindow {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = Q_NULLPTR);
+	explicit MainWindow(QWidget *parent = Q_NULLPTR);
 
 private:
-	Ui::MainWindowClass ui;
+	Ui::MainWindowClass _ui;
 };

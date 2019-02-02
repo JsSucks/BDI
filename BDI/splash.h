@@ -6,16 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#pragma once
 
-#include "mainwindow.h"
-#include <QtWidgets/QApplication>
-#include "config.h"
+#include <QObject>
 
-int main(int argc, char *argv[]) {
-	QApplication app(argc, argv);
-	Config::get().deserialize();
+#include "ui_splash.h"
 
-	MainWindow w;
+class Splash final : public QWidget {
+	Q_OBJECT
 
-	return app.exec();
-}
+public:
+	explicit Splash(QWidget *parent = Q_NULLPTR);
+
+private:
+	Ui::Splash _ui;
+};

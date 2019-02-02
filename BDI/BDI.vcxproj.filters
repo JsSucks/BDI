@@ -31,25 +31,32 @@
     <Filter Include="Headers\incl">
       <UniqueIdentifier>{d91ac03e-9835-4f47-8201-dfce38263744}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\ui">
+      <UniqueIdentifier>{06a90fe5-1e0a-4adb-923c-3c1e9f1c6b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ui">
+      <UniqueIdentifier>{74f1c796-9b71-467d-b6d7-6bd975f29cec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="mainwindow.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="splash.cpp">
+      <Filter>Sources\ui</Filter>
     </ClCompile>
     <ClCompile Include="config.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="mainwindow.h">
-      <Filter>Headers</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
+      <Filter>Ui</Filter>
+    </QtUic>
+    <QtUic Include="splash.ui">
       <Filter>Ui</Filter>
     </QtUic>
   </ItemGroup>
@@ -69,14 +76,22 @@
     <None Include="config.json" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="qtfs.hpp">
       <Filter>Headers\incl</Filter>
     </ClInclude>
     <ClInclude Include="qtjson.hpp">
       <Filter>Headers\incl</Filter>
     </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="mainwindow.h">
+      <Filter>Headers\ui</Filter>
+    </QtMoc>
+    <QtMoc Include="splash.h">
+      <Filter>Headers\ui</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

@@ -10,5 +10,8 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-	ui.setupUi(this);
+	_ui.setupUi(this);
+
+	auto splash = new Splash();
+	splash->show();
 }

@@ -6,16 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#include "splash.h"
 
-#include "mainwindow.h"
-#include <QtWidgets/QApplication>
-#include "config.h"
-
-int main(int argc, char *argv[]) {
-	QApplication app(argc, argv);
-	Config::get().deserialize();
-
-	MainWindow w;
-
-	return app.exec();
+Splash::Splash(QWidget *parent) : QWidget(parent) {
+	setWindowFlags(Qt::FramelessWindowHint);
+	_ui.setupUi(this);
 }
