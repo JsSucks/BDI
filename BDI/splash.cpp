@@ -7,6 +7,7 @@
  */
 
 #include "splash.h"
+#include <QTimer>
 
 Splash::Splash(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);

@@ -22,4 +22,7 @@ public:
 
 private:
 	Ui::MainWindowClass _ui;
+
+public slots:
+	void splashFinished();
 };

@@ -13,5 +13,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	_ui.setupUi(this);
 
 	auto splash = new Splash();
+	connect(splash, &Splash::finished, this, &MainWindow::splashFinished);
 	splash->show();
 }
+
+void MainWindow::splashFinished() {
+	show();
+}
+

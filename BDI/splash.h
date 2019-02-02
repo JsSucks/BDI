@@ -20,4 +20,7 @@ public:
 
 private:
 	Ui::Splash _ui;
+
+signals:
+	void finished();
 };
