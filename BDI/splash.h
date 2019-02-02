@@ -22,6 +22,8 @@ public:
 private:
 	Ui::Splash _ui;
 
+	void systemChecks();
+
 protected:
 	void mouseMoveEvent(QMouseEvent *event) override;
 	void mousePressEvent(QMouseEvent *event) override;

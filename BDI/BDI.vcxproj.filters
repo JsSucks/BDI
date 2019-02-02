@@ -57,6 +57,9 @@
     <ClCompile Include="pbar.cpp">
       <Filter>Custom Controls</Filter>
     </ClCompile>
+    <ClCompile Include="discord.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -104,6 +107,9 @@
     </QtMoc>
     <QtMoc Include="pbar.h">
       <Filter>Custom Controls</Filter>
+    </QtMoc>
+    <QtMoc Include="discord.h">
+      <Filter>Headers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,9 @@ void Splash::attemptClose() {
 	QApplication::quit();
 }
 
+void Splash::systemChecks() {
+}
+
 void Splash::mouseMoveEvent(QMouseEvent* event) {
 	if (!_drag) return;
 	move(event->globalX() - _mousePressX, event->globalY() - _mousePressY);
