@@ -19,6 +19,7 @@
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "pbar.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -48,6 +49,19 @@ public:
     QSpacerItem *footerSpacer;
     QPushButton *btnContinue;
     QWidget *page_2;
+    QVBoxLayout *verticalLayout_6;
+    QWidget *content_2;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *lblLogo_2;
+    QLabel *lblLogoText_3;
+    QSpacerItem *verticalSpacer_3;
+    QVBoxLayout *systemChecksLayout;
+    QLabel *label_3;
+    Pbar *progressBar;
+    QVBoxLayout *remoteChecksLayout;
+    QLabel *label_4;
+    Pbar *progressBar_2;
 
     void setupUi(QWidget *Splash)
     {
@@ -207,6 +221,76 @@ public:
         mainStack->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
+        verticalLayout_6 = new QVBoxLayout(page_2);
+        verticalLayout_6->setSpacing(0);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(0, 0, 0, 0);
+        content_2 = new QWidget(page_2);
+        content_2->setObjectName(QStringLiteral("content_2"));
+        verticalLayout_5 = new QVBoxLayout(content_2);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        lblLogo_2 = new QLabel(content_2);
+        lblLogo_2->setObjectName(QStringLiteral("lblLogo_2"));
+        lblLogo_2->setMinimumSize(QSize(50, 50));
+        lblLogo_2->setMaximumSize(QSize(50, 50));
+        lblLogo_2->setPixmap(QPixmap(QString::fromUtf8(":/images/logoPtb")));
+        lblLogo_2->setScaledContents(true);
+        lblLogo_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        horizontalLayout_4->addWidget(lblLogo_2);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_4);
+
+        lblLogoText_3 = new QLabel(content_2);
+        lblLogoText_3->setObjectName(QStringLiteral("lblLogoText_3"));
+        lblLogoText_3->setFont(font);
+
+        verticalLayout_5->addWidget(lblLogoText_3);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_5->addItem(verticalSpacer_3);
+
+        systemChecksLayout = new QVBoxLayout();
+        systemChecksLayout->setObjectName(QStringLiteral("systemChecksLayout"));
+        label_3 = new QLabel(content_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        systemChecksLayout->addWidget(label_3);
+
+        progressBar = new Pbar(content_2);
+        progressBar->setObjectName(QStringLiteral("progressBar"));
+        progressBar->setMaximumSize(QSize(16777215, 8));
+        progressBar->setValue(24);
+
+        systemChecksLayout->addWidget(progressBar);
+
+
+        verticalLayout_5->addLayout(systemChecksLayout);
+
+        remoteChecksLayout = new QVBoxLayout();
+        remoteChecksLayout->setObjectName(QStringLiteral("remoteChecksLayout"));
+        label_4 = new QLabel(content_2);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        remoteChecksLayout->addWidget(label_4);
+
+        progressBar_2 = new Pbar(content_2);
+        progressBar_2->setObjectName(QStringLiteral("progressBar_2"));
+        progressBar_2->setMaximumSize(QSize(16777215, 8));
+        progressBar_2->setValue(24);
+
+        remoteChecksLayout->addWidget(progressBar_2);
+
+
+        verticalLayout_5->addLayout(remoteChecksLayout);
+
+
+        verticalLayout_6->addWidget(content_2);
+
         mainStack->addWidget(page_2);
 
         verticalLayout_3->addWidget(mainStack);
@@ -219,7 +303,7 @@ public:
         QObject::connect(captionBtnX, SIGNAL(clicked()), Splash, SLOT(attemptClose()));
         QObject::connect(btnContinue, SIGNAL(clicked()), Splash, SLOT(btnContinueClicked()));
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Splash);
@@ -234,6 +318,10 @@ public:
         label->setText(QApplication::translate("Splash", "<html><head/><body><p align=\"center\">To learn more about privacy, see the BetterDiscord <a href=\"https://betterdiscord.net/fwd?id=pp\"><span style=\" text-decoration: none; color:#3ecc9c;\">Privacy Policy</span></a></p></body></html>", nullptr));
         label_2->setText(QApplication::translate("Splash", "<html><head/><body><p align=\"center\">By continuing you agree to the BetterDiscord <a href=\"https://betterdiscord.net/fwd?id=slt\"><span style=\"text-decoration: none; color:#3ecc9c;\">Software License Terms</span></a></p></body></html>", nullptr));
         btnContinue->setText(QApplication::translate("Splash", "Continue", nullptr));
+        lblLogo_2->setText(QString());
+        lblLogoText_3->setText(QApplication::translate("Splash", "<html><head/><body><p align=\"center\"><span style=\" color:#3ecc9c;\">Better</span><span style=\" color:#ffffff;\">Discord</span></p></body></html>", nullptr));
+        label_3->setText(QApplication::translate("Splash", "System Checks", nullptr));
+        label_4->setText(QApplication::translate("Splash", "Remote Resources", nullptr));
     } // retranslateUi
 
 };
