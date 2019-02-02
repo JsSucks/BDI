@@ -430,7 +430,7 @@ QPushButton::hover {
                   </size>
                  </property>
                  <property name="value">
-                  <number>24</number>
+                  <number>0</number>
                  </property>
                 </widget>
                </item>
@@ -454,7 +454,7 @@ QPushButton::hover {
                   </size>
                  </property>
                  <property name="value">
-                  <number>24</number>
+                  <number>0</number>
                  </property>
                 </widget>
                </item>

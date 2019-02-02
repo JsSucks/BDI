@@ -58,10 +58,10 @@ public:
     QSpacerItem *verticalSpacer_3;
     QVBoxLayout *systemChecksLayout;
     QLabel *label_3;
-    Pbar *progressBar;
+    Pbar *pbarSystemChecks;
     QVBoxLayout *remoteChecksLayout;
     QLabel *label_4;
-    Pbar *progressBar_2;
+    Pbar *pbarRemotes;
 
     void setupUi(QWidget *Splash)
     {
@@ -261,12 +261,12 @@ public:
 
         systemChecksLayout->addWidget(label_3);
 
-        progressBar = new Pbar(content_2);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setMaximumSize(QSize(16777215, 8));
-        progressBar->setValue(24);
+        pbarSystemChecks = new Pbar(content_2);
+        pbarSystemChecks->setObjectName(QStringLiteral("pbarSystemChecks"));
+        pbarSystemChecks->setMaximumSize(QSize(16777215, 8));
+        pbarSystemChecks->setValue(0);
 
-        systemChecksLayout->addWidget(progressBar);
+        systemChecksLayout->addWidget(pbarSystemChecks);
 
 
         verticalLayout_5->addLayout(systemChecksLayout);
@@ -278,12 +278,12 @@ public:
 
         remoteChecksLayout->addWidget(label_4);
 
-        progressBar_2 = new Pbar(content_2);
-        progressBar_2->setObjectName(QStringLiteral("progressBar_2"));
-        progressBar_2->setMaximumSize(QSize(16777215, 8));
-        progressBar_2->setValue(24);
+        pbarRemotes = new Pbar(content_2);
+        pbarRemotes->setObjectName(QStringLiteral("pbarRemotes"));
+        pbarRemotes->setMaximumSize(QSize(16777215, 8));
+        pbarRemotes->setValue(0);
 
-        remoteChecksLayout->addWidget(progressBar_2);
+        remoteChecksLayout->addWidget(pbarRemotes);
 
 
         verticalLayout_5->addLayout(remoteChecksLayout);

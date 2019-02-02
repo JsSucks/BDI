@@ -21,6 +21,8 @@ public:
 	explicit Pbar(QWidget *parent);
 
 private:
+	QTimer *_animTimer;
+
 	QColor _borderColour;
 	QColor _chunkColour;
 	QBrush _chunkBrush;
@@ -33,5 +35,8 @@ private:
 
 protected:
 	void paintEvent(QPaintEvent *event) override;
+
+public slots:
+	void animate();
 };
 

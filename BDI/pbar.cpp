@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 #include "pbar.h"
 
 Pbar::Pbar(QWidget* parent) : QProgressBar(parent) {
@@ -16,6 +15,25 @@ Pbar::Pbar(QWidget* parent) : QProgressBar(parent) {
 	_bgColour = QColor(30, 30, 38);
 	_bgBrush = QBrush(_bgColour, Qt::SolidPattern);
 	_gradient = QImage(":/images/pbargradient");
+
+	_trailingValue = static_cast<double>(value());
+	_tracker = qrand() % -20;
+
+	_animTimer = new QTimer(this);
+	connect(_animTimer, &QTimer::timeout, this, &Pbar::animate);
+	_animTimer->start(5);
+}
+
+void Pbar::animate() {
+	if (_trailingValue >= maximum() - 0.1) _animTimer->stop();
+	_tracker += 2;
+	if (_tracker > width()) _tracker = qrand() % -20;
+	if (_trailingValue >= value()) {
+		update();
+		return;
+	}
+	_trailingValue = _trailingValue + (value() - _trailingValue) / 10;
+	update();
 }
 
 void Pbar::paintEvent(QPaintEvent* event) {
@@ -29,7 +47,6 @@ void Pbar::paintEvent(QPaintEvent* event) {
 
 	painter.fillRect(0, 0, chunk, height() - 1, _chunkBrush);
 	if (value() >= maximum()) return;
-
 	painter.drawImage(QRectF(_tracker, 1, _gradient.width() / 2, _gradient.height()), _gradient);
 
 	painter.fillRect(chunk, 1, width(), height() - 2, _bgBrush);
