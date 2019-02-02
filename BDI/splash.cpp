@@ -13,3 +13,7 @@ Splash::Splash(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
 	_ui.setupUi(this);
 }
+
+void Splash::attemptClose() {
+	QApplication::quit();
+}

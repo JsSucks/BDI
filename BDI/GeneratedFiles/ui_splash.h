@@ -43,6 +43,14 @@ public:
 "\n"
 "#centralWidget {\n"
 "	background: rgb(30, 30, 38);\n"
+"}\n"
+"\n"
+"#captionBtnX {\n"
+"	border-image: url(:/images/xNormal);\n"
+"}\n"
+"\n"
+"#captionBtnX:hover {\n"
+"	border-image: url(:/images/xHover);\n"
 "}"));
         verticalLayout = new QVBoxLayout(Splash);
         verticalLayout->setSpacing(0);
@@ -56,17 +64,21 @@ public:
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         caption = new QWidget(centralWidget);
         caption->setObjectName(QStringLiteral("caption"));
-        caption->setMaximumSize(QSize(16777215, 30));
+        caption->setMaximumSize(QSize(16777215, 24));
         horizontalLayout = new QHBoxLayout(caption);
+        horizontalLayout->setSpacing(0);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         captionBtnX = new QToolButton(caption);
         captionBtnX->setObjectName(QStringLiteral("captionBtnX"));
-        captionBtnX->setMinimumSize(QSize(30, 30));
-        captionBtnX->setMaximumSize(QSize(30, 30));
+        captionBtnX->setMinimumSize(QSize(30, 24));
+        captionBtnX->setMaximumSize(QSize(30, 24));
+        captionBtnX->setStyleSheet(QStringLiteral("background: transparent;"));
+        captionBtnX->setIconSize(QSize(30, 30));
 
         horizontalLayout->addWidget(captionBtnX);
 
@@ -85,6 +97,7 @@ public:
 
 
         retranslateUi(Splash);
+        QObject::connect(captionBtnX, SIGNAL(clicked()), Splash, SLOT(attemptClose()));
 
         QMetaObject::connectSlotsByName(Splash);
     } // setupUi

@@ -145,5 +145,25 @@
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>captionBtnX</sender>
+   <signal>clicked()</signal>
+   <receiver>Splash</receiver>
+   <slot>attemptClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>408</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>118</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>attemptClose()</slot>
+ </slots>
 </ui>

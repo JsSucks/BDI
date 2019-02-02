@@ -21,6 +21,9 @@ public:
 private:
 	Ui::Splash _ui;
 
+public slots:
+	void attemptClose();
+
 signals:
 	void finished();
 };
