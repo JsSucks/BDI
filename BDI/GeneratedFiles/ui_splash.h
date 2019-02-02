@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
@@ -31,13 +33,28 @@ public:
     QToolButton *captionBtnX;
     QWidget *content;
     QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *lblLogo;
+    QLabel *lblLogoText_2;
+    QSpacerItem *verticalSpacer_2;
+    QLabel *label;
+    QLabel *label_2;
+    QWidget *footer;
+    QHBoxLayout *horizontalLayout_2;
+    QSpacerItem *footerSpacer;
+    QPushButton *btnContinue;
 
     void setupUi(QWidget *Splash)
     {
         if (Splash->objectName().isEmpty())
             Splash->setObjectName(QStringLiteral("Splash"));
-        Splash->resize(426, 237);
-        Splash->setStyleSheet(QLatin1String("#Splash {\n"
+        Splash->resize(410, 252);
+        Splash->setStyleSheet(QLatin1String("QWidget {\n"
+"	font-family: \"Roboto\";\n"
+"	color: #AEAEAE;\n"
+"}\n"
+"\n"
+"#Splash {\n"
 "	background: rgb(62, 204, 156);\n"
 "}\n"
 "\n"
@@ -89,8 +106,90 @@ public:
         content->setObjectName(QStringLiteral("content"));
         verticalLayout_2 = new QVBoxLayout(content);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        lblLogo = new QLabel(content);
+        lblLogo->setObjectName(QStringLiteral("lblLogo"));
+        lblLogo->setMinimumSize(QSize(50, 50));
+        lblLogo->setMaximumSize(QSize(50, 50));
+        lblLogo->setPixmap(QPixmap(QString::fromUtf8(":/images/logoPtb")));
+        lblLogo->setScaledContents(true);
+        lblLogo->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        horizontalLayout_3->addWidget(lblLogo);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_3);
+
+        lblLogoText_2 = new QLabel(content);
+        lblLogoText_2->setObjectName(QStringLiteral("lblLogoText_2"));
+        QFont font;
+        font.setFamily(QStringLiteral("Roboto"));
+        font.setPointSize(16);
+        lblLogoText_2->setFont(font);
+
+        verticalLayout_2->addWidget(lblLogoText_2);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer_2);
+
+        label = new QLabel(content);
+        label->setObjectName(QStringLiteral("label"));
+        label->setMinimumSize(QSize(0, 15));
+        label->setMaximumSize(QSize(16777215, 15));
+        QFont font1;
+        font1.setFamily(QStringLiteral("Roboto"));
+        font1.setPointSize(8);
+        label->setFont(font1);
+        label->setStyleSheet(QStringLiteral(""));
+        label->setMargin(0);
+        label->setOpenExternalLinks(true);
+
+        verticalLayout_2->addWidget(label);
+
+        label_2 = new QLabel(content);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setMinimumSize(QSize(0, 15));
+        label_2->setMaximumSize(QSize(16777215, 15));
+        label_2->setLineWidth(1);
+        label_2->setMargin(0);
+        label_2->setOpenExternalLinks(true);
+
+        verticalLayout_2->addWidget(label_2);
+
 
         verticalLayout_3->addWidget(content);
+
+        footer = new QWidget(centralWidget);
+        footer->setObjectName(QStringLiteral("footer"));
+        footer->setMinimumSize(QSize(0, 0));
+        horizontalLayout_2 = new QHBoxLayout(footer);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        footerSpacer = new QSpacerItem(405, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(footerSpacer);
+
+        btnContinue = new QPushButton(footer);
+        btnContinue->setObjectName(QStringLiteral("btnContinue"));
+        btnContinue->setStyleSheet(QLatin1String("QPushButton {\n"
+"	background: transparent;\n"
+"    color: #fff;\n"
+"    padding: 7px 10px;\n"
+"    min-width: 50px;\n"
+"	background: #17171c;\n"
+"	border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	background: rgb(35, 35, 38);\n"
+"	background: rgb(62, 204, 156)\n"
+"}"));
+
+        horizontalLayout_2->addWidget(btnContinue);
+
+
+        verticalLayout_3->addWidget(footer);
 
 
         verticalLayout->addWidget(centralWidget);
@@ -106,6 +205,11 @@ public:
     {
         Splash->setWindowTitle(QApplication::translate("Splash", "Form", nullptr));
         captionBtnX->setText(QString());
+        lblLogo->setText(QString());
+        lblLogoText_2->setText(QApplication::translate("Splash", "<html><head/><body><p align=\"center\"><span style=\" color:#3ecc9c;\">Better</span><span style=\" color:#ffffff;\">Discord</span></p></body></html>", nullptr));
+        label->setText(QApplication::translate("Splash", "<html><head/><body><p align=\"center\">To learn more about privacy, see the BetterDiscord <a href=\"https://betterdiscord.net/fwd?id=pp\"><span style=\" text-decoration: none; color:#3ecc9c;\">Privacy Policy</span></a></p></body></html>", nullptr));
+        label_2->setText(QApplication::translate("Splash", "<html><head/><body><p align=\"center\">By continuing you agree to the BetterDiscord <a href=\"https://betterdiscord.net/fwd?id=slt\"><span style=\"text-decoration: none; color:#3ecc9c;\">Software License Terms</span></a></p></body></html>", nullptr));
+        btnContinue->setText(QApplication::translate("Splash", "Continue", nullptr));
     } // retranslateUi
 
 };
