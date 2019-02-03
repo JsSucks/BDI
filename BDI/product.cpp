@@ -50,6 +50,10 @@ void Product::setCheckedBtn(const int index) const {
 	}
 }
 
+void Product::setIcon(const QString &iconPath) const {
+	_ui.icon->setPixmap(QPixmap(iconPath));
+}
+
 void Product::checkBtn(bool checked) {
 	auto btn = qobject_cast<QPushButton*>(sender());
 	_ui.btnInstall->setChecked(false);

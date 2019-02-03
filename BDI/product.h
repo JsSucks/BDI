@@ -21,6 +21,7 @@ public:
 	void setSkipBtnState(bool enabled, const QString &text = "Skip") const;
 	void setUninstallBtnState(bool enabled, const QString &text = "Remove") const;
 	void setCheckedBtn(int index) const;
+	void setIcon(const QString &iconPath) const;
 
 	bool install() const { return _ui.btnInstall->isChecked(); }
 	bool skip() const { return _ui.btnSkip->isChecked(); }
