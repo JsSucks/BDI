@@ -13,7 +13,7 @@
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
-	CONFIG->deserialize();
+	Config::deserialize();
 
 	MainWindow w;
 

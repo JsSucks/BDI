@@ -16,39 +16,27 @@
 
 #define TEST_MODE
 
-struct Repository {
+struct Repository final {
 	QString name;
 	QString main;
 	QString scnd;
 	QString active;
 };
 
-struct Paths {
+struct Paths final {
 	QString releaseInfo;
 };
 
-struct Urls {
+struct Urls final {
 	QString github;
 	QString bd;
 	QString api;
 	Paths paths;
 };
 
-class Config final {
-public:
-	Config();
-
+namespace Config {
 	void deserialize(const QString &configPath = "config.json");
-
-	QUrl repository() const;
-	QUrl ghuc(const QString &path) const;
-	Urls urls() const;
-
-private:
-	Repository _repository;
-	Urls _urls;
-	int _apiVersion;
-	QVersionNumber _installerVersion;
-};
-
-extern Config *CONFIG;
+	QUrl repository();
+	QUrl qhuc(const QString &path);
+	QVersionNumber installerVersion();
+}

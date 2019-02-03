@@ -14,6 +14,8 @@ Splash::Splash(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
 	_ui.setupUi(this);
 	_ui.mainStack->setCurrentIndex(0);
+	
+	qDebug(qPrintable(Config::repository().url()));
 }
 
 void Splash::attemptClose() {
@@ -78,6 +80,7 @@ void Splash::btnContinueClicked() {
 	rf.open(QIODevice::ReadOnly | QIODevice::Text);
 	remotes(QJsonDocument::fromJson(rf.readAll()).object());
 #else
+	/*
 	auto remotesFile = new RemoteFile(Config::get().ghuc(Config::get().urls().paths.releaseInfo));
 	connect(remotesFile, &RemoteFile::error, [](RemoteFile * remoteFile) {
 		Logger::Debug(remoteFile->errorMsg());
@@ -86,5 +89,6 @@ void Splash::btnContinueClicked() {
 		remotes(QJsonDocument::fromJson(remoteFile->bytes()).object());
 	});
 	remotesFile->download();
+	*/
 #endif
 }
