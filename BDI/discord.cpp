@@ -111,6 +111,37 @@ Product *Discord::widget() {
 	if(_product != nullptr) return _product;
 
 	_product = new Product();
+	_product->setText(
+		"BetterDiscord v" + _bdCoreVersion.toString() +
+		"/" + _bdClientVersion.toString() +
+		" for " + channelString() + " " + _latestVersion.toString()
+	);
+
+	if(_channel == "canary") _product->setIcon(":/images/logoCanary");
+	else if(_channel == "ptb") _product->setIcon(":/images/logoPtb");
+	else _product->setIcon(":/images/logoStable");
+
+	switch(_installState) {
+		case NOT_INSTALLED:
+		case UNKNOWN:
+			_product->setCheckedBtn(1);
+			_product->setInstallBtnState(true, "Install");
+			_product->setUninstallBtnState(false);
+			break;
+		case INSTALLED:
+		case BROKEN:
+			_product->setCheckedBtn(0);
+			_product->setInstallBtnState(true, "Repair");
+			_product->setUninstallBtnState(true);
+			break;
+		case INSTALLING:
+		case UNAVAILABLE:
+		default: break;
+	}
+
+	resolveAction(false);
+
+	connect(_product, &Product::actionChanged, this, &Discord::actionChange);
 
 	return _product;
 }
