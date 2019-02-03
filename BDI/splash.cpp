@@ -14,8 +14,6 @@ Splash::Splash(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
 	_ui.setupUi(this);
 	_ui.mainStack->setCurrentIndex(0);
-	
-	qDebug(qPrintable(Config::repository().url()));
 }
 
 void Splash::attemptClose() {
