@@ -12,7 +12,6 @@ QUrl Config::repository() const {
 	return QUrl(_urls.github + "/" + _repository.active + "/" + _repository.name);
 }
 
-
 void Config::deserialize(const QString &configPath) {
 	QFile configFile(configPath);
 	if(!configFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
