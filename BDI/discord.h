@@ -13,6 +13,7 @@
 #include <QTextStream>
 
 #include "qtfs.hpp"
+#include "product.h"
 
 class Discord final : public QObject {
 	Q_OBJECT
@@ -54,6 +55,8 @@ private:
 	QVersionNumber _bdCoreVersion;
 	QVersionNumber _bdClientVersion;
 	QString _stub;
+
+	Product *_product = nullptr;
 
 	void resolveAction(bool debug = true);
 	void actionChange();
