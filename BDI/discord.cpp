@@ -26,6 +26,7 @@ QString Discord::applicationName() const {
 	return "Unknown";
 }
 
+#if defined(Q_OS_WIN)
 void Discord::locate() {
 	_baseDir = resolveBaseDir();
 
@@ -33,23 +34,23 @@ void Discord::locate() {
 		_installState = UNAVAILABLE;
 		return;
 	}
-	// TODO This is pretty much windows only stuff
+
 	QDirIterator it(_baseDir, QDirIterator::NoIteratorFlags);
 
 	QVersionNumber latestVersion(0, 0, 0);
 	QDir latestDir;
 
-	while (it.hasNext()) {
+	while(it.hasNext()) {
 		auto dir = QDir(it.next());
 		auto nextVersion = resolveVersion(dir.dirName());
 
-		if (QVersionNumber::compare(nextVersion, latestVersion) <= 0) continue;
+		if(QVersionNumber::compare(nextVersion, latestVersion) <= 0) continue;
 
 		latestVersion = nextVersion;
 		latestDir = dir;
 	}
 
-	if (latestVersion.majorVersion() == 0 && latestVersion.minorVersion() == 0 && latestVersion.microVersion() == 0) {
+	if(latestVersion.majorVersion() == 0 && latestVersion.minorVersion() == 0 && latestVersion.microVersion() == 0) {
 		_installState = UNAVAILABLE;
 		return;
 	}
@@ -58,25 +59,32 @@ void Discord::locate() {
 
 	auto rDir = QDir(QDir::toNativeSeparators(latestDir.absolutePath() + "/resources"));
 
-	if (!rDir.exists()) {
+	if(!rDir.exists()) {
 		_installState = UNAVAILABLE;
 		return;
 	}
 
 	_appDir = QDir(QDir::toNativeSeparators(rDir.absolutePath() + "/app"));
 
-	if (!_appDir.exists()) {
+	if(!_appDir.exists()) {
 		_installState = NOT_INSTALLED;
 		return;
 	}
 
 	QFile bdJsonFile(_appDir.filePath("bd.json"));
-	if (!bdJsonFile.exists()) {
+	if(!bdJsonFile.exists()) {
 		_installState = NOT_INSTALLED;
 		return;
 	}
 	_installState = INSTALLED;
 }
+#elif defined(Q_OS_LINUX)
+void Discord::locate() {}
+#elif defined(Q_OS_DARWIN)
+void Discord::locate() {}
+#else
+void Discord::locate() { _installState = UNAVAILABLE; }
+#endif
 
 bool Discord::inject() {
 	if(!_appDir.exists()) {
