@@ -1,0 +1,30 @@
+{
+    "mver": "2.0.0",
+    "stub": "/master/installer/stub.js",
+    "files": [
+        {
+            "id": "client",
+            "name": "client.zip",
+            "version": "2.0.0",
+            "size": "436228",
+            "remote": "/releases/download/InstallerTest/client.zip",
+            "hash": "B0543B1D458021BC8F73CCEFB66185738582FD5B27B6F803F3ACB4989C9D1EBA"
+        },
+        {
+            "id": "core",
+            "name": "core.zip",
+            "version": "2.0.0",
+            "size": "6983826",
+            "remote": "/releases/download/InstallerTest/core.zip",
+            "hash": "CF2AB488FB4FFF0EF2F5EC41930A62753D7DA5062954CDE1C27DD931F4560DC9"
+        },
+        {
+            "id": "csseditor",
+            "name": "csseditor.zip",
+            "version": "0.0.1",
+            "size": "209435",
+            "remote": "/releases/download/InstallerTest/csseditor.zip",
+            "hash": "5AD55F136AB515F17D163F017122E6690F01441F004967F53A50C218801A474E"
+        }
+    ]
+}

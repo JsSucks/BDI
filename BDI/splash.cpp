@@ -46,6 +46,12 @@ void Splash::systemChecks() {
 	Logger::Debug("System checks finished");
 }
 
+void Splash::remotes(const QJsonObject &remotes) {
+	_ui.pbarRemotes->setValue(100);
+	emit finished(_discords, remotes);
+}
+
+
 void Splash::mouseMoveEvent(QMouseEvent *event) {
 	if (!_drag) return;
 	move(event->globalX() - _mousePressX, event->globalY() - _mousePressY);
@@ -64,4 +70,12 @@ void Splash::mouseReleaseEvent(QMouseEvent *event) {
 void Splash::btnContinueClicked() {
 	_ui.mainStack->setCurrentIndex(1);
 	systemChecks();
+	_ui.pbarRemotes->setValue(50);
+#ifdef TEST_MODE
+	QFile rf("releaseinfo.json");
+	rf.open(QIODevice::ReadOnly | QIODevice::Text);
+	remotes(QJsonDocument::fromJson(rf.readAll()).object());
+#else
+
+#endif
 }

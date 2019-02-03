@@ -50,7 +50,7 @@ void Discord::locate() {
 		latestDir = dir;
 	}
 
-	if(latestVersion.majorVersion() == 0 && latestVersion.minorVersion() == 0 && latestVersion.microVersion() == 0) {
+	if(QVersionNumber::compare(_latestVersion, QVersionNumber(0,0,0)) == 0) {
 		_installState = UNAVAILABLE;
 		return;
 	}
@@ -145,7 +145,6 @@ Product *Discord::widget() {
 
 	return _product;
 }
-
 
 void Discord::resolveAction(const bool debug) {
 	const auto oldAction = _action;

@@ -13,6 +13,7 @@
 #include <QVector>
 
 #include "ui_splash.h"
+#include "config.h"
 #include "logger.h"
 #include "discord.h"
 
@@ -27,7 +28,7 @@ private:
 	QVector<Discord*> _discords;
 
 	void systemChecks();
-
+	void remotes(const QJsonObject &remotes);
 
 protected:
 	void mouseMoveEvent(QMouseEvent *event) override;
@@ -42,5 +43,5 @@ public slots:
 	void btnContinueClicked();
 
 signals:
-	void finished();
+	void finished(QVector<Discord*> &discords, const QJsonObject &remotes);
 };
