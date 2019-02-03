@@ -49,6 +49,9 @@ public:
 	Product *widget();
 	void debug() const;
 
+	InstallState state() const;
+	QString channel() const;
+
 private:
 	QString _channel;
 	QDir _baseDir;

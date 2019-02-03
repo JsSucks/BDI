@@ -13,6 +13,7 @@
 #include "ui_mainwindow.h"
 
 #include "splash.h"
+#include "config.h"
 
 class MainWindow final : public QMainWindow {
 	Q_OBJECT
@@ -23,6 +24,17 @@ public:
 private:
 	Ui::MainWindowClass _ui;
 
+protected:
+	int _mousePressX;
+	int _mousePressY;
+	bool _drag = false;
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
+
+	void focusOutEvent(QFocusEvent *event) override;
+	void focusInEvent(QFocusEvent *event) override;
+
 public slots:
-	void splashFinished();
+	void splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes);
 };

@@ -195,3 +195,11 @@ void Discord::debug() const {
 			"InstallState: " + QString(QMetaEnum::fromType<InstallState>().valueToKey(_installState)) + "\n"
 	});
 }
+
+Discord::InstallState Discord::state() const {
+	return _installState;
+}
+
+QString Discord::channel() const {
+	return _channel;
+}

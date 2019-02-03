@@ -50,6 +50,7 @@ void Splash::systemChecks() {
 void Splash::remotes(const QJsonObject &remotes) {
 	_ui.pbarRemotes->setValue(100);
 	emit finished(_discords, remotes);
+	hide();
 }
 
 
