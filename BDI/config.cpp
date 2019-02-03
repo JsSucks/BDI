@@ -52,7 +52,7 @@ namespace Config {
 		return QUrl(URLS.github + "/" + REPOSITORY.active + "/" + REPOSITORY.name);
 	}
 
-	QUrl qhuc(const QString &path) {
+	QUrl ghuc(const QString &path) {
 		return QUrl("https://raw.githubusercontent.com/" + REPOSITORY.active + "/" + REPOSITORY.name + path);
 	}
 
