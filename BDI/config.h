@@ -36,10 +36,7 @@ struct Urls {
 
 class Config final {
 public:
-	static Config &get() {
-		static Config instance;
-		return instance;
-	}
+	Config();
 
 	void deserialize(const QString &configPath = "config.json");
 
@@ -48,9 +45,10 @@ public:
 	Urls urls() const;
 
 private:
-	Config() { };
 	Repository _repository;
 	Urls _urls;
 	int _apiVersion;
 	QVersionNumber _installerVersion;
 };
+
+extern Config *CONFIG;

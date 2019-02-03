@@ -8,6 +8,10 @@
 
 #include "config.h"
 
+Config *CONFIG = new Config();
+
+Config::Config() {}
+
 QUrl Config::repository() const {
 	return QUrl(_urls.github + "/" + _repository.active + "/" + _repository.name);
 }
