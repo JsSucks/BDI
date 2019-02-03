@@ -39,4 +39,5 @@ namespace Config {
 	QUrl repository();
 	QUrl ghuc(const QString &path);
 	QVersionNumber installerVersion();
+	Urls urls();
 }

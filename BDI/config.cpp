@@ -59,4 +59,8 @@ namespace Config {
 	QVersionNumber installerVersion() {
 		return INSTALLER_VERSION;
 	}
+
+	Urls urls() {
+		return URLS;
+	}
 }
