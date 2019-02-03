@@ -107,7 +107,16 @@ QString Discord::channelString() const {
 	return "Discord";
 }
 
-void Discord::resolveAction(bool debug) {
+Product *Discord::widget() {
+	if(_product != nullptr) return _product;
+
+	_product = new Product();
+
+	return _product;
+}
+
+
+void Discord::resolveAction(const bool debug) {
 	const auto oldAction = _action;
 
 	_action = _product->install() ? A_REPAIR_INSTALL :

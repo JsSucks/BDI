@@ -46,6 +46,8 @@ public:
 	bool inject();
 	QString channelString() const;
 
+	Product *widget();
+
 private:
 	QString _channel;
 	QDir _baseDir;
