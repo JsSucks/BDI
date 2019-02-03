@@ -24,7 +24,7 @@ void RemoteFile::download() {
 	const auto reply = _manager.get(request);
 
 	connect(reply, &QNetworkReply::downloadProgress, [=](const qint64 bytesReceived, const qint64 bytesTotal) {
-		if(bytesTotal < 0) return;
+		if(bytesTotal <= 0) return;
 		emit downloadProgressChanged(
 			bytesReceived,
 			bytesTotal,
@@ -35,7 +35,7 @@ void RemoteFile::download() {
 	});
 }
 
-void RemoteFile::downloadFinished(QNetworkReply * reply) {
+void RemoteFile::downloadFinished(QNetworkReply *reply) {
 	auto url = reply->url();
 
 	auto statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
@@ -84,7 +84,7 @@ QString RemoteFile::readAll() const {
 	return ra;
 }
 
-QByteArray RemoteFile::hash(const QCryptographicHash::Algorithm & algorithm) {
+QByteArray RemoteFile::hash(const QCryptographicHash::Algorithm &algorithm) {
 	if(!_hash.isEmpty()) return _hash;
 
 	QCryptographicHash hash(algorithm);
@@ -99,11 +99,11 @@ QByteArray RemoteFile::hash(const QCryptographicHash::Algorithm & algorithm) {
 	return (_hash = hash.result().toHex());
 }
 
-QString RemoteFile::hashString(const QCryptographicHash::Algorithm & algorithm) {
+QString RemoteFile::hashString(const QCryptographicHash::Algorithm &algorithm) {
 	return QString::fromUtf8(hash(algorithm));
 }
 
-bool RemoteFile::compareHash(const QString & hash, const bool &recalculate) {
+bool RemoteFile::compareHash(const QString &hash, const bool &recalculate) {
 	if(recalculate) _hash.clear();
 	return hashString().compare(hash, Qt::CaseInsensitive) == 0;
 }

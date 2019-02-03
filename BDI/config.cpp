@@ -12,6 +12,14 @@ QUrl Config::repository() const {
 	return QUrl(_urls.github + "/" + _repository.active + "/" + _repository.name);
 }
 
+QUrl Config::ghuc(const QString &path) const {
+	return QUrl("https://raw.githubusercontent.com/" + _repository.active + "/" + _repository.name + path);
+}
+
+Urls Config::urls() const {
+	return _urls;
+}
+
 void Config::deserialize(const QString &configPath) {
 	QFile configFile(configPath);
 	if(!configFile.open(QIODevice::ReadOnly | QIODevice::Text)) {

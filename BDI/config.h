@@ -44,6 +44,8 @@ public:
 	void deserialize(const QString &configPath = "config.json");
 
 	QUrl repository() const;
+	QUrl ghuc(const QString &path) const;
+	Urls urls() const;
 
 private:
 	Config() { };
