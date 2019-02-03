@@ -80,15 +80,13 @@ void Splash::btnContinueClicked() {
 	rf.open(QIODevice::ReadOnly | QIODevice::Text);
 	remotes(QJsonDocument::fromJson(rf.readAll()).object());
 #else
-	/*
-	auto remotesFile = new RemoteFile(Config::get().ghuc(Config::get().urls().paths.releaseInfo));
-	connect(remotesFile, &RemoteFile::error, [](RemoteFile * remoteFile) {
+	auto remotesFile = new RemoteFile(Config::ghuc(Config::urls().paths.releaseInfo));
+	connect(remotesFile, &RemoteFile::error, [](RemoteFile *remoteFile) {
 		Logger::Debug(remoteFile->errorMsg());
 	});
-	connect(remotesFile, &RemoteFile::finished, [&](RemoteFile * remoteFile) {
+	connect(remotesFile, &RemoteFile::finished, [&](RemoteFile *remoteFile) {
 		remotes(QJsonDocument::fromJson(remoteFile->bytes()).object());
 	});
 	remotesFile->download();
-	*/
 #endif
 }
