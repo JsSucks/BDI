@@ -16,6 +16,12 @@ class Product final : public QWidget {
 public:
 	explicit Product(QWidget *parent = Q_NULLPTR);
 
+	void setText(const QString &text) const;
+	void setInstallBtnState(bool enabled, const QString &text = "Install") const;
+	void setSkipBtnState(bool enabled, const QString &text = "Skip") const;
+	void setUninstallBtnState(bool enabled, const QString &text = "Remove") const;
+	void setCheckedBtn(int index) const;
+
 	bool install() const { return _ui.btnInstall->isChecked(); }
 	bool skip() const { return _ui.btnSkip->isChecked(); }
 	bool uninstall() const { return _ui.btnInstall->isChecked(); }
