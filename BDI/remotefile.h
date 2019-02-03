@@ -14,7 +14,9 @@
 #include <QNetworkRequest>
 #include <QUrl>
 #include <QLocale>
+
 #include "qtfs.hpp"
+#include "logger.h"
 
 class RemoteFile final : public QObject {
 	Q_OBJECT

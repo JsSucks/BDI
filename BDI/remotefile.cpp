@@ -7,7 +7,6 @@
  */
 
 #include "remotefile.h"
-#include "logger.h"
 
 RemoteFile::RemoteFile(const QString &fileName, const QString &basePath, const QUrl &remoteLocation, const bool memoryOnly) {
 	_memoryOnly = memoryOnly;
