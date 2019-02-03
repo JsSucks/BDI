@@ -66,6 +66,9 @@
     <ClCompile Include="logger.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="remotefile.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -125,6 +128,9 @@
     </QtMoc>
     <QtMoc Include="product.h">
       <Filter>Custom Controls</Filter>
+    </QtMoc>
+    <QtMoc Include="remotefile.h">
+      <Filter>Headers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
