@@ -172,5 +172,18 @@ QVersionNumber Discord::resolveVersion(const QString &versionString) const {
 }
 
 QDir Discord::resolveBaseDir() const {
-	return QDir("");
+	const auto appName = QCoreApplication::applicationName();
+	QCoreApplication::setApplicationName(applicationName());
+
+#ifdef Q_OS_WIN
+	QDir rDir(QStandardPaths::locate(QStandardPaths::AppLocalDataLocation, "", QStandardPaths::LocateOption::LocateDirectory));
+#elif defined(Q_OS_LINUX)
+	QDir rDir(QStandardPaths::locate(QStandardPaths::AppConfigLocation, "", QStandardPaths::LocateOption::LocateDirectory));
+#elif defined(Q_OS_DARWIN)
+	auto aDir = QDir(QStandardPaths::locate(QStandardPaths::ApplicationsLocation, "", QStandardPaths::LocateOption::LocateDirectory));
+	QDir rDir(QDir::toNativeSeparators(aDir.absolutePath() + applicationName()));
+#endif
+	QCoreApplication::setApplicationName(appName);
+	Logger::Debug("Base Directory: " + rDir.absolutePath());
+	return rDir;
 }
