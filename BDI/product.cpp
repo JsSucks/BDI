@@ -49,3 +49,12 @@ void Product::setCheckedBtn(const int index) const {
 		_ui.btnSkip->setChecked(true);
 	}
 }
+
+void Product::checkBtn(bool checked) {
+	auto btn = qobject_cast<QPushButton*>(sender());
+	_ui.btnInstall->setChecked(false);
+	_ui.btnSkip->setChecked(false);
+	_ui.btnUninstall->setChecked(false);
+	btn->setChecked(true);
+	emit actionChanged();
+}

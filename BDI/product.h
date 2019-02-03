@@ -28,4 +28,10 @@ public:
 
 private:
 	Ui::Product _ui;
+
+signals:
+	void actionChanged();
+
+public slots:
+	void checkBtn(bool checked);
 };
