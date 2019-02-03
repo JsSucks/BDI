@@ -108,8 +108,16 @@ QString Discord::channelString() const {
 }
 
 void Discord::resolveAction(bool debug) {
-	// TODO after productwidget refactor
 	const auto oldAction = _action;
+
+	_action = _product->install() ? A_REPAIR_INSTALL :
+		_product->skip() ? A_SKIP :
+		_product->uninstall() ? A_UNINSTALL : A_UNKNOWN;
+
+	if(!debug) return;
+	Logger::Debug("Action changed for " + _channel +
+		" from " + QMetaEnum::fromType<Action>().valueToKey(oldAction) +
+		" to " + QMetaEnum::fromType<Action>().valueToKey(_action));
 }
 
 void Discord::actionChange() {

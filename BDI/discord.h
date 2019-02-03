@@ -14,6 +14,7 @@
 
 #include "qtfs.hpp"
 #include "product.h"
+#include "logger.h"
 
 class Discord final : public QObject {
 	Q_OBJECT
