@@ -184,6 +184,15 @@ QDir Discord::resolveBaseDir() const {
 	QDir rDir(QDir::toNativeSeparators(aDir.absolutePath() + applicationName()));
 #endif
 	QCoreApplication::setApplicationName(appName);
-	Logger::Debug("Base Directory: " + rDir.absolutePath());
 	return rDir;
+}
+
+void Discord::debug() const {
+	// TODO get actual installed bd version from bd.json
+	Logger::Debug(QVector<QString>{
+		applicationName(),
+			"App Dir: " + _appDir.absolutePath(),
+			_installState == INSTALLED ? ("BD Installed - v2.0.0") : "BD Not Installed",
+			"InstallState: " + QString(QMetaEnum::fromType<InstallState>().valueToKey(_installState)) + "\n"
+	});
 }

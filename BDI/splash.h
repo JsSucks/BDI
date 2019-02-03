@@ -10,8 +10,11 @@
 
 #include <QObject>
 #include <QMouseEvent>
+#include <QVector>
 
 #include "ui_splash.h"
+#include "logger.h"
+#include "discord.h"
 
 class Splash final : public QWidget {
 	Q_OBJECT
@@ -21,8 +24,10 @@ public:
 
 private:
 	Ui::Splash _ui;
+	QVector<Discord*> _discords;
 
 	void systemChecks();
+
 
 protected:
 	void mouseMoveEvent(QMouseEvent *event) override;

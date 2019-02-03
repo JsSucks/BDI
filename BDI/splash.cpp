@@ -12,6 +12,7 @@
 Splash::Splash(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
 	_ui.setupUi(this);
+	_ui.mainStack->setCurrentIndex(0);
 }
 
 void Splash::attemptClose() {
@@ -19,6 +20,30 @@ void Splash::attemptClose() {
 }
 
 void Splash::systemChecks() {
+	Logger::Debug("System checks started");
+
+	auto stable = new Discord("stable");
+	stable->locate();
+	stable->debug();
+	_ui.pbarSystemChecks->setValue(33);
+
+	auto ptb = new Discord("ptb");
+	ptb->locate();
+	ptb->debug();
+	_ui.pbarSystemChecks->setValue(66);
+
+	auto canary = new Discord("canary");
+	canary->locate();
+	canary->debug();
+	_ui.pbarSystemChecks->setValue(100);
+
+	_discords = QVector<Discord*> {
+		stable,
+		ptb,
+		canary
+	};
+
+	Logger::Debug("System checks finished");
 }
 
 void Splash::mouseMoveEvent(QMouseEvent *event) {
@@ -38,4 +63,5 @@ void Splash::mouseReleaseEvent(QMouseEvent *event) {
 
 void Splash::btnContinueClicked() {
 	_ui.mainStack->setCurrentIndex(1);
+	systemChecks();
 }

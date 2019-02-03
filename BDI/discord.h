@@ -47,6 +47,7 @@ public:
 	QString channelString() const;
 
 	Product *widget();
+	void debug() const;
 
 private:
 	QString _channel;
