@@ -14,7 +14,7 @@ class Product final : public QWidget {
 	Q_OBJECT
 
 public:
-	explicit Product(QWidget* parent = Q_NULLPTR);
+	explicit Product(QWidget *parent = Q_NULLPTR);
 
 private:
 	Ui::Product _ui;

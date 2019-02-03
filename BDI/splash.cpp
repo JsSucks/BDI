@@ -21,18 +21,18 @@ void Splash::attemptClose() {
 void Splash::systemChecks() {
 }
 
-void Splash::mouseMoveEvent(QMouseEvent* event) {
+void Splash::mouseMoveEvent(QMouseEvent *event) {
 	if (!_drag) return;
 	move(event->globalX() - _mousePressX, event->globalY() - _mousePressY);
 }
 
-void Splash::mousePressEvent(QMouseEvent* event) {
+void Splash::mousePressEvent(QMouseEvent *event) {
 	_drag = true;
 	_mousePressX = event->x();
 	_mousePressY = event->y();
 }
 
-void Splash::mouseReleaseEvent(QMouseEvent* event) {
+void Splash::mouseReleaseEvent(QMouseEvent *event) {
 	_drag = false;
 }
 

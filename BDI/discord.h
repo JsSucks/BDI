@@ -58,6 +58,6 @@ private:
 	void resolveAction(bool debug = true);
 	void actionChange();
 
-	QVersionNumber resolveVersion(const QString& versionString) const;
+	QVersionNumber resolveVersion(const QString &versionString) const;
 	QDir resolveBaseDir() const;
 };

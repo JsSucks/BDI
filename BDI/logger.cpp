@@ -24,17 +24,17 @@ void Logger::Debug(const QString &msg, const bool &log) {
 }
 
 void Logger::Debug(const QVector<QString> &messages) {
-	for (auto& msg : messages) Debug(msg);
+	for (auto &msg : messages) Debug(msg);
 }
 
 void Logger::Dump(const QString &fPath) {
 	QFile f(fPath);
-	if (!f.open(QIODevice::WriteOnly)) {
+	if(!f.open(QIODevice::WriteOnly)) {
 		Debug("Unable to dump logs", false);
 		return;
 	}
 	QTextStream stream(&f);
-	for (auto& log : _logs) stream << log << endl;
+	for(auto &log : _logs) stream << log << endl;
 }
 
 QString Logger::TimeStamp() {
