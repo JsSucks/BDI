@@ -151,6 +151,9 @@ public:
 
 
         retranslateUi(Product);
+        QObject::connect(btnInstall, SIGNAL(clicked(bool)), Product, SLOT(checkBtn(bool)));
+        QObject::connect(btnSkip, SIGNAL(clicked(bool)), Product, SLOT(checkBtn(bool)));
+        QObject::connect(btnUninstall, SIGNAL(clicked(bool)), Product, SLOT(checkBtn(bool)));
 
         QMetaObject::connectSlotsByName(Product);
     } // setupUi
