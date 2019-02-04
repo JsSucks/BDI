@@ -112,6 +112,9 @@ background: rgb(30, 30, 38);</string>
       </item>
       <item>
        <widget class="QWidget" name="btnGroup" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 	background: transparent;
@@ -129,7 +132,10 @@ QPushButton::checked,
 QPushButton::hover {
 	background: rgb(62, 204, 156);
 }
-</string>
+
+QPushButton::checked::disabled {
+	background: gray;
+}</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <property name="spacing">
@@ -150,6 +156,9 @@ QPushButton::hover {
          </item>
          <item>
           <widget class="QPushButton" name="btnSkip">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="styleSheet">
             <string notr="true">border-left: 0;
 border-right: 0;</string>

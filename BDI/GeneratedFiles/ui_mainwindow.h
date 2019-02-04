@@ -51,7 +51,6 @@ public:
     QVBoxLayout *verticalLayout_4;
     QWidget *footer;
     QHBoxLayout *horizontalLayout_9;
-    QLabel *label_10;
     QSpacerItem *horizontalSpacer_5;
     QPushButton *pushButton_4;
     QPushButton *btnOptions;
@@ -264,6 +263,7 @@ public:
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         label_3 = new QLabel(prodcutsSplit);
         label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setEnabled(true);
         QFont font4;
         font4.setFamily(QStringLiteral("Roboto"));
         font4.setPointSize(10);
@@ -311,12 +311,6 @@ public:
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
-        label_10 = new QLabel(footer);
-        label_10->setObjectName(QStringLiteral("label_10"));
-        label_10->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
-
-        horizontalLayout_9->addWidget(label_10);
-
         horizontalSpacer_5 = new QSpacerItem(325, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_9->addItem(horizontalSpacer_5);
@@ -370,7 +364,6 @@ public:
         captionMin->setText(QString());
         captionClose->setText(QString());
         label_3->setText(QApplication::translate("MainWindowClass", "Available Products", nullptr));
-        label_10->setText(QApplication::translate("MainWindowClass", "<html><head/><body><p>By continuing you agree to the BetterDiscord <a style=\"color:rgb(62, 204, 156); text-decoration: none;\" href=\"https://betterdiscord.net/fwd?id=slt\">Software License Terms</a></p></body></html>", nullptr));
         pushButton_4->setText(QApplication::translate("MainWindowClass", "Secret", nullptr));
         btnOptions->setText(QApplication::translate("MainWindowClass", "Options", nullptr));
         btnContinue->setText(QApplication::translate("MainWindowClass", "Continue", nullptr));

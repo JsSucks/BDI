@@ -32,8 +32,7 @@ protected:
 	void mousePressEvent(QMouseEvent *event) override;
 	void mouseReleaseEvent(QMouseEvent *event) override;
 
-	void focusOutEvent(QFocusEvent *event) override;
-	void focusInEvent(QFocusEvent *event) override;
+	void changeEvent(QEvent *event) override;
 
 public slots:
 	void splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes);

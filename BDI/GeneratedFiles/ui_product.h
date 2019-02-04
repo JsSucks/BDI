@@ -93,6 +93,7 @@ public:
 
         btnGroup = new QWidget(mainContainer);
         btnGroup->setObjectName(QStringLiteral("btnGroup"));
+        btnGroup->setEnabled(true);
         btnGroup->setStyleSheet(QLatin1String("QPushButton {\n"
 "	background: transparent;\n"
 "	border: 1px solid #30313a;\n"
@@ -109,7 +110,10 @@ public:
 "QPushButton::hover {\n"
 "	background: rgb(62, 204, 156);\n"
 "}\n"
-""));
+"\n"
+"QPushButton::checked::disabled {\n"
+"	background: gray;\n"
+"}"));
         horizontalLayout_4 = new QHBoxLayout(btnGroup);
         horizontalLayout_4->setSpacing(0);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -122,6 +126,7 @@ public:
 
         btnSkip = new QPushButton(btnGroup);
         btnSkip->setObjectName(QStringLiteral("btnSkip"));
+        btnSkip->setEnabled(true);
         btnSkip->setStyleSheet(QLatin1String("border-left: 0;\n"
 "border-right: 0;"));
         btnSkip->setCheckable(true);

@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
 void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes) {
 	show();
+	raise();
+	setFocus();
 
 	QJsonObject _coreObj, _clientObj;
 
@@ -60,6 +62,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
+	setFocus();
 	_drag = true;
 	_mousePressX = event->x();
 	_mousePressY = event->y();
@@ -69,10 +72,22 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
 	_drag = false;
 }
 
-void MainWindow::focusOutEvent(QFocusEvent *event) {
-	_ui.icon->setEnabled(false);
-}
-
-void MainWindow::focusInEvent(QFocusEvent *event) {
-	_ui.icon->setEnabled(true);
+void MainWindow::changeEvent(QEvent *event) {
+	if(event->type() != QEvent::ActivationChange) return;
+	_ui.mainStack->setEnabled(isActiveWindow());
+	if(!isActiveWindow()) {
+		_ui.centralWidget->setStyleSheet("#centralWidget { background: gray; }");
+		_ui.icon->setEnabled(false);
+		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid gray; color: #aeaeae; margin-left: 65px;");
+		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:gray;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
+	} else {
+#ifdef TEST_MODE
+		_ui.centralWidget->setStyleSheet("#centralWidget { background: red; }");
+#else
+		_ui.centralWidget->setStyleSheet("#centralWidget { background: rgb(62, 204, 156); }");
+#endif
+		_ui.icon->setEnabled(true);
+		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid rgb(62, 204, 156); color: rgb(62, 204, 156); margin-left: 65px;");
+		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:#3ecc9c;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
+	}
 }
