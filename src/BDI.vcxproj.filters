@@ -137,11 +137,7 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
-    <Image Include="BDI.ico" />
-    <Image Include="Resources\images\BDlogo.ico" />
     <Image Include="Resources\images\appicon.png" />
-    <Image Include="Resources\images\appicon.ico" />
     <Image Include="appicon.ico" />
   </ItemGroup>
 </Project>

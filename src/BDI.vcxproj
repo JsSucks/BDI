@@ -184,11 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="appicon.ico" />
-    <Image Include="BDI.ico" />
-    <Image Include="icon1.ico" />
-    <Image Include="Resources\images\appicon.ico" />
     <Image Include="Resources\images\appicon.png" />
-    <Image Include="Resources\images\BDlogo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
