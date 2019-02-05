@@ -23,7 +23,7 @@
 #ifdef _DEBUG
 #define FILE_FLAGS					VS_FF_DEBUG
 #else
-#define FILEFLAGS 0
+#define FILE_FLAGS					0
 #endif
 
 #define COMPANY_NAME				"BetterDiscord - https://betterdiscord.net"
