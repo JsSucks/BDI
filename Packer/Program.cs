@@ -1,0 +1,104 @@
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+
+namespace Packer {
+    internal class Program {
+        private static void Main() {
+            _ = new Program();
+        }
+
+        private Program() {
+            var configJson = FindConfig();
+            if (configJson == null) Quit();
+
+            var binaryPath = FindBinary();
+            if(binaryPath == null) Quit("Unable to locate binary");
+            Console.WriteLine($"Located binary at {binaryPath}");
+
+            var versionInfo = FileVersionInfo.GetVersionInfo(binaryPath ?? throw new InvalidOperationException());
+
+            var newBinaryName = binaryPath.Replace("-V", $"-{versionInfo.ProductVersion}");
+            var newBinaryInfo = new FileInfo(newBinaryName);
+            Console.WriteLine($"New binary name: {newBinaryInfo.Name}");
+
+            var releaseDir = Path.Combine(new FileInfo(binaryPath).Directory.FullName, "packed");
+            
+            if (Directory.Exists(releaseDir)) {
+                Console.WriteLine("pack dir exists, deleting");
+                Console.WriteLine(releaseDir);
+                Directory.Delete(releaseDir, true);
+            }
+
+            if (!Directory.Exists(releaseDir)) {
+                Console.WriteLine("creating pack dir");
+                Console.WriteLine(releaseDir);
+                Directory.CreateDirectory(releaseDir);
+            }
+
+            Console.WriteLine("Copying binary");
+            File.Copy(binaryPath, Path.Combine(releaseDir, newBinaryInfo.Name));
+
+            Console.WriteLine("Setting version to json");
+            configJson["version"] = versionInfo.ProductVersion;
+
+            Console.WriteLine("Saving config.json");
+            File.WriteAllText(Path.Combine(releaseDir, "config.json"), configJson.ToString());
+
+            // TODO copy libs
+
+            Console.WriteLine("All done");
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+            Process.Start(releaseDir);
+            Environment.Exit(0);
+        }
+
+        private static JObject FindConfig() {
+            var currentPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            while (currentPath.Contains("Packer")) currentPath = Path.Combine(currentPath, "..").AbsolutePath();
+            while (!Directory.Exists(Path.Combine(currentPath, "src"))) {
+                if (Directory.GetParent(currentPath) == null) break;
+                currentPath = Path.Combine(currentPath, "..");
+            }
+
+            var configJsonPath = Path.Combine(currentPath, "src", "config.json").AbsolutePath();
+            if (File.Exists(configJsonPath)) {
+                Console.WriteLine($"Located config.json at {configJsonPath}");
+                return JObject.Parse(File.ReadAllText(configJsonPath));
+            }
+
+            Console.WriteLine("Unable to locate config.json");
+            return null;
+        }
+
+        private static string FindBinary() {
+            var currentPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            while (currentPath.Contains("Packer")) currentPath = Path.Combine(currentPath, "..").AbsolutePath();
+            while (!Directory.Exists(Path.Combine(currentPath, "bin"))) {
+                if (Directory.GetParent(currentPath) == null) break;
+                currentPath = Path.Combine(currentPath, "..");
+            }
+
+            currentPath = Path.Combine(currentPath, "bin", "x64", "Release").AbsolutePath();
+
+            if (Directory.Exists(currentPath))
+                return (from file in Directory.GetFiles(currentPath)
+                    select new FileInfo(file)
+                    into finfo
+                    where finfo.Extension == ".exe"
+                    select finfo.FullName).FirstOrDefault();
+
+            return null;
+        }
+
+        private static void Quit(string msg = null) {
+            if(msg != null) Console.WriteLine(msg);
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+            Environment.Exit(0);
+        }
+    }
+}
