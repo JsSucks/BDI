@@ -106,12 +106,11 @@
     <ClInclude Include="config.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="logger.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
@@ -139,5 +138,6 @@
     <Image Include="Resources\images\BDlogo.ico" />
     <Image Include="Resources\images\appicon.png" />
     <Image Include="Resources\images\appicon.ico" />
+    <Image Include="appicon.ico" />
   </ItemGroup>
 </Project>
