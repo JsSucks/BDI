@@ -24,8 +24,8 @@ namespace Packer {
             var newBinaryInfo = new FileInfo(newBinaryName);
             Console.WriteLine($"New binary name: {newBinaryInfo.Name}");
 
-            var releaseDir = Path.Combine(new FileInfo(binaryPath).Directory.FullName, "packed");
-            
+            var releaseDir = Path.Combine(Directory.GetCurrentDirectory(), "packed");
+            Console.WriteLine(releaseDir);
             if (Directory.Exists(releaseDir)) {
                 Console.WriteLine("pack dir exists, deleting");
                 Console.WriteLine(releaseDir);
@@ -48,6 +48,15 @@ namespace Packer {
             File.WriteAllText(Path.Combine(releaseDir, "config.json"), configJson.ToString());
 
             // TODO copy libs
+            Console.WriteLine("Copying ssl libs");
+            var packagesPath = FindPackages();
+            Console.WriteLine($"Packagespath: {packagesPath}");
+            var libeay = Path.Combine(packagesPath, "libeay32.dll").AbsolutePath();
+            var ssleay = Path.Combine(packagesPath, "ssleay32.dll").AbsolutePath();
+            if(!File.Exists(libeay)) Quit("libeay32.dll not found");
+            if(!File.Exists(ssleay)) Quit("ssleay32.dll not found");
+            File.Copy(libeay, Path.Combine(releaseDir, "libeay32.dll"));
+            File.Copy(ssleay, Path.Combine(releaseDir, "ssleay32.dll"));
 
             Console.WriteLine("All done");
             Console.WriteLine("Press any key to exit...");
@@ -92,6 +101,17 @@ namespace Packer {
                     select finfo.FullName).FirstOrDefault();
 
             return null;
+        }
+
+        private static string FindPackages() {
+            var currentPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            while (currentPath.Contains("Packer")) currentPath = Path.Combine(currentPath, "..").AbsolutePath();
+            while (!Directory.Exists(Path.Combine(currentPath, "packages"))) {
+                if (Directory.GetParent(currentPath) == null) break;
+                currentPath = Path.Combine(currentPath, "..");
+            }
+
+            return Path.Combine(currentPath, "packages").AbsolutePath();
         }
 
         private static void Quit(string msg = null) {
