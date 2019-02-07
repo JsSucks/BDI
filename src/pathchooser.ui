@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>Jiiks</author>
  <class>PathChooser</class>
  <widget class="QWidget" name="PathChooser">
   <property name="geometry">
