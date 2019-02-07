@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
-    <height>420</height>
+    <width>473</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -216,8 +216,8 @@ font-family: &quot;Inconsolata&quot;;</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>599</width>
-           <height>300</height>
+           <width>469</width>
+           <height>322</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -227,6 +227,9 @@ font-family: &quot;Inconsolata&quot;;</string>
              <string/>
             </property>
             <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="openExternalLinks">
              <bool>true</bool>
             </property>
            </widget>
