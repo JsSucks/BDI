@@ -9,12 +9,21 @@
 */
 
 #include "about.h"
+#include "splash.h"
 
 About::About(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 	_ui.setupUi(this);
+	_ui.lblVersion->setText("Version " + Config::installerVersion().toString());
 }
 
 void About::aboutQt() {
 	qApp->aboutQt();
+}
+
+void About::loadLicenseText(const QString &fPath) {
+	QFile f(fPath);
+	if(!f.open(QIODevice::ReadOnly | QIODevice::Text)) return;
+
+	_ui.licenses->setText(f.readAll());
 }
