@@ -251,7 +251,7 @@ font-family: &quot;Inconsolata&quot;;</string>
    <sender>captionBtnX</sender>
    <signal>clicked()</signal>
    <receiver>AboutWindow</receiver>
-   <slot>close()</slot>
+   <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>585</x>

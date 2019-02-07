@@ -162,7 +162,7 @@ public:
 
 
         retranslateUi(AboutWindow);
-        QObject::connect(captionBtnX, SIGNAL(clicked()), AboutWindow, SLOT(close()));
+        QObject::connect(captionBtnX, SIGNAL(clicked()), AboutWindow, SLOT(hide()));
 
         QMetaObject::connectSlotsByName(AboutWindow);
     } // setupUi
