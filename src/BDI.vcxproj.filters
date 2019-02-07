@@ -104,6 +104,9 @@
   <ItemGroup>
     <None Include="README.MD" />
     <None Include="config.json" />
+    <None Include="about.htm">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="qtfs.hpp">

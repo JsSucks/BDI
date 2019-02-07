@@ -166,6 +166,9 @@
     <Text Include="LICENSE" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="about.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="config.json" />
     <None Include="README.MD" />
   </ItemGroup>
