@@ -69,6 +69,9 @@
     <ClCompile Include="remotefile.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="pathchooser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -78,6 +81,9 @@
       <Filter>Ui</Filter>
     </QtUic>
     <QtUic Include="product.ui">
+      <Filter>Custom Controls</Filter>
+    </QtUic>
+    <QtUic Include="pathchooser.ui">
       <Filter>Custom Controls</Filter>
     </QtUic>
   </ItemGroup>
@@ -134,6 +140,9 @@
     </QtMoc>
     <QtMoc Include="remotefile.h">
       <Filter>Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="pathchooser.h">
+      <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
