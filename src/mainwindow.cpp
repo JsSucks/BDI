@@ -85,6 +85,7 @@ void MainWindow::changeEvent(QEvent *event) {
 		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid gray; color: #aeaeae; margin-left: 65px;");
 		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:gray;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
 	} else {
+		_about->hide();
 #ifdef TEST_MODE
 		_ui.centralWidget->setStyleSheet("#centralWidget { background: red; }");
 #else
