@@ -44,7 +44,7 @@ public:
     {
         if (AboutWindow->objectName().isEmpty())
             AboutWindow->setObjectName(QStringLiteral("AboutWindow"));
-        AboutWindow->resize(603, 420);
+        AboutWindow->resize(473, 442);
         AboutWindow->setStyleSheet(QLatin1String("QWidget {\n"
 "	color: #aeaeae;\n"
 "	font-family: \"Roboto\";\n"
@@ -143,12 +143,13 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 599, 300));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 469, 322));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         licenses = new QLabel(scrollAreaWidgetContents);
         licenses->setObjectName(QStringLiteral("licenses"));
         licenses->setWordWrap(true);
+        licenses->setOpenExternalLinks(true);
 
         verticalLayout_2->addWidget(licenses);
 

@@ -15,6 +15,7 @@
 #include "ui_mainwindow.h"
 
 #include "splash.h"
+#include "about.h"
 #include "config.h"
 
 class MainWindow final : public QMainWindow {
@@ -25,6 +26,7 @@ public:
 
 private:
 	Ui::MainWindowClass _ui;
+	About *_about;
 
 protected:
 	int _mousePressX;
@@ -38,4 +40,7 @@ protected:
 
 public slots:
 	void splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes);
+	void captionCloseClicked();
+	void captionHelpClicked();
+	void captionMinClicked();
 };

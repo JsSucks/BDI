@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	_ui.centralWidget->setStyleSheet("#centralWidget { background: rgb(62, 204, 156); }");
 #endif
 
+	_about = new About();
+	_about->loadLicenseText();
+
 	auto splash = new Splash();
 	connect(splash, &Splash::finished, this, &MainWindow::splashFinished);
 	splash->show();
@@ -91,4 +94,19 @@ void MainWindow::changeEvent(QEvent *event) {
 		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid rgb(62, 204, 156); color: rgb(62, 204, 156); margin-left: 65px;");
 		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:#3ecc9c;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
 	}
+}
+
+void MainWindow::captionCloseClicked() {
+	QCoreApplication::quit();
+}
+
+void MainWindow::captionHelpClicked() {
+	_about->show();
+	const auto cx = x() + width() / 2;
+	const auto cy = y() + height() / 2;
+	_about->move(cx - _about->width() / 2, cy - _about->height() / 2);
+}
+
+void MainWindow::captionMinClicked() {
+	setWindowState(Qt::WindowMinimized);
 }

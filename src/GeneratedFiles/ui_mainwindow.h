@@ -351,6 +351,9 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindowClass);
+        QObject::connect(captionClose, SIGNAL(clicked()), MainWindowClass, SLOT(captionCloseClicked()));
+        QObject::connect(captionHelp, SIGNAL(clicked()), MainWindowClass, SLOT(captionHelpClicked()));
+        QObject::connect(captionMin, SIGNAL(clicked()), MainWindowClass, SLOT(captionMinClicked()));
 
         QMetaObject::connectSlotsByName(MainWindowClass);
     } // setupUi
