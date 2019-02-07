@@ -70,7 +70,7 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="pathchooser.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>Custom Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +142,7 @@
       <Filter>Headers</Filter>
     </QtMoc>
     <QtMoc Include="pathchooser.h">
-      <Filter>Generated Files</Filter>
+      <Filter>Custom Controls</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
