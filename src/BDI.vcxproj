@@ -150,6 +150,7 @@
     <QtMoc Include="mainwindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="about.ui" />
     <QtUic Include="mainwindow.ui" />
     <QtUic Include="pathchooser.ui" />
     <QtUic Include="product.ui" />

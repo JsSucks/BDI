@@ -86,6 +86,9 @@
     <QtUic Include="pathchooser.ui">
       <Filter>Custom Controls</Filter>
     </QtUic>
+    <QtUic Include="about.ui">
+      <Filter>Ui</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="resources.qrc">
