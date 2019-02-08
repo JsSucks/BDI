@@ -126,18 +126,18 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 	move(event->globalX() - _mousePressX, event->globalY() - _mousePressY);
 }
 
-void MainWindow::mousePressEvent(QMouseEvent * event) {
+void MainWindow::mousePressEvent(QMouseEvent *event) {
 	setFocus();
 	_drag = true;
 	_mousePressX = event->x();
 	_mousePressY = event->y();
 }
 
-void MainWindow::mouseReleaseEvent(QMouseEvent * event) {
+void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
 	_drag = false;
 }
 
-void MainWindow::changeEvent(QEvent * event) {
+void MainWindow::changeEvent(QEvent *event) {
 	if(event->type() != QEvent::ActivationChange) return;
 	_ui.mainStack->setEnabled(isActiveWindow());
 	if(!isActiveWindow()) {
