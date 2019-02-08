@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>745</width>
-    <height>487</height>
+    <width>850</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -311,6 +311,9 @@ QPushButton:hover {
     </item>
     <item>
      <widget class="QStackedWidget" name="mainStack">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
       <widget class="QWidget" name="pageInitial">
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <property name="spacing">
@@ -527,13 +530,162 @@ min-width: 0;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="pageOptions"/>
+      <widget class="QWidget" name="pageOptions">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="optionsContent" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QCheckBox" name="commonInstall">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Use common path for BetterDiscord core files</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="PathChooser" name="installPathChooser" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>90</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="commonData">
+             <property name="text">
+              <string>Use common path for BetterDiscord content</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="PathChooser" name="dataPathChooser" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>90</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="autoInject">
+             <property name="text">
+              <string>Autoinjection routine(attempts to survive Discord updates but could break if Discord changes their structure)</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="optionsFooter" native="true">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background: transparent;
+    color: #fff;
+    padding: 7px 10px;
+    min-width: 50px;
+	background: #17171c;
+	border-radius: 5px;
+}
+
+QPushButton::hover {
+	background: rgb(35, 35, 38);
+	background: rgb(62, 204, 156)
+}</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnCancelOptions">
+             <property name="text">
+              <string>Cancel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnApplyOptions">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>28</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Apply</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>PathChooser</class>
+   <extends>QWidget</extends>
+   <header>pathchooser.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>
@@ -586,10 +738,95 @@ min-width: 0;</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnOptions</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>btnOptionsClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnApplyOptions</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>btnApplyOptionsClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>803</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCancelOptions</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>btnCancelOptionsClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>commonData</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>dataCheckboxCheckedChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>commonInstall</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>installCheckboxCheckedChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>captionCloseClicked()</slot>
   <slot>captionHelpClicked()</slot>
   <slot>captionMinClicked()</slot>
+  <slot>btnOptionsClicked()</slot>
+  <slot>btnApplyOptionsClicked()</slot>
+  <slot>btnCancelOptionsClicked()</slot>
+  <slot>installCheckboxCheckedChanged(bool)</slot>
+  <slot>dataCheckboxCheckedChanged(bool)</slot>
  </slots>
 </ui>

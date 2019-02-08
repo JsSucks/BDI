@@ -28,12 +28,27 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	splash->show();
 }
 
+void MainWindow::initOptionsPage() const {
+	_ui.commonData->setChecked(_userConfig.useCommonDataPath());
+	_ui.commonInstall->setChecked(_userConfig.useCommonInstallPath());
+	_ui.autoInject->setChecked(_userConfig.autoInject());
+
+	_ui.installPathChooser->initialize("Install Path:",
+		"* Location for BetterDiscord core files.",
+		_userConfig.installPath(),
+		_userConfig.useCommonInstallPath() ? "/BetterDiscord" : "/BetterDiscord/:channel");
+
+	_ui.dataPathChooser->initialize("Data Path:",
+		"* Location for BetterDiscord data such as plugins, themes and caches.",
+		_userConfig.dataPath(),
+		_userConfig.useCommonDataPath() ? "/BetterDiscord" : "/BetterDiscord/:channel");
+}
+
 void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes) {
+	initOptionsPage();
 	show();
 	raise();
 	setFocus();
-
-	QJsonObject _coreObj, _clientObj;
 
 	for(auto remote : remotes["files"].toArray()) {
 		auto obj = remote.toObject();
@@ -60,23 +75,69 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 	}
 }
 
+void MainWindow::btnOptionsClicked() const {
+	_ui.mainStack->setCurrentWidget(_ui.pageOptions);
+}
+
+void MainWindow::btnApplyOptionsClicked() {
+	_userConfig.useCommonInstallPath(_ui.commonInstall->isChecked());
+	_userConfig.useCommonDataPath(_ui.commonData->isChecked());
+	_userConfig.autoInject(_ui.autoInject->isChecked());
+	_userConfig.setInstallPath(_ui.installPathChooser->selectedPath());
+	_userConfig.setDataPath(_ui.dataPathChooser->selectedPath());
+	_userConfig.write();
+	_ui.mainStack->setCurrentWidget(_ui.pageInitial);
+}
+
+void MainWindow::btnCancelOptionsClicked() const {
+	_ui.commonInstall->setChecked(_userConfig.useCommonInstallPath());
+	_ui.commonData->setChecked(_userConfig.useCommonDataPath());
+	_ui.autoInject->setChecked(_userConfig.autoInject());
+	_ui.installPathChooser->setPath(_userConfig.installPath());
+	_ui.dataPathChooser->setPath(_userConfig.dataPath());
+	_ui.mainStack->setCurrentWidget(_ui.pageInitial);
+}
+
+void MainWindow::installCheckboxCheckedChanged(const bool checked) const {
+	checked ? _ui.installPathChooser->setSuffix("/BetterDiscord") : _ui.installPathChooser->setSuffix("/BetterDiscord/:channel");
+}
+
+void MainWindow::dataCheckboxCheckedChanged(const bool checked) const {
+	checked ? _ui.dataPathChooser->setSuffix("/BetterDiscord") : _ui.dataPathChooser->setSuffix("/BetterDiscord/:channel");
+}
+
+void MainWindow::captionCloseClicked() const {
+	QCoreApplication::quit();
+}
+
+void MainWindow::captionHelpClicked() const {
+	_about->show();
+	const auto cx = x() + width() / 2;
+	const auto cy = y() + height() / 2;
+	_about->move(cx - _about->width() / 2, cy - _about->height() / 2);
+}
+
+void MainWindow::captionMinClicked() {
+	setWindowState(Qt::WindowMinimized);
+}
+
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 	if(!_drag) return;
 	move(event->globalX() - _mousePressX, event->globalY() - _mousePressY);
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *event) {
+void MainWindow::mousePressEvent(QMouseEvent * event) {
 	setFocus();
 	_drag = true;
 	_mousePressX = event->x();
 	_mousePressY = event->y();
 }
 
-void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
+void MainWindow::mouseReleaseEvent(QMouseEvent * event) {
 	_drag = false;
 }
 
-void MainWindow::changeEvent(QEvent *event) {
+void MainWindow::changeEvent(QEvent * event) {
 	if(event->type() != QEvent::ActivationChange) return;
 	_ui.mainStack->setEnabled(isActiveWindow());
 	if(!isActiveWindow()) {
@@ -84,7 +145,8 @@ void MainWindow::changeEvent(QEvent *event) {
 		_ui.icon->setEnabled(false);
 		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid gray; color: #aeaeae; margin-left: 65px;");
 		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:gray;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
-	} else {
+	}
+	else {
 		_about->hide();
 #ifdef TEST_MODE
 		_ui.centralWidget->setStyleSheet("#centralWidget { background: red; }");
@@ -95,19 +157,4 @@ void MainWindow::changeEvent(QEvent *event) {
 		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid rgb(62, 204, 156); color: rgb(62, 204, 156); margin-left: 65px;");
 		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:#3ecc9c;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
 	}
-}
-
-void MainWindow::captionCloseClicked() {
-	QCoreApplication::quit();
-}
-
-void MainWindow::captionHelpClicked() {
-	_about->show();
-	const auto cx = x() + width() / 2;
-	const auto cy = y() + height() / 2;
-	_about->move(cx - _about->width() / 2, cy - _about->height() / 2);
-}
-
-void MainWindow::captionMinClicked() {
-	setWindowState(Qt::WindowMinimized);
 }

@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -19,6 +20,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "pathchooser.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -56,12 +58,26 @@ public:
     QPushButton *btnOptions;
     QPushButton *btnContinue;
     QWidget *pageOptions;
+    QVBoxLayout *verticalLayout_6;
+    QWidget *optionsContent;
+    QVBoxLayout *verticalLayout_7;
+    QCheckBox *commonInstall;
+    PathChooser *installPathChooser;
+    QCheckBox *commonData;
+    PathChooser *dataPathChooser;
+    QCheckBox *autoInject;
+    QSpacerItem *verticalSpacer;
+    QWidget *optionsFooter;
+    QHBoxLayout *horizontalLayout_3;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *btnCancelOptions;
+    QPushButton *btnApplyOptions;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(745, 487);
+        MainWindowClass->resize(850, 500);
         MainWindowClass->setStyleSheet(QLatin1String("QWidget {\n"
 "	color: #aeaeae;\n"
 "	font-family: \"Roboto\";\n"
@@ -344,6 +360,91 @@ public:
         mainStack->addWidget(pageInitial);
         pageOptions = new QWidget();
         pageOptions->setObjectName(QStringLiteral("pageOptions"));
+        verticalLayout_6 = new QVBoxLayout(pageOptions);
+        verticalLayout_6->setSpacing(0);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(0, 0, 0, 0);
+        optionsContent = new QWidget(pageOptions);
+        optionsContent->setObjectName(QStringLiteral("optionsContent"));
+        verticalLayout_7 = new QVBoxLayout(optionsContent);
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        commonInstall = new QCheckBox(optionsContent);
+        commonInstall->setObjectName(QStringLiteral("commonInstall"));
+        commonInstall->setStyleSheet(QStringLiteral(""));
+        commonInstall->setChecked(false);
+
+        verticalLayout_7->addWidget(commonInstall);
+
+        installPathChooser = new PathChooser(optionsContent);
+        installPathChooser->setObjectName(QStringLiteral("installPathChooser"));
+        installPathChooser->setMaximumSize(QSize(16777215, 90));
+
+        verticalLayout_7->addWidget(installPathChooser);
+
+        commonData = new QCheckBox(optionsContent);
+        commonData->setObjectName(QStringLiteral("commonData"));
+
+        verticalLayout_7->addWidget(commonData);
+
+        dataPathChooser = new PathChooser(optionsContent);
+        dataPathChooser->setObjectName(QStringLiteral("dataPathChooser"));
+        dataPathChooser->setMaximumSize(QSize(16777215, 90));
+
+        verticalLayout_7->addWidget(dataPathChooser);
+
+        autoInject = new QCheckBox(optionsContent);
+        autoInject->setObjectName(QStringLiteral("autoInject"));
+        autoInject->setChecked(true);
+
+        verticalLayout_7->addWidget(autoInject);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_7->addItem(verticalSpacer);
+
+
+        verticalLayout_6->addWidget(optionsContent);
+
+        optionsFooter = new QWidget(pageOptions);
+        optionsFooter->setObjectName(QStringLiteral("optionsFooter"));
+        optionsFooter->setStyleSheet(QLatin1String("QPushButton {\n"
+"	background: transparent;\n"
+"    color: #fff;\n"
+"    padding: 7px 10px;\n"
+"    min-width: 50px;\n"
+"	background: #17171c;\n"
+"	border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	background: rgb(35, 35, 38);\n"
+"	background: rgb(62, 204, 156)\n"
+"}"));
+        horizontalLayout_3 = new QHBoxLayout(optionsFooter);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
+        btnCancelOptions = new QPushButton(optionsFooter);
+        btnCancelOptions->setObjectName(QStringLiteral("btnCancelOptions"));
+
+        horizontalLayout_3->addWidget(btnCancelOptions);
+
+        btnApplyOptions = new QPushButton(optionsFooter);
+        btnApplyOptions->setObjectName(QStringLiteral("btnApplyOptions"));
+        btnApplyOptions->setMinimumSize(QSize(70, 28));
+
+        horizontalLayout_3->addWidget(btnApplyOptions);
+
+
+        verticalLayout_6->addWidget(optionsFooter);
+
         mainStack->addWidget(pageOptions);
 
         verticalLayout->addWidget(mainStack);
@@ -354,6 +455,14 @@ public:
         QObject::connect(captionClose, SIGNAL(clicked()), MainWindowClass, SLOT(captionCloseClicked()));
         QObject::connect(captionHelp, SIGNAL(clicked()), MainWindowClass, SLOT(captionHelpClicked()));
         QObject::connect(captionMin, SIGNAL(clicked()), MainWindowClass, SLOT(captionMinClicked()));
+        QObject::connect(btnOptions, SIGNAL(clicked()), MainWindowClass, SLOT(btnOptionsClicked()));
+        QObject::connect(btnApplyOptions, SIGNAL(clicked()), MainWindowClass, SLOT(btnApplyOptionsClicked()));
+        QObject::connect(btnCancelOptions, SIGNAL(clicked()), MainWindowClass, SLOT(btnCancelOptionsClicked()));
+        QObject::connect(commonData, SIGNAL(toggled(bool)), MainWindowClass, SLOT(dataCheckboxCheckedChanged(bool)));
+        QObject::connect(commonInstall, SIGNAL(toggled(bool)), MainWindowClass, SLOT(installCheckboxCheckedChanged(bool)));
+
+        mainStack->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(MainWindowClass);
     } // setupUi
@@ -370,6 +479,11 @@ public:
         pushButton_4->setText(QApplication::translate("MainWindowClass", "Secret", nullptr));
         btnOptions->setText(QApplication::translate("MainWindowClass", "Options", nullptr));
         btnContinue->setText(QApplication::translate("MainWindowClass", "Continue", nullptr));
+        commonInstall->setText(QApplication::translate("MainWindowClass", "Use common path for BetterDiscord core files", nullptr));
+        commonData->setText(QApplication::translate("MainWindowClass", "Use common path for BetterDiscord content", nullptr));
+        autoInject->setText(QApplication::translate("MainWindowClass", "Autoinjection routine(attempts to survive Discord updates but could break if Discord changes their structure)", nullptr));
+        btnCancelOptions->setText(QApplication::translate("MainWindowClass", "Cancel", nullptr));
+        btnApplyOptions->setText(QApplication::translate("MainWindowClass", "Apply", nullptr));
     } // retranslateUi
 
 };

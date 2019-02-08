@@ -75,6 +75,9 @@
     <ClCompile Include="about.cpp">
       <Filter>Sources\ui</Filter>
     </ClCompile>
+    <ClCompile Include="userconfig.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -129,6 +132,9 @@
     </ClInclude>
     <ClInclude Include="version.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="userconfig.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
