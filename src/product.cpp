@@ -57,13 +57,18 @@ void Product::setIcon(const QString &iconPath) const {
 }
 
 void Product::showButtons() const {
-	_ui.btnGroup->show();
+	_ui.rsStack->setCurrentWidget(_ui.pageButtons);
 }
 
 
 void Product::hideButtons() const {
-	_ui.btnGroup->hide();
+	_ui.rsStack->setCurrentWidget(_ui.pageStatus);
 }
+
+void Product::setStatus(const QString &status) const {
+	_ui.lblStatus->setText(status);
+}
+
 
 void Product::checkBtn(bool checked) {
 	auto btn = qobject_cast<QPushButton*>(sender());

@@ -26,6 +26,7 @@ public:
 	void setIcon(const QString &iconPath) const;
 	void showButtons() const;
 	void hideButtons() const;
+	void setStatus(const QString &status) const;
 
 	bool install() const { return _ui.btnInstall->isChecked(); }
 	bool skip() const { return _ui.btnSkip->isChecked(); }

@@ -15,6 +15,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -33,11 +34,17 @@ public:
     QVBoxLayout *verticalLayout_5;
     QLabel *lblInfo;
     QSpacerItem *spacer;
+    QStackedWidget *rsStack;
+    QWidget *pageButtons;
+    QHBoxLayout *horizontalLayout;
     QWidget *btnGroup;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *btnInstall;
     QPushButton *btnSkip;
     QPushButton *btnUninstall;
+    QWidget *pageStatus;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *lblStatus;
 
     void setupUi(QWidget *Product)
     {
@@ -91,7 +98,15 @@ public:
 
         horizontalLayout_3->addItem(spacer);
 
-        btnGroup = new QWidget(mainContainer);
+        rsStack = new QStackedWidget(mainContainer);
+        rsStack->setObjectName(QStringLiteral("rsStack"));
+        pageButtons = new QWidget();
+        pageButtons->setObjectName(QStringLiteral("pageButtons"));
+        horizontalLayout = new QHBoxLayout(pageButtons);
+        horizontalLayout->setSpacing(0);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        btnGroup = new QWidget(pageButtons);
         btnGroup->setObjectName(QStringLiteral("btnGroup"));
         btnGroup->setEnabled(true);
         btnGroup->setStyleSheet(QLatin1String("QPushButton {\n"
@@ -144,7 +159,22 @@ public:
         horizontalLayout_4->addWidget(btnUninstall);
 
 
-        horizontalLayout_3->addWidget(btnGroup);
+        horizontalLayout->addWidget(btnGroup);
+
+        rsStack->addWidget(pageButtons);
+        pageStatus = new QWidget();
+        pageStatus->setObjectName(QStringLiteral("pageStatus"));
+        horizontalLayout_2 = new QHBoxLayout(pageStatus);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        lblStatus = new QLabel(pageStatus);
+        lblStatus->setObjectName(QStringLiteral("lblStatus"));
+        lblStatus->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_2->addWidget(lblStatus);
+
+        rsStack->addWidget(pageStatus);
+
+        horizontalLayout_3->addWidget(rsStack);
 
 
         verticalLayout->addWidget(mainContainer);
@@ -154,6 +184,9 @@ public:
         QObject::connect(btnInstall, SIGNAL(clicked(bool)), Product, SLOT(checkBtn(bool)));
         QObject::connect(btnSkip, SIGNAL(clicked(bool)), Product, SLOT(checkBtn(bool)));
         QObject::connect(btnUninstall, SIGNAL(clicked(bool)), Product, SLOT(checkBtn(bool)));
+
+        rsStack->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(Product);
     } // setupUi
@@ -165,6 +198,7 @@ public:
         btnInstall->setText(QApplication::translate("Product", "Install", nullptr));
         btnSkip->setText(QApplication::translate("Product", "Skip", nullptr));
         btnUninstall->setText(QApplication::translate("Product", "Remove", nullptr));
+        lblStatus->setText(QApplication::translate("Product", "Status", nullptr));
         Q_UNUSED(Product);
     } // retranslateUi
 

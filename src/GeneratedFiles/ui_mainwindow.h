@@ -501,9 +501,10 @@ public:
         productsToRemove->setObjectName(QStringLiteral("productsToRemove"));
         productsToRemove->setStyleSheet(QStringLiteral(""));
         verticalLayout_13 = new QVBoxLayout(productsToRemove);
-        verticalLayout_13->setSpacing(6);
+        verticalLayout_13->setSpacing(20);
         verticalLayout_13->setContentsMargins(11, 11, 11, 11);
         verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
+        verticalLayout_13->setContentsMargins(0, 0, 0, 0);
 
         verticalLayout_10->addWidget(productsToRemove);
 

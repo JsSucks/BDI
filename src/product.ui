@@ -112,12 +112,34 @@ background: rgb(30, 30, 38);</string>
        </spacer>
       </item>
       <item>
-       <widget class="QWidget" name="btnGroup" native="true">
-        <property name="enabled">
-         <bool>true</bool>
+       <widget class="QStackedWidget" name="rsStack">
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
+        <widget class="QWidget" name="pageButtons">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="btnGroup" native="true">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
 	background: transparent;
 	border: 1px solid #30313a;
 	color: #fff;
@@ -137,64 +159,82 @@ QPushButton::hover {
 QPushButton::checked::disabled {
 	background: gray;
 }</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="btnInstall">
-           <property name="styleSheet">
-            <string notr="true">border-right: 0;</string>
-           </property>
-           <property name="text">
-            <string>Install</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnSkip">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border-left: 0;
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="btnInstall">
+               <property name="styleSheet">
+                <string notr="true">border-right: 0;</string>
+               </property>
+               <property name="text">
+                <string>Install</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSkip">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-left: 0;
 border-right: 0;</string>
-           </property>
-           <property name="text">
-            <string>Skip</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnUninstall">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border-left: 0;</string>
-           </property>
-           <property name="text">
-            <string>Remove</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="flat">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+               </property>
+               <property name="text">
+                <string>Skip</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnUninstall">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-left: 0;</string>
+               </property>
+               <property name="text">
+                <string>Remove</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="flat">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageStatus">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="lblStatus">
+            <property name="text">
+             <string>Status</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
