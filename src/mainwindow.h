@@ -32,6 +32,7 @@ private:
 	QJsonObject _coreObj;
 	QJsonObject _clientObj;
 	QVector<Discord*> _discords;
+	bool _remotesLoaded;
 
 	void initOptionsPage() const;
 

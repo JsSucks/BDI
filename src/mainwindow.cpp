@@ -105,6 +105,16 @@ void MainWindow::btnContinueClicked() const {
 	}
 
 	_ui.mainStack->setCurrentWidget(_ui.pageInstall);
+
+	for(auto discord : remove) {
+		discord->widget()->setStatus("Removing...");
+	}
+
+	for(auto discord : install) {
+		if(!_remotesLoaded) {
+			discord->widget()->setStatus("Pulling packages...");
+		}
+	}
 }
 
 void MainWindow::btnOptionsClicked() const {
