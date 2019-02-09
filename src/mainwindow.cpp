@@ -79,11 +79,16 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 }
 
 void MainWindow::btnContinueClicked() const {
+
+	QVector<Discord*> install;
+	QVector<Discord*> remove;
+
 	for(auto discord : _discords) {
 		discord->widget()->hideButtons();
 		discord->widget()->setStatus("");
 		if(discord->action() == Discord::A_REPAIR_INSTALL) {
 			_ui.productsToInstall->layout()->addWidget(discord->widget());
+			install.append(discord);
 		} else if(discord->action() == Discord::A_UNINSTALL) {
 			_ui.productsToRemove->layout()->addWidget(discord->widget());
 		}
