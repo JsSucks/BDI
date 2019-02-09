@@ -86,7 +86,6 @@ void MainWindow::btnContinueClicked() const {
 		}
 	}
 
-	qDebug(qPrintable(QString::number(_ui.productsToRemove->children().length())));
 	if(_ui.productsToRemove->children().length() <= 1) {
 		_ui.productsToRemoveHeader->hide();
 		_ui.productsToRemove->hide();
