@@ -13,6 +13,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
 	_ui.setupUi(this);
+	_ui.mainStack->setCurrentWidget(_ui.pageInitial);
 
 #ifdef TEST_MODE
 	_ui.centralWidget->setStyleSheet("#centralWidget { background: red; }");
@@ -168,7 +169,7 @@ void MainWindow::changeEvent(QEvent *event) {
 	if(!isActiveWindow()) {
 		_ui.centralWidget->setStyleSheet("#centralWidget { background: gray; }");
 		_ui.icon->setEnabled(false);
-		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid gray; color: #aeaeae; margin-left: 65px;");
+		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid gray; color: #aeaeae; margin-left: 75px;");
 		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:gray;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
 	}
 	else {
@@ -179,7 +180,7 @@ void MainWindow::changeEvent(QEvent *event) {
 		_ui.centralWidget->setStyleSheet("#centralWidget { background: rgb(62, 204, 156); }");
 #endif
 		_ui.icon->setEnabled(true);
-		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid rgb(62, 204, 156); color: rgb(62, 204, 156); margin-left: 65px;");
+		_ui.prodcutsSplit->setStyleSheet("border-bottom: 1px solid rgb(62, 204, 156); color: rgb(62, 204, 156); margin-left: 75px;");
 		_ui.label_2->setText(R"(<html><head/><body><p><span style="color:#3ecc9c;">Better</span><span style="color:#ffffff;">Discord</span></p></body></html>)");
 	}
 }

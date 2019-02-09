@@ -86,6 +86,7 @@ public:
     QLabel *label_4;
     QWidget *productsToInstall;
     QVBoxLayout *verticalLayout_14;
+    QSpacerItem *verticalSpacer_2;
     QWidget *installFooter;
 
     void setupUi(QMainWindow *MainWindowClass)
@@ -288,7 +289,7 @@ public:
         prodcutsSplit->setMaximumSize(QSize(16777215, 20));
         prodcutsSplit->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
 "color: rgb(62, 204, 156);\n"
-"margin-left: 65px;"));
+"margin-left: 75px;"));
         verticalLayout_2 = new QVBoxLayout(prodcutsSplit);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -481,7 +482,7 @@ public:
         productsToRemoveHeader->setMaximumSize(QSize(16777215, 20));
         productsToRemoveHeader->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
 "color: rgb(62, 204, 156);\n"
-"margin-left: 65px;"));
+"margin-left: 75px;"));
         verticalLayout_11 = new QVBoxLayout(productsToRemoveHeader);
         verticalLayout_11->setSpacing(0);
         verticalLayout_11->setContentsMargins(11, 11, 11, 11);
@@ -489,6 +490,7 @@ public:
         verticalLayout_11->setContentsMargins(0, 0, 0, 0);
         label = new QLabel(productsToRemoveHeader);
         label->setObjectName(QStringLiteral("label"));
+        label->setFont(font1);
 
         verticalLayout_11->addWidget(label);
 
@@ -510,7 +512,7 @@ public:
         productsToInstallHeader->setMaximumSize(QSize(16777215, 20));
         productsToInstallHeader->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
 "color: rgb(62, 204, 156);\n"
-"margin-left: 65px;"));
+"margin-left: 75px;"));
         verticalLayout_12 = new QVBoxLayout(productsToInstallHeader);
         verticalLayout_12->setSpacing(0);
         verticalLayout_12->setContentsMargins(11, 11, 11, 11);
@@ -518,6 +520,12 @@ public:
         verticalLayout_12->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(productsToInstallHeader);
         label_4->setObjectName(QStringLiteral("label_4"));
+        QFont font5;
+        font5.setFamily(QStringLiteral("Roboto"));
+        font5.setPointSize(10);
+        font5.setBold(false);
+        font5.setWeight(50);
+        label_4->setFont(font5);
 
         verticalLayout_12->addWidget(label_4);
 
@@ -528,11 +536,16 @@ public:
         productsToInstall->setObjectName(QStringLiteral("productsToInstall"));
         productsToInstall->setStyleSheet(QStringLiteral(""));
         verticalLayout_14 = new QVBoxLayout(productsToInstall);
-        verticalLayout_14->setSpacing(6);
+        verticalLayout_14->setSpacing(20);
         verticalLayout_14->setContentsMargins(11, 11, 11, 11);
         verticalLayout_14->setObjectName(QStringLiteral("verticalLayout_14"));
+        verticalLayout_14->setContentsMargins(0, 0, 0, 0);
 
         verticalLayout_10->addWidget(productsToInstall);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_10->addItem(verticalSpacer_2);
 
 
         verticalLayout_9->addWidget(installContent);
@@ -559,7 +572,7 @@ public:
         QObject::connect(commonInstall, SIGNAL(toggled(bool)), MainWindowClass, SLOT(installCheckboxCheckedChanged(bool)));
         QObject::connect(btnContinue, SIGNAL(clicked()), MainWindowClass, SLOT(btnContinueClicked()));
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);

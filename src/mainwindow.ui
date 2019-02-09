@@ -314,7 +314,7 @@ QPushButton:hover {
     <item>
      <widget class="QStackedWidget" name="mainStack">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageInitial">
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -368,7 +368,7 @@ QPushButton:hover {
              <property name="styleSheet">
               <string notr="true">border-bottom: 1px solid rgb(62, 204, 156);
 color: rgb(62, 204, 156);
-margin-left: 65px;</string>
+margin-left: 75px;</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <property name="spacing">
@@ -705,7 +705,7 @@ QPushButton::hover {
              <property name="styleSheet">
               <string notr="true">border-bottom: 1px solid rgb(62, 204, 156);
 color: rgb(62, 204, 156);
-margin-left: 65px;</string>
+margin-left: 75px;</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11">
               <property name="spacing">
@@ -725,6 +725,12 @@ margin-left: 65px;</string>
               </property>
               <item>
                <widget class="QLabel" name="label">
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Products to Remove</string>
                 </property>
@@ -738,7 +744,23 @@ margin-left: 65px;</string>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_13"/>
+             <layout class="QVBoxLayout" name="verticalLayout_13">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+             </layout>
             </widget>
            </item>
            <item>
@@ -752,7 +774,7 @@ margin-left: 65px;</string>
              <property name="styleSheet">
               <string notr="true">border-bottom: 1px solid rgb(62, 204, 156);
 color: rgb(62, 204, 156);
-margin-left: 65px;</string>
+margin-left: 75px;</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12">
               <property name="spacing">
@@ -772,6 +794,14 @@ margin-left: 65px;</string>
               </property>
               <item>
                <widget class="QLabel" name="label_4">
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                  <pointsize>10</pointsize>
+                  <weight>50</weight>
+                  <bold>false</bold>
+                 </font>
+                </property>
                 <property name="text">
                  <string>Products to Install</string>
                 </property>
@@ -785,8 +815,37 @@ margin-left: 65px;</string>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_14"/>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+             </layout>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
