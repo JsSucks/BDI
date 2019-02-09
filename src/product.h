@@ -24,6 +24,8 @@ public:
 	void setUninstallBtnState(bool enabled, const QString &text = "Remove") const;
 	void setCheckedBtn(int index) const;
 	void setIcon(const QString &iconPath) const;
+	void showButtons() const;
+	void hideButtons() const;
 
 	bool install() const { return _ui.btnInstall->isChecked(); }
 	bool skip() const { return _ui.btnSkip->isChecked(); }

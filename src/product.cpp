@@ -56,6 +56,15 @@ void Product::setIcon(const QString &iconPath) const {
 	_ui.icon->setPixmap(QPixmap(iconPath));
 }
 
+void Product::showButtons() const {
+	_ui.btnGroup->show();
+}
+
+
+void Product::hideButtons() const {
+	_ui.btnGroup->hide();
+}
+
 void Product::checkBtn(bool checked) {
 	auto btn = qobject_cast<QPushButton*>(sender());
 	_ui.btnInstall->setChecked(false);

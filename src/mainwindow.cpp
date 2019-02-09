@@ -79,6 +79,7 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 
 void MainWindow::btnContinueClicked() const {
 	for(auto discord : _discords) {
+		discord->widget()->hideButtons();
 		if(discord->action() == Discord::A_REPAIR_INSTALL) {
 			_ui.productsToInstall->layout()->addWidget(discord->widget());
 		} else if(discord->action() == Discord::A_UNINSTALL) {
