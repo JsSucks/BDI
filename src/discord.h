@@ -52,6 +52,7 @@ public:
 	void debug() const;
 
 	InstallState state() const;
+	Action action() const;
 	QString channel() const;
 
 private:

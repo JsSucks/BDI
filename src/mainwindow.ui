@@ -695,7 +695,7 @@ QPushButton::hover {
          <widget class="QWidget" name="installContent" native="true">
           <layout class="QVBoxLayout" name="verticalLayout_10">
            <item>
-            <widget class="QWidget" name="widget_2" native="true">
+            <widget class="QWidget" name="productsToRemoveHeader" native="true">
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -742,7 +742,7 @@ margin-left: 65px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="widget_3" native="true">
+            <widget class="QWidget" name="productsToInstallHeader" native="true">
              <property name="maximumSize">
               <size>
                <width>16777215</width>

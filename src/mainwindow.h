@@ -31,6 +31,7 @@ private:
 	UserConfig _userConfig;
 	QJsonObject _coreObj;
 	QJsonObject _clientObj;
+	QVector<Discord*> _discords;
 
 	void initOptionsPage() const;
 

@@ -50,6 +50,8 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 	raise();
 	setFocus();
 
+	_discords = discords;
+
 	for(auto remote : remotes["files"].toArray()) {
 		auto obj = remote.toObject();
 		if(obj.value("id") == "core") _coreObj = obj;
@@ -76,6 +78,25 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 }
 
 void MainWindow::btnContinueClicked() const {
+	for(auto discord : _discords) {
+		if(discord->action() == Discord::A_REPAIR_INSTALL) {
+			_ui.productsToInstall->layout()->addWidget(discord->widget());
+		} else if(discord->action() == Discord::A_UNINSTALL) {
+			_ui.productsToRemove->layout()->addWidget(discord->widget());
+		}
+	}
+
+	qDebug(qPrintable(QString::number(_ui.productsToRemove->children().length())));
+	if(_ui.productsToRemove->children().length() <= 1) {
+		_ui.productsToRemoveHeader->hide();
+		_ui.productsToRemove->hide();
+	}
+
+	if(_ui.productsToInstall->children().length() <= 1) {
+		_ui.productsToInstallHeader->hide();
+		_ui.productsToInstall->hide();
+	}
+
 	_ui.mainStack->setCurrentWidget(_ui.pageInstall);
 }
 

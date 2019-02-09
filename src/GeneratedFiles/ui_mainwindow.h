@@ -76,12 +76,12 @@ public:
     QVBoxLayout *verticalLayout_9;
     QWidget *installContent;
     QVBoxLayout *verticalLayout_10;
-    QWidget *widget_2;
+    QWidget *productsToRemoveHeader;
     QVBoxLayout *verticalLayout_11;
     QLabel *label;
     QWidget *productsToRemove;
     QVBoxLayout *verticalLayout_13;
-    QWidget *widget_3;
+    QWidget *productsToInstallHeader;
     QVBoxLayout *verticalLayout_12;
     QLabel *label_4;
     QWidget *productsToInstall;
@@ -476,24 +476,24 @@ public:
         verticalLayout_10->setSpacing(6);
         verticalLayout_10->setContentsMargins(11, 11, 11, 11);
         verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
-        widget_2 = new QWidget(installContent);
-        widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setMaximumSize(QSize(16777215, 20));
-        widget_2->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
+        productsToRemoveHeader = new QWidget(installContent);
+        productsToRemoveHeader->setObjectName(QStringLiteral("productsToRemoveHeader"));
+        productsToRemoveHeader->setMaximumSize(QSize(16777215, 20));
+        productsToRemoveHeader->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
 "color: rgb(62, 204, 156);\n"
 "margin-left: 65px;"));
-        verticalLayout_11 = new QVBoxLayout(widget_2);
+        verticalLayout_11 = new QVBoxLayout(productsToRemoveHeader);
         verticalLayout_11->setSpacing(0);
         verticalLayout_11->setContentsMargins(11, 11, 11, 11);
         verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
         verticalLayout_11->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget_2);
+        label = new QLabel(productsToRemoveHeader);
         label->setObjectName(QStringLiteral("label"));
 
         verticalLayout_11->addWidget(label);
 
 
-        verticalLayout_10->addWidget(widget_2);
+        verticalLayout_10->addWidget(productsToRemoveHeader);
 
         productsToRemove = new QWidget(installContent);
         productsToRemove->setObjectName(QStringLiteral("productsToRemove"));
@@ -505,24 +505,24 @@ public:
 
         verticalLayout_10->addWidget(productsToRemove);
 
-        widget_3 = new QWidget(installContent);
-        widget_3->setObjectName(QStringLiteral("widget_3"));
-        widget_3->setMaximumSize(QSize(16777215, 20));
-        widget_3->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
+        productsToInstallHeader = new QWidget(installContent);
+        productsToInstallHeader->setObjectName(QStringLiteral("productsToInstallHeader"));
+        productsToInstallHeader->setMaximumSize(QSize(16777215, 20));
+        productsToInstallHeader->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
 "color: rgb(62, 204, 156);\n"
 "margin-left: 65px;"));
-        verticalLayout_12 = new QVBoxLayout(widget_3);
+        verticalLayout_12 = new QVBoxLayout(productsToInstallHeader);
         verticalLayout_12->setSpacing(0);
         verticalLayout_12->setContentsMargins(11, 11, 11, 11);
         verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
         verticalLayout_12->setContentsMargins(0, 0, 0, 0);
-        label_4 = new QLabel(widget_3);
+        label_4 = new QLabel(productsToInstallHeader);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         verticalLayout_12->addWidget(label_4);
 
 
-        verticalLayout_10->addWidget(widget_3);
+        verticalLayout_10->addWidget(productsToInstallHeader);
 
         productsToInstall = new QWidget(installContent);
         productsToInstall->setObjectName(QStringLiteral("productsToInstall"));

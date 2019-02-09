@@ -202,6 +202,10 @@ Discord::InstallState Discord::state() const {
 	return _installState;
 }
 
+Discord::Action Discord::action() const {
+	return _action;
+}
+
 QString Discord::channel() const {
 	return _channel;
 }
