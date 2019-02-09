@@ -52,6 +52,7 @@ public slots:
 	void btnOptionsClicked() const;
 	void btnApplyOptionsClicked();
 	void btnCancelOptionsClicked() const;
+	void btnContinueClicked() const;
 	void installCheckboxCheckedChanged(bool checked) const;
 	void dataCheckboxCheckedChanged(bool checked) const;
 };

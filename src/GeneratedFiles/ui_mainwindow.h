@@ -72,6 +72,21 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QPushButton *btnCancelOptions;
     QPushButton *btnApplyOptions;
+    QWidget *pageInstall;
+    QVBoxLayout *verticalLayout_9;
+    QWidget *installContent;
+    QVBoxLayout *verticalLayout_10;
+    QWidget *widget_2;
+    QVBoxLayout *verticalLayout_11;
+    QLabel *label;
+    QWidget *productsToRemove;
+    QVBoxLayout *verticalLayout_13;
+    QWidget *widget_3;
+    QVBoxLayout *verticalLayout_12;
+    QLabel *label_4;
+    QWidget *productsToInstall;
+    QVBoxLayout *verticalLayout_14;
+    QWidget *installFooter;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
@@ -84,7 +99,8 @@ public:
 "}\n"
 "\n"
 "#content,\n"
-"#optionsContent {\n"
+"#optionsContent,\n"
+"#installContent {\n"
 "	background: #2d2d30;\n"
 "	background: rgb(30, 30, 38);\n"
 "}\n"
@@ -95,7 +111,8 @@ public:
 "}\n"
 "\n"
 "#footer,\n"
-"#optionsFooter {\n"
+"#optionsFooter,\n"
+"#installFooter {\n"
 "	background: #202023;\n"
 "	background: rgb(32, 32, 38);\n"
 "	max-height: 50px;\n"
@@ -446,6 +463,86 @@ public:
         verticalLayout_6->addWidget(optionsFooter);
 
         mainStack->addWidget(pageOptions);
+        pageInstall = new QWidget();
+        pageInstall->setObjectName(QStringLiteral("pageInstall"));
+        verticalLayout_9 = new QVBoxLayout(pageInstall);
+        verticalLayout_9->setSpacing(0);
+        verticalLayout_9->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
+        verticalLayout_9->setContentsMargins(0, 0, 0, 0);
+        installContent = new QWidget(pageInstall);
+        installContent->setObjectName(QStringLiteral("installContent"));
+        verticalLayout_10 = new QVBoxLayout(installContent);
+        verticalLayout_10->setSpacing(6);
+        verticalLayout_10->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
+        widget_2 = new QWidget(installContent);
+        widget_2->setObjectName(QStringLiteral("widget_2"));
+        widget_2->setMaximumSize(QSize(16777215, 20));
+        widget_2->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
+"color: rgb(62, 204, 156);\n"
+"margin-left: 65px;"));
+        verticalLayout_11 = new QVBoxLayout(widget_2);
+        verticalLayout_11->setSpacing(0);
+        verticalLayout_11->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
+        verticalLayout_11->setContentsMargins(0, 0, 0, 0);
+        label = new QLabel(widget_2);
+        label->setObjectName(QStringLiteral("label"));
+
+        verticalLayout_11->addWidget(label);
+
+
+        verticalLayout_10->addWidget(widget_2);
+
+        productsToRemove = new QWidget(installContent);
+        productsToRemove->setObjectName(QStringLiteral("productsToRemove"));
+        productsToRemove->setStyleSheet(QStringLiteral(""));
+        verticalLayout_13 = new QVBoxLayout(productsToRemove);
+        verticalLayout_13->setSpacing(6);
+        verticalLayout_13->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
+
+        verticalLayout_10->addWidget(productsToRemove);
+
+        widget_3 = new QWidget(installContent);
+        widget_3->setObjectName(QStringLiteral("widget_3"));
+        widget_3->setMaximumSize(QSize(16777215, 20));
+        widget_3->setStyleSheet(QLatin1String("border-bottom: 1px solid rgb(62, 204, 156);\n"
+"color: rgb(62, 204, 156);\n"
+"margin-left: 65px;"));
+        verticalLayout_12 = new QVBoxLayout(widget_3);
+        verticalLayout_12->setSpacing(0);
+        verticalLayout_12->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
+        verticalLayout_12->setContentsMargins(0, 0, 0, 0);
+        label_4 = new QLabel(widget_3);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        verticalLayout_12->addWidget(label_4);
+
+
+        verticalLayout_10->addWidget(widget_3);
+
+        productsToInstall = new QWidget(installContent);
+        productsToInstall->setObjectName(QStringLiteral("productsToInstall"));
+        productsToInstall->setStyleSheet(QStringLiteral(""));
+        verticalLayout_14 = new QVBoxLayout(productsToInstall);
+        verticalLayout_14->setSpacing(6);
+        verticalLayout_14->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_14->setObjectName(QStringLiteral("verticalLayout_14"));
+
+        verticalLayout_10->addWidget(productsToInstall);
+
+
+        verticalLayout_9->addWidget(installContent);
+
+        installFooter = new QWidget(pageInstall);
+        installFooter->setObjectName(QStringLiteral("installFooter"));
+
+        verticalLayout_9->addWidget(installFooter);
+
+        mainStack->addWidget(pageInstall);
 
         verticalLayout->addWidget(mainStack);
 
@@ -460,8 +557,9 @@ public:
         QObject::connect(btnCancelOptions, SIGNAL(clicked()), MainWindowClass, SLOT(btnCancelOptionsClicked()));
         QObject::connect(commonData, SIGNAL(toggled(bool)), MainWindowClass, SLOT(dataCheckboxCheckedChanged(bool)));
         QObject::connect(commonInstall, SIGNAL(toggled(bool)), MainWindowClass, SLOT(installCheckboxCheckedChanged(bool)));
+        QObject::connect(btnContinue, SIGNAL(clicked()), MainWindowClass, SLOT(btnContinueClicked()));
 
-        mainStack->setCurrentIndex(1);
+        mainStack->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
@@ -484,6 +582,8 @@ public:
         autoInject->setText(QApplication::translate("MainWindowClass", "Autoinjection routine(attempts to survive Discord updates but could break if Discord changes their structure)", nullptr));
         btnCancelOptions->setText(QApplication::translate("MainWindowClass", "Cancel", nullptr));
         btnApplyOptions->setText(QApplication::translate("MainWindowClass", "Apply", nullptr));
+        label->setText(QApplication::translate("MainWindowClass", "Products to Remove", nullptr));
+        label_4->setText(QApplication::translate("MainWindowClass", "Products to Install", nullptr));
     } // retranslateUi
 
 };

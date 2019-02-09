@@ -75,6 +75,10 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 	}
 }
 
+void MainWindow::btnContinueClicked() const {
+	_ui.mainStack->setCurrentWidget(_ui.pageInstall);
+}
+
 void MainWindow::btnOptionsClicked() const {
 	_ui.mainStack->setCurrentWidget(_ui.pageOptions);
 }
