@@ -113,6 +113,12 @@ background: rgb(30, 30, 38);</string>
       </item>
       <item>
        <widget class="QStackedWidget" name="rsStack">
+        <property name="minimumSize">
+         <size>
+          <width>290</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>

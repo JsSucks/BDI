@@ -100,6 +100,7 @@ public:
 
         rsStack = new QStackedWidget(mainContainer);
         rsStack->setObjectName(QStringLiteral("rsStack"));
+        rsStack->setMinimumSize(QSize(290, 0));
         pageButtons = new QWidget();
         pageButtons->setObjectName(QStringLiteral("pageButtons"));
         horizontalLayout = new QHBoxLayout(pageButtons);
