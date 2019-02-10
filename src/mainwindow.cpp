@@ -113,6 +113,11 @@ void MainWindow::btnContinueClicked() const {
 
 	for(auto discord : remove) {
 		discord->widget()->setStatus("Removing...");
+		if(discord->remove()) {
+			discord->widget()->setStatus("Done");
+		} else {
+			discord->widget()->setStatus("Error!");
+		}
 	}
 
 	for(auto discord : install) {

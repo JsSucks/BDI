@@ -103,6 +103,15 @@ bool Discord::inject() {
 	return true;
 }
 
+bool Discord::remove() {
+	Logger::Debug("Removing BetteDiscord installation at: " + _appDir.absolutePath());
+	if(!_appDir.exists()) {
+		Logger::Debug("App dir doesn't seem to exist anymore");
+		return true;
+	}
+	return _appDir.removeRecursively();
+}
+
 QString Discord::channelString() const {
 	if (_channel == "ptb") return "Discord PTB";
 	if (_channel == "canary") return "Discord Canary";

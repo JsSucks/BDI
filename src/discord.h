@@ -46,6 +46,7 @@ public:
 	QString applicationName() const;
 	void locate();
 	bool inject();
+	bool remove();
 	QString channelString() const;
 
 	Product *widget();
