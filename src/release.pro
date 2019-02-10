@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = BDI
 DESTDIR = ../bin/x64/Release
 QT += core network gui svg widgets
-CONFIG += debug
+CONFIG += release
 DEFINES += _UNICODE QT_NETWORK_LIB QT_SVG_LIB QT_WIDGETS_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
