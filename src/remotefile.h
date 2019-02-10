@@ -30,10 +30,12 @@ public:
 	explicit RemoteFile(const QUrl &remoteLocation, const bool memoryOnly = true) : RemoteFile("", "", remoteLocation, memoryOnly) {};
 
 	void download();
+	void loadLocal();
 	QString readAll() const;
 	QByteArray hash(const QCryptographicHash::Algorithm &algorithm = QCryptographicHash::Sha256);
 	QString hashString(const QCryptographicHash::Algorithm &algorithm = QCryptographicHash::Sha256);
 	bool compareHash(const QString &hash, const bool &recalculate = false);
+	bool exists() const;
 
 	QUrl remoteLocation() const { return _remoteLocation; }
 	QString fileName() const { return _fileName; }

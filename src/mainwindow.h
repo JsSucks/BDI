@@ -36,7 +36,7 @@ private:
 	bool _remotesLoaded;
 	
 	void initOptionsPage() const;
-	void install(QVector<Discord*> discords, const QString &stub) const;
+	void install(QVector<Discord*> discords) const;
 
 protected:
 	int _mousePressX;

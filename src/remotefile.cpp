@@ -36,6 +36,11 @@ void RemoteFile::download() {
 	});
 }
 
+void RemoteFile::loadLocal() {
+	_localFilePath = _basePath.filePath(_fileName);
+}
+
+
 void RemoteFile::downloadFinished(QNetworkReply *reply) {
 	auto url = reply->url();
 
@@ -107,4 +112,8 @@ QString RemoteFile::hashString(const QCryptographicHash::Algorithm &algorithm) {
 bool RemoteFile::compareHash(const QString &hash, const bool &recalculate) {
 	if(recalculate) _hash.clear();
 	return hashString().compare(hash, Qt::CaseInsensitive) == 0;
+}
+
+bool RemoteFile::exists() const {
+	return QFile::exists(_localFilePath);
 }

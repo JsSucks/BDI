@@ -9,6 +9,7 @@
 */
 
 #include "mainwindow.h"
+#include "remotefile.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
@@ -59,7 +60,7 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 	for(auto remote : remotes["files"].toArray()) {
 		auto obj = remote.toObject();
 		if(obj.value("id") == "core") _coreObj = obj;
-		else if(obj.value("key") == "client") _clientObj = obj;
+		else if(obj.value("id") == "client") _clientObj = obj;
 	}
 
 	const auto coreVersion = QVersionNumber::fromString(_coreObj.value("version").toString());
@@ -130,12 +131,45 @@ void MainWindow::btnContinueClicked() const {
 		return;
 	}
 #endif
-	QFile stubFile("stub.js");
-	stubFile.open(QIODevice::ReadOnly | QIODevice::Text);
-	this->install(install, stubFile.readAll());
+	this->install(install);
 }
 
-void MainWindow::install(QVector<Discord*> discords, const QString &stub) const {
+void MainWindow::install(QVector<Discord*> discords) const {
+
+	RemoteFile stubFile("stub.js", "tmp", QUrl(""), false);
+	stubFile.loadLocal();
+	if(!stubFile.exists()) {
+		Logger::Debug("stub.js does not exist!");
+		return;
+	}
+
+	const auto stub = stubFile.readAll();
+
+	RemoteFile coreZip("core.zip", "tmp", QUrl(Config::repository().url() + _coreObj["remote"].toString()), false);
+	coreZip.loadLocal();
+	if(!coreZip.exists()) {
+		Logger::Debug("core.zip does not exist!");
+		return;
+	}
+
+	if(!coreZip.compareHash(_coreObj["hash"].toString())) {
+		Logger::Debug("core.zip hash mismatch!" + coreZip.hashString() + "/" + _coreObj["hash"].toString());
+		return;
+	}
+	Logger::Debug("core.zip hash match " + coreZip.hashString() + "/" + _coreObj["hash"].toString());
+
+	RemoteFile clientZip("client.zip", "tmp", QUrl(Config::repository().url() + _clientObj["remote"].toString()), false);
+	clientZip.loadLocal();
+	if(!clientZip.exists()) {
+		Logger::Debug("client.zip does not exist!");
+		return;
+	}
+
+	if(!clientZip.compareHash(_clientObj["hash"].toString())) {
+		Logger::Debug("client.zip hash mismatch! " + clientZip.hashString() + "/" + _clientObj["hash"].toString());
+		return;
+	}
+	Logger::Debug("client.zip hash match " + clientZip.hashString() + "/" + _clientObj["hash"].toString());
 
 	auto cfg = _userConfig.toObj();
 	cfg["versions"] = QJsonObject{
