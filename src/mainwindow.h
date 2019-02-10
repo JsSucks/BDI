@@ -11,6 +11,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QMovie>
 
 #include "ui_mainwindow.h"
 

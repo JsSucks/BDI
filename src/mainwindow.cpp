@@ -79,6 +79,10 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 }
 
 void MainWindow::btnContinueClicked() const {
+	// TODO Better spinner
+	auto mov = new QMovie(":/images/horSpinner");
+	_ui.spinner->setMovie(mov);
+	mov->start();
 
 	QVector<Discord*> install;
 	QVector<Discord*> remove;

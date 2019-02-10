@@ -1,19 +1,20 @@
 <RCC>
-    <qresource prefix="/MainWindow"/>
-    <qresource prefix="/images">
-        <file alias="mHover">Resources/images/btn_-_hover.png</file>
-        <file alias="mNormal">Resources/images/btn_-_normal.png</file>
-        <file alias="qHover">Resources/images/btn_q_hover.png</file>
-        <file alias="qNormal">Resources/images/btn_q_normal.png</file>
-        <file alias="xHover">Resources/images/btn_x_hover.png</file>
-        <file alias="xNormal">Resources/images/btn_x_normal.png</file>
-        <file alias="logoCanary">Resources/images/LogoCanary.svg</file>
-        <file alias="logoPtb">Resources/images/LogoPTB.svg</file>
-        <file alias="logoStable">Resources/images/LogoStable.svg</file>
-        <file alias="pbargradient">Resources/images/pbargradient.png</file>
-    </qresource>
-    <qresource prefix="/fonts">
-        <file alias="Inconsolata">Resources/fonts/Inconsolata-Regular.ttf</file>
-        <file alias="Roboto">Resources/fonts/Roboto-Bold.ttf</file>
-    </qresource>
+  <qresource prefix="/MainWindow"/>
+  <qresource prefix="/images">
+    <file alias="horSpinner">Resources/images/spinnergif.gif</file>
+    <file alias="mHover">Resources/images/btn_-_hover.png</file>
+    <file alias="mNormal">Resources/images/btn_-_normal.png</file>
+    <file alias="qHover">Resources/images/btn_q_hover.png</file>
+    <file alias="qNormal">Resources/images/btn_q_normal.png</file>
+    <file alias="xHover">Resources/images/btn_x_hover.png</file>
+    <file alias="xNormal">Resources/images/btn_x_normal.png</file>
+    <file alias="logoCanary">Resources/images/LogoCanary.svg</file>
+    <file alias="logoPtb">Resources/images/LogoPTB.svg</file>
+    <file alias="logoStable">Resources/images/LogoStable.svg</file>
+    <file alias="pbargradient">Resources/images/pbargradient.png</file>
+  </qresource>
+  <qresource prefix="/fonts">
+    <file alias="Inconsolata">Resources/fonts/Inconsolata-Regular.ttf</file>
+    <file alias="Roboto">Resources/fonts/Roboto-Bold.ttf</file>
+  </qresource>
 </RCC>

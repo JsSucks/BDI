@@ -88,6 +88,10 @@ public:
     QVBoxLayout *verticalLayout_14;
     QSpacerItem *verticalSpacer_2;
     QWidget *installFooter;
+    QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer_3;
+    QLabel *spinner;
+    QSpacerItem *horizontalSpacer_4;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
@@ -553,6 +557,24 @@ public:
 
         installFooter = new QWidget(pageInstall);
         installFooter->setObjectName(QStringLiteral("installFooter"));
+        horizontalLayout_4 = new QHBoxLayout(installFooter);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
+
+        spinner = new QLabel(installFooter);
+        spinner->setObjectName(QStringLiteral("spinner"));
+        spinner->setMinimumSize(QSize(400, 0));
+
+        horizontalLayout_4->addWidget(spinner);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_4);
+
 
         verticalLayout_9->addWidget(installFooter);
 
@@ -598,6 +620,7 @@ public:
         btnApplyOptions->setText(QApplication::translate("MainWindowClass", "Apply", nullptr));
         label->setText(QApplication::translate("MainWindowClass", "Products to Remove", nullptr));
         label_4->setText(QApplication::translate("MainWindowClass", "Products to Install", nullptr));
+        spinner->setText(QString());
     } // retranslateUi
 
 };
