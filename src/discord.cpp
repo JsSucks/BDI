@@ -119,8 +119,7 @@ bool Discord::inject(const QString &stub, QJsonObject config) {
 
 	if(options["commonData"].toBool()) {
 		paths["data"] = paths["data"].toString() + "/BetterDiscord";
-	}
-	else {
+	} else {
 		paths["data"] = paths["data"].toString() + "/BetterDiscord/" + _channel;
 	}
 
