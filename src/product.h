@@ -30,7 +30,7 @@ public:
 
 	bool install() const { return _ui.btnInstall->isChecked(); }
 	bool skip() const { return _ui.btnSkip->isChecked(); }
-	bool uninstall() const { return _ui.btnInstall->isChecked(); }
+	bool uninstall() const { return _ui.btnUninstall->isChecked(); }
 
 private:
 	Ui::Product _ui;
