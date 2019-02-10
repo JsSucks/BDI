@@ -78,6 +78,9 @@
     <ClCompile Include="userconfig.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="errordialog.cpp">
+      <Filter>Sources\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -163,6 +166,9 @@
       <Filter>Custom Controls</Filter>
     </QtMoc>
     <QtMoc Include="about.h">
+      <Filter>Headers\ui</Filter>
+    </QtMoc>
+    <QtMoc Include="errordialog.h">
       <Filter>Headers\ui</Filter>
     </QtMoc>
   </ItemGroup>

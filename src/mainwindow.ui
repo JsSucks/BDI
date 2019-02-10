@@ -314,7 +314,7 @@ QPushButton:hover {
     <item>
      <widget class="QStackedWidget" name="mainStack">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pageInitial">
        <layout class="QVBoxLayout" name="verticalLayout_5">

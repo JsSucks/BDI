@@ -17,6 +17,7 @@
 
 #include "splash.h"
 #include "about.h"
+#include "errordialog.h"
 #include "config.h"
 #include "userconfig.h"
 

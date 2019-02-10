@@ -595,7 +595,7 @@ public:
         QObject::connect(commonInstall, SIGNAL(toggled(bool)), MainWindowClass, SLOT(installCheckboxCheckedChanged(bool)));
         QObject::connect(btnContinue, SIGNAL(clicked()), MainWindowClass, SLOT(btnContinueClicked()));
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
