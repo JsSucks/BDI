@@ -24,6 +24,7 @@ public:
 	void useCommonDataPath(bool use);
 	bool autoInject() const { return _autoInject; }
 	void autoInject(bool autoInject);
+	QJsonObject toObj() const;
 
 	QString installPath() const { return _installPath; }
 	void setInstallPath(const QString &installPath);

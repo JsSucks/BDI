@@ -88,7 +88,7 @@ void Discord::locate() {}
 void Discord::locate() { _installState = UNAVAILABLE; }
 #endif
 
-bool Discord::inject(const QString &stub, const QString &config) {
+bool Discord::inject(const QString &stub, QJsonObject config) {
 	if(!_appDir.exists()) {
 		if (!_appDir.mkdir(".")) return false;
 	}
@@ -108,8 +108,26 @@ bool Discord::inject(const QString &stub, const QString &config) {
 		return false;
 	}
 
+	auto options = config["options"].toObject();
+	auto paths = config["paths"].toObject();
+
+	if(options["commonCore"].toBool()) {
+		paths["core"] = paths["core"].toString() + "/BetterDiscord";
+	} else {
+		paths["core"] = paths["core"].toString() + "/BetterDiscord/" + _channel;
+	}
+
+	if(options["commonData"].toBool()) {
+		paths["data"] = paths["data"].toString() + "/BetterDiscord";
+	}
+	else {
+		paths["data"] = paths["data"].toString() + "/BetterDiscord/" + _channel;
+	}
+
+	config["paths"] = paths;
+
 	QTextStream configOut(&configFile);
-	configOut << config;
+	configOut << QJsonDocument(config).toJson(QJsonDocument::Indented);
 
 	_installState = INSTALLED;
 	return true;

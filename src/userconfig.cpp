@@ -34,6 +34,21 @@ void UserConfig::setDataPath(const QString &dataPath) {
 	_dataPath = dataPath;
 }
 
+QJsonObject UserConfig::toObj() const {
+	return QJsonObject{
+		{ "options", QJsonObject{
+			{ "commonCore", _commonInstallPath },
+			{ "commonData", _commonDataPath },
+			{ "autoInject", _autoInject }
+		} },
+		{ "paths", QJsonObject{
+			{ "core", _installPath },
+			{ "data", _dataPath }
+		} }
+	};
+}
+
+
 UserConfig *UserConfig::read(const QString &fPath) {
 	QFile file(fPath);
 	if(!file.open(QIODevice::ReadOnly)) {

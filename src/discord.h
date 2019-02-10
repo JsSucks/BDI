@@ -15,6 +15,7 @@
 #include <QTextStream>
 
 #include "qtfs.hpp"
+#include "qtjson.hpp"
 #include "product.h"
 #include "logger.h"
 
@@ -45,7 +46,7 @@ public:
 
 	QString applicationName() const;
 	void locate();
-	bool inject(const QString &stub, const QString &config);
+	bool inject(const QString &stub, QJsonObject config);
 	bool remove();
 	QString channelString() const;
 

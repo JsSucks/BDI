@@ -136,9 +136,16 @@ void MainWindow::btnContinueClicked() const {
 }
 
 void MainWindow::install(QVector<Discord*> discords, const QString &stub) const {
+
+	auto cfg = _userConfig.toObj();
+	cfg["versions"] = QJsonObject{
+		{ "core", _coreObj["version"] },
+		{ "client", _clientObj["version"] }
+	};
+
 	for(auto discord : discords) {
 		discord->widget()->setStatus("Installing...");
-		if(discord->inject(stub, "config")) {
+		if(discord->inject(stub, cfg)) {
 			discord->widget()->setStatus("Done");
 		} else {
 			discord->widget()->setStatus("Error!");
