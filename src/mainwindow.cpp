@@ -95,6 +95,7 @@ void MainWindow::btnContinueClicked() const {
 			install.append(discord);
 		} else if(discord->action() == Discord::A_UNINSTALL) {
 			_ui.productsToRemove->layout()->addWidget(discord->widget());
+			remove.append(discord);
 		}
 	}
 
