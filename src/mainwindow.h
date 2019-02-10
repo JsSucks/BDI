@@ -34,8 +34,9 @@ private:
 	QJsonObject _clientObj;
 	QVector<Discord*> _discords;
 	bool _remotesLoaded;
-
+	
 	void initOptionsPage() const;
+	void install(QVector<Discord*> discords, const QString &stub) const;
 
 protected:
 	int _mousePressX;

@@ -88,16 +88,28 @@ void Discord::locate() {}
 void Discord::locate() { _installState = UNAVAILABLE; }
 #endif
 
-bool Discord::inject() {
+bool Discord::inject(const QString &stub, const QString &config) {
 	if(!_appDir.exists()) {
 		if (!_appDir.mkdir(".")) return false;
 	}
 
-	QFile f(_appDir.filePath("index.js"));
-	if (!f.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
+	QFile indexFile(_appDir.filePath("index.js"));
+	if (!indexFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+		Logger::Debug("Unable to write to: " + _appDir.filePath("index.js"));
+		return false;
+	}
 
-	QTextStream out(&f);
-	out << _stub;
+	QTextStream indexOut(&indexFile);
+	indexOut << stub;
+
+	QFile configFile(_appDir.filePath("bd.json"));
+	if(!configFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+		Logger::Debug("Unable to write to: " + _appDir.filePath("bd.json"));
+		return false;
+	}
+
+	QTextStream configOut(&configFile);
+	configOut << config;
 
 	_installState = INSTALLED;
 	return true;

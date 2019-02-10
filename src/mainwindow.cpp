@@ -12,6 +12,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
+	_remotesLoaded = false;
 	_ui.setupUi(this);
 	_ui.mainStack->setCurrentWidget(_ui.pageInitial);
 
@@ -44,6 +45,8 @@ void MainWindow::initOptionsPage() const {
 		_userConfig.dataPath(),
 		_userConfig.useCommonDataPath() ? "/BetterDiscord" : "/BetterDiscord/:channel");
 }
+
+
 
 void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes) {
 	initOptionsPage();
@@ -120,9 +123,25 @@ void MainWindow::btnContinueClicked() const {
 		}
 	}
 
-	for(auto discord : install) {
-		if(!_remotesLoaded) {
-			discord->widget()->setStatus("Pulling packages...");
+	if(install.length() <= 0) return;
+#ifndef TEST_MODE
+	if(!_remotesLoaded) {
+		install.first()->widget()->setStatus("Pulling packages...");
+		return;
+	}
+#endif
+	QFile stubFile("stub.js");
+	stubFile.open(QIODevice::ReadOnly | QIODevice::Text);
+	this->install(install, stubFile.readAll());
+}
+
+void MainWindow::install(QVector<Discord*> discords, const QString &stub) const {
+	for(auto discord : discords) {
+		discord->widget()->setStatus("Installing...");
+		if(discord->inject(stub, "config")) {
+			discord->widget()->setStatus("Done");
+		} else {
+			discord->widget()->setStatus("Error!");
 		}
 	}
 }

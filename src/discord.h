@@ -45,7 +45,7 @@ public:
 
 	QString applicationName() const;
 	void locate();
-	bool inject();
+	bool inject(const QString &stub, const QString &config);
 	bool remove();
 	QString channelString() const;
 
