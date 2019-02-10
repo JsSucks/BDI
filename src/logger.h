@@ -19,6 +19,7 @@
 
 class Logger final {
 public:
+	static void Init(const QString &fPath = "debug.log");
 	static void Log(const QString &msg);
 	static void Debug(const QString &msg, const bool &log = true);
 	static void Debug(const QVector<QString> &messages);
@@ -27,5 +28,7 @@ public:
 	static QString TimeStamp();
 
 private:
+	static QFile *_logFile;
+	static bool _writable;
 	static QVector<QString> _logs;
 };

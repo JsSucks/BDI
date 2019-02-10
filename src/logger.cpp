@@ -11,17 +11,22 @@
 #include "logger.h"
 
 QVector<QString> Logger::_logs;
+QFile *Logger::_logFile = nullptr;
+bool Logger::_writable = false;
+
+void Logger::Init(const QString &fPath) {
+	_logFile = new QFile("debug.log");
+	_writable = _logFile->open(QIODevice::Append | QIODevice::Text);
+	if(!_writable) Debug("Unable to write logs", false);
+}
 
 void Logger::Log(const QString &msg) {
 	_logs.append(msg);
 
-	QFile f("debug.log");
-	if(!f.open(QIODevice::WriteOnly | QIODevice::Append)) {
-		Debug("Unable to write logs", false);
-		return;
-	}
+	if(_logFile == nullptr) Init();
+	if(!_writable || _logFile == nullptr) return;
 
-	QTextStream stream(&f);
+	QTextStream stream(_logFile);
 	stream << msg << endl;
 }
 
@@ -39,7 +44,7 @@ void Logger::Debug(const QVector<QString> &messages) {
 
 void Logger::Dump(const QString &fPath) {
 	QFile f(fPath);
-	if(!f.open(QIODevice::WriteOnly)) {
+	if(!f.open(QIODevice::WriteOnly | QIODevice::Text)) {
 		Debug("Unable to dump logs", false);
 		return;
 	}
