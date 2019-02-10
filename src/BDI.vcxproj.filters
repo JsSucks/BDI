@@ -95,6 +95,9 @@
     <QtUic Include="about.ui">
       <Filter>Ui</Filter>
     </QtUic>
+    <QtUic Include="errordialog.ui">
+      <Filter>Ui</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="resources.qrc">

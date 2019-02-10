@@ -179,7 +179,7 @@ void MainWindow::install(QVector<Discord*> discords) const {
 
 	for(auto discord : discords) {
 		discord->widget()->setStatus("Installing...");
-		if(discord->inject(stub, cfg)) {
+		if(discord->inject(stub, cfg, coreZip, clientZip)) {
 			discord->widget()->setStatus("Done");
 		} else {
 			discord->widget()->setStatus("Error!");
