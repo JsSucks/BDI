@@ -81,6 +81,9 @@
     <ClCompile Include="errordialog.cpp">
       <Filter>Sources\ui</Filter>
     </ClCompile>
+    <ClCompile Include="zip.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -170,6 +173,9 @@
     </QtMoc>
     <QtMoc Include="errordialog.h">
       <Filter>Headers\ui</Filter>
+    </QtMoc>
+    <QtMoc Include="zip.h">
+      <Filter>Headers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

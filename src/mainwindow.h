@@ -20,6 +20,7 @@
 #include "errordialog.h"
 #include "config.h"
 #include "userconfig.h"
+#include "zip.h"
 
 class MainWindow final : public QMainWindow {
 	Q_OBJECT
