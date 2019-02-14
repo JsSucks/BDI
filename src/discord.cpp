@@ -83,7 +83,46 @@ void Discord::locate() {
 #elif defined(Q_OS_LINUX)
 void Discord::locate() {}
 #elif defined(Q_OS_DARWIN)
-void Discord::locate() {}
+void Discord::locate() {
+	_baseDir = QDir(QDir::toNativeSeparators("/Applications"));
+
+	if(!_baseDir.exists()) {
+		_installState = UNAVAILABLE;
+		return;
+	}
+
+    auto bundleDir = QDir(QDir::toNativeSeparators(_baseDir.absolutePath() + "/" + applicationName()));
+
+	if(!bundleDir.exists()) {
+        _baseDir = QDir(QDir::toNativeSeparators(QDir::homePath() + "/Applications"));
+        bundleDir = QDir(QDir::toNativeSeparators(_baseDir.absolutePath() + "/" + applicationName()));
+        if(!bundleDir.exists()) {
+            _installState = UNAVAILABLE;
+		    return;
+        }
+	}
+
+	auto rDir = QDir(QDir::toNativeSeparators(bundleDir.absolutePath() + "/Contents/Resources"));
+
+	if(!rDir.exists()) {
+		_installState = UNAVAILABLE;
+		return;
+	}
+
+	_appDir = QDir(QDir::toNativeSeparators(rDir.absolutePath() + "/app"));
+
+	if(!_appDir.exists()) {
+		_installState = NOT_INSTALLED;
+		return;
+	}
+
+	QFile bdJsonFile(_appDir.filePath("bd.json"));
+	if(!bdJsonFile.exists()) {
+		_installState = NOT_INSTALLED;
+		return;
+	}
+	_installState = INSTALLED;
+}
 #else
 void Discord::locate() { _installState = UNAVAILABLE; }
 #endif
