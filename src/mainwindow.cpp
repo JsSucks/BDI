@@ -9,7 +9,6 @@
 */
 
 #include "mainwindow.h"
-#include "remotefile.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
