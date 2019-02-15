@@ -18,64 +18,57 @@ Zip::Zip(const QString &in, const QString &out) {
 #if defined(Q_OS_WIN)
 void Zip::extract() {
 	if(QFileInfo(_in).fileName().endsWith(".tar.gz")) return extractTarGz();
-	QProcess extractProcess;
+	auto extractProcess = new QProcess(this);
 
 	QStringList args{"x", "-y", _in, "-o" + _out};
 
 	Logger::Debug(_extractProgram + " " + args.join(" "));
 
-	connect(&extractProcess, &QProcess::readyReadStandardOutput, [&]() {
-		emit extractProcessChanged(QString(extractProcess.readAllStandardOutput()));
+	connect(extractProcess, &QProcess::readyReadStandardOutput, [&]() {
+		emit extractProcessChanged(QString(extractProcess->readAllStandardOutput()));
 	});
 
-	extractProcess.start(_extractProgram, args);
-	if(!extractProcess.waitForFinished()) {
-		Logger::Debug("extractProcess failed to finish!");
-		emit extracted(false);
-		return;
-	}
+	connect(extractProcess, static_cast<void(QProcess:: *)(int, QProcess::ExitStatus)>(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus) {
+		delete extractProcess;
+		emit extracted(true);
+	});
 
-	emit extracted(true);
+	extractProcess->start(_extractProgram, args);
+	if(!extractProcess->waitForStarted()) {
+		Logger::Debug("extractProcess failed to start!");
+		emit extracted(false);
+	}
 }
 
 void Zip::extractTarGz() {
-	QProcess gzProcess;
+	auto gzProcess = new QProcess(this);
 	QStringList gzArgs{ "x", _in, "-so" };
 	Logger::Debug(_extractProgram + " " + gzArgs.join(" "));
 
-	connect(&gzProcess, &QProcess::readyReadStandardOutput, [&]() {
-		emit extractProcessChanged(QString(gzProcess.readAllStandardOutput()));
+	connect(gzProcess, &QProcess::readyReadStandardOutput, [&]() {
+		emit extractProcessChanged(QString(gzProcess->readAllStandardOutput()));
 	});
 
-	QProcess tarProcess;
+	auto tarProcess = new QProcess(this);
 	QStringList tarArgs{ "x", "-aoa", "-si", "-ttar", "-o" + _out };
 	Logger::Debug(_extractProgram + " " + tarArgs.join(" "));
 
-	gzProcess.setStandardOutputProcess(&tarProcess);
+	connect(tarProcess, static_cast<void(QProcess:: *)(int, QProcess::ExitStatus)>(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus) {
+		delete tarProcess;
+		delete gzProcess;
+		emit extracted(true);
+	});
 
-	gzProcess.start(_extractProgram, gzArgs);
-	tarProcess.start(_extractProgram, tarArgs);
-	tarProcess.setProcessChannelMode(QProcess::ForwardedChannels);
+	gzProcess->setStandardOutputProcess(tarProcess);
 
-	if(!gzProcess.waitForStarted()) {
+	gzProcess->start(_extractProgram, gzArgs);
+	tarProcess->start(_extractProgram, tarArgs);
+	tarProcess->setProcessChannelMode(QProcess::ForwardedChannels);
+
+	if(!gzProcess->waitForStarted()) {
 		Logger::Debug("gzProcess failed to start!");
 		emit extracted(false);
-		return;
 	}
-
-	if(!gzProcess.waitForFinished()) {
-		Logger::Debug("gzProcess failed to finish!");
-		emit extracted(false);
-		return;
-	}
-
-	if(!tarProcess.waitForFinished()) {
-		Logger::Debug("tarProcess failed to finish!");
-		emit extracted(false);
-		return;
-	}
-
-	emit extracted(true);
 }
 
 #else
