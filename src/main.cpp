@@ -14,6 +14,11 @@
 
 int main(int argc, char *argv[]) {
 	QApplication app(argc, argv);
+
+	QDir::setCurrent(qApp->applicationDirPath());
+	QFontDatabase::addApplicationFont(":/fonts/Roboto");
+	QFontDatabase::addApplicationFont(":/fonts/Inconsolata");
+
 	Config::deserialize();
 
 	MainWindow w;
