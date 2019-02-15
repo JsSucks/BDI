@@ -20,8 +20,7 @@ void Zip::extract() {
 	if(QFileInfo(_in).fileName().endsWith(".tar.gz")) return extractTarGz();
 	QProcess extractProcess;
 
-	QStringList args;
-	args << "x" << "-y" << _in << "-o" + _out;
+	QStringList args{"x", "-y", _in, "-o" + _out};
 
 	Logger::Debug(_extractProgram + " " + args.join(" "));
 
@@ -41,8 +40,7 @@ void Zip::extract() {
 
 void Zip::extractTarGz() {
 	QProcess gzProcess;
-	QStringList gzArgs;
-	gzArgs << "x" << _in << "-so";
+	QStringList gzArgs{ "x", _in, "-so" };
 	Logger::Debug(_extractProgram + " " + gzArgs.join(" "));
 
 	connect(&gzProcess, &QProcess::readyReadStandardOutput, [&]() {
@@ -50,8 +48,7 @@ void Zip::extractTarGz() {
 	});
 
 	QProcess tarProcess;
-	QStringList tarArgs;
-	tarArgs << "x" << "-aoa" << "-si" << "-ttar" << "-o" + _out;
+	QStringList tarArgs{ "x", "-aoa", "-si", "-ttar", "-o" + _out };
 	Logger::Debug(_extractProgram + " " + tarArgs.join(" "));
 
 	gzProcess.setStandardOutputProcess(&tarProcess);
