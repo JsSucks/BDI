@@ -25,9 +25,10 @@ public:
 private:
 	QString _in;
 	QString _out;
+	void extractTarGz();
 
 #if defined(Q_OS_WIN)
-	QString _extractProgram = "7z.exe";
+	QString _extractProgram = "7za.exe";
 #else
 #endif
 
