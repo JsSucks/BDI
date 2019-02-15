@@ -18,19 +18,19 @@ Zip::Zip(const QString &in, const QString &out) {
 #if defined(Q_OS_WIN)
 void Zip::extract() {
 	if(QFileInfo(_in).fileName().endsWith(".tar.gz")) return extractTarGz();
-	auto extractProcess = new QProcess(this);
+	QProcess extractProcess;
 
 	QStringList args;
 	args << "x" << "-y" << _in << "-o" + _out;
 
 	Logger::Debug(_extractProgram + " " + args.join(" "));
 
-	connect(extractProcess, &QProcess::readyReadStandardOutput, [&]() {
-		emit extractProcessChanged(QString(extractProcess->readAllStandardOutput()));
+	connect(&extractProcess, &QProcess::readyReadStandardOutput, [&]() {
+		emit extractProcessChanged(QString(extractProcess.readAllStandardOutput()));
 	});
 
-	extractProcess->start(_extractProgram, args);
-	if(!extractProcess->waitForFinished()) {
+	extractProcess.start(_extractProgram, args);
+	if(!extractProcess.waitForFinished()) {
 		Logger::Debug("extractProcess failed to finish!");
 		emit extracted(false);
 		return;
