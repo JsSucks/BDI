@@ -184,6 +184,15 @@ void MainWindow::inject() const {
 		clientAsset.zip->extract(_userConfig.dataPath());
 		return;
 	}
+
+	for(auto discord : *_toInstall) {
+		discord->widget()->setStatus("Installing...");
+		if(discord->inject(asset("stub").remote->readAll(), _userConfig.toObj(), "", "")) {
+			discord->widget()->setStatus("Done");
+		} else {
+			discord->widget()->setStatus("Error!");
+		}
+	}
 }
 
 void MainWindow::btnOptionsClicked() const {

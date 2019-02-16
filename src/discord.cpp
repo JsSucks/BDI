@@ -128,9 +128,14 @@ void Discord::locate() { _installState = UNAVAILABLE; }
 #endif
 
 bool Discord::inject(const QString &stub, QJsonObject config, const QString &corePath, const QString &clientPath) {
+	Logger::Debug(_channel + " injecting to: " + _appDir.absolutePath());
 	if(!_appDir.exists()) {
-		emit injected(false);
-		if (!_appDir.mkdir(".")) return false;
+		Logger::Debug(_channel + " _appDir does not exist");
+		if(!_appDir.mkdir(".")) {
+			Logger::Debug(_channel + " cannot create _appDir");
+			emit injected(false);
+			return false;
+		}
 	}
 
 	QFile indexFile(_appDir.filePath("index.js"));
