@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	splash->show();
 }
 
+Asset MainWindow::asset(const QString &id) const {
+	return _assets.find(id).value();
+}
+
 void MainWindow::initOptionsPage() const {
 	_ui.commonData->setChecked(_userConfig.useCommonDataPath());
 	_ui.commonInstall->setChecked(_userConfig.useCommonInstallPath());
@@ -46,8 +50,6 @@ void MainWindow::initOptionsPage() const {
 		_userConfig.useCommonDataPath() ? "/BetterDiscord" : "/BetterDiscord/:channel");
 }
 
-
-
 void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes) {
 	initOptionsPage();
 	show();
@@ -55,25 +57,31 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 	setFocus();
 
 	_discords = discords;
+	_remotes = remotes;
 
 	for(auto remote : remotes["files"].toArray()) {
 		auto obj = remote.toObject();
-		if(obj.value("id") == "core") _coreObj = obj;
-		else if(obj.value("id") == "client") _clientObj = obj;
-	}
+		Asset asset(obj);
+		if(asset.id() == "stub") {
+			asset.remote = new RemoteFile(asset.raw());
+		} else {
+			asset.remote = new RemoteFile(asset.fileName(), "tmp", asset.remoteLocation(), false);
+			asset.remote->loadLocal();
+			asset.zip = new Zip(asset.remote->localFilePath(), "tmp");
+		}
 
-	const auto coreVersion = QVersionNumber::fromString(_coreObj.value("version").toString());
-	const auto clientVersion = QVersionNumber::fromString(_clientObj.value("version").toString());
+		_assets.insert(obj["id"].toString(), asset);
+	}
 
 	for(auto discord : discords) {
 		switch(discord->state()) {
 		case Discord::NOT_INSTALLED:
 			_ui.availableProducts->layout()->addWidget(discord->widget());
-				break;
+			break;
 		case Discord::INSTALLED:
 		case Discord::BROKEN:
 			_ui.installedProducts->layout()->addWidget(discord->widget());
-				break;
+			break;
 		case Discord::INSTALLING:
 		case Discord::UNAVAILABLE:
 		default: break;
@@ -124,67 +132,55 @@ void MainWindow::btnContinueClicked() const {
 	}
 
 	if(install.length() <= 0) return;
-#ifndef TEST_MODE
-	if(!_remotesLoaded) {
-		install.first()->widget()->setStatus("Pulling packages...");
-		return;
-	}
-#endif
+	install.first()->widget()->setStatus("Pulling packages...");
 	this->install(install);
 }
 
-void MainWindow::install(QVector<Discord*> discords) const {
+void MainWindow::install(QVector<Discord *> &discords) const {
+	connect(asset("stub").remote, &RemoteFile::finished, [=]() {
+		processRemotes(discords);
+	});
 
-	RemoteFile stubFile("stub.js", "tmp", QUrl(""), false);
-	stubFile.loadLocal();
-	if(!stubFile.exists()) {
-		Logger::Debug("stub.js does not exist!");
-		return;
+	connect(asset("core").remote, &RemoteFile::finished, [=]() {
+		processRemotes(discords);
+	});
+
+	connect(asset("client").remote, &RemoteFile::finished, [=]() {
+		processRemotes(discords);
+	});
+
+	// Check if files exist
+	if(asset("core").localFileExists() && asset("core").compareHash()) {
+		Logger::Debug("Latest core archive exists");
+		asset("core").remote->setDownloaded(true);
+	} else {
+		Logger::Debug("Latest core archive does not exist");
+		asset("core").remote->download();
 	}
 
-	const auto stub = stubFile.readAll();
-
-	RemoteFile coreZip("core.zip", "tmp", QUrl(Config::repository().url() + _coreObj["remote"].toString()), false);
-	coreZip.loadLocal();
-	if(!coreZip.exists()) {
-		Logger::Debug("core.zip does not exist!");
-		return;
+	if(asset("client").localFileExists() && asset("client").compareHash()) {
+		Logger::Debug("Latest client archive exists");
+		asset("client").remote->setDownloaded(true);
+	} else {
+		Logger::Debug("Latest client archive does not exist");
+		asset("client").remote->download();
 	}
 
-	if(!coreZip.compareHash(_coreObj["hash"].toString())) {
-		Logger::Debug("core.zip hash mismatch!" + coreZip.hashString() + "/" + _coreObj["hash"].toString());
-		return;
-	}
-	Logger::Debug("core.zip hash match " + coreZip.hashString() + "/" + _coreObj["hash"].toString());
-
-	RemoteFile clientZip("client.zip", "tmp", QUrl(Config::repository().url() + _clientObj["remote"].toString()), false);
-	clientZip.loadLocal();
-	if(!clientZip.exists()) {
-		Logger::Debug("client.zip does not exist!");
-		return;
-	}
-
-	if(!clientZip.compareHash(_clientObj["hash"].toString())) {
-		Logger::Debug("client.zip hash mismatch! " + clientZip.hashString() + "/" + _clientObj["hash"].toString());
-		return;
-	}
-	Logger::Debug("client.zip hash match " + clientZip.hashString() + "/" + _clientObj["hash"].toString());
-
-	auto cfg = _userConfig.toObj();
-	cfg["versions"] = QJsonObject{
-		{ "core", _coreObj["version"] },
-		{ "client", _clientObj["version"] }
-	};
-
-	for(auto discord : discords) {
-		discord->widget()->setStatus("Installing...");
-		if(discord->inject(stub, cfg, coreZip, clientZip)) {
-			discord->widget()->setStatus("Done");
-		} else {
-			discord->widget()->setStatus("Error!");
-		}
-	}
+	asset("stub").remote->download();
 }
+
+void MainWindow::processRemotes(QVector<Discord *> discords) const {
+	if(!asset("stub").remote->downloaded() || !asset("core").remote->downloaded() || !asset("client").remote->downloaded()) return;
+	Logger::Debug("Finished pulling packages");
+
+	discords.first()->widget()->setStatus("Installing...");
+
+}
+
+void MainWindow::inject(QVector<Discord *> discords) const {
+
+}
+
 
 void MainWindow::btnOptionsClicked() const {
 	_ui.mainStack->setCurrentWidget(_ui.pageOptions);

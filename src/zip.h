@@ -21,11 +21,13 @@ class Zip final : public QObject {
 public:
 	Zip(const QString &in, const QString &out);
 	void extract();
+	bool isExtracted();
 
 private:
 	QString _in;
 	QString _out;
 	void extractTarGz();
+	bool _extracted;
 
 #if defined(Q_OS_WIN)
 	QString _extractProgram = "7za.exe";

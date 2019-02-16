@@ -55,8 +55,16 @@ namespace Config {
 		return QUrl(URLS.github + "/" + REPOSITORY.active + "/" + REPOSITORY.name);
 	}
 
+	QUrl repository(const QString &path) {
+		return QUrl(URLS.github + "/" + REPOSITORY.active + "/" + REPOSITORY.name + path);
+	}
+
 	QUrl ghuc(const QString &path) {
 		return QUrl("https://raw.githubusercontent.com/" + REPOSITORY.active + "/" + REPOSITORY.name + path);
+	}
+
+	QUrl release(const QString &path) {
+		return QUrl(URLS.github + "/" + REPOSITORY.active + "/" + REPOSITORY.name + "/releases/download" + path);
 	}
 
 	QVersionNumber installerVersion() {

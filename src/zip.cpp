@@ -13,7 +13,13 @@
 Zip::Zip(const QString &in, const QString &out) {
 	_in = in;
 	_out = out;
+	_extracted = false;
 }
+
+bool Zip::isExtracted() {
+	return _extracted;
+}
+
 
 #if defined(Q_OS_WIN)
 void Zip::extract() {
@@ -30,6 +36,7 @@ void Zip::extract() {
 
 	connect(extractProcess, static_cast<void(QProcess:: *)(int, QProcess::ExitStatus)>(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus) {
 		delete extractProcess;
+		_extracted = true;
 		emit extracted(true);
 	});
 
@@ -56,6 +63,7 @@ void Zip::extractTarGz() {
 	connect(tarProcess, static_cast<void(QProcess:: *)(int, QProcess::ExitStatus)>(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus) {
 		delete tarProcess;
 		delete gzProcess;
+		_extracted = true;
 		emit extracted(true);
 	});
 

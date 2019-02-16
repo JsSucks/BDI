@@ -11,6 +11,7 @@
 #include "remotefile.h"
 
 RemoteFile::RemoteFile(const QString &fileName, const QString &basePath, const QUrl &remoteLocation, const bool memoryOnly) {
+	_downloaded = false;
 	_memoryOnly = memoryOnly;
 	_fileName = fileName;
 	_basePath = QDir(QDir::toNativeSeparators(basePath));
@@ -21,7 +22,9 @@ RemoteFile::RemoteFile(const QString &fileName, const QString &basePath, const Q
 
 void RemoteFile::download() {
 	Logger::Debug("Fetching remote file: " + _remoteLocation.toString());
-	const QNetworkRequest request(_remoteLocation);
+	QNetworkRequest request(_remoteLocation);
+	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setHeader(QNetworkRequest::UserAgentHeader, "BetterDiscord");
 	const auto reply = _manager.get(request);
 
 	connect(reply, &QNetworkReply::downloadProgress, [=](const qint64 bytesReceived, const qint64 bytesTotal) {
@@ -47,6 +50,8 @@ void RemoteFile::downloadFinished(QNetworkReply *reply) {
 	auto statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
 
 	Logger::Debug("Finished fetch: " + url.toString() + " - " + statusCode.toString());
+
+	_downloaded = true;
 
 	if(reply->error()) {
 		_error = reply->errorString();
@@ -111,9 +116,19 @@ QString RemoteFile::hashString(const QCryptographicHash::Algorithm &algorithm) {
 
 bool RemoteFile::compareHash(const QString &hash, const bool &recalculate) {
 	if(recalculate) _hash.clear();
-	return hashString().compare(hash, Qt::CaseInsensitive) == 0;
+	auto hs = hashString();
+	Logger::Debug(QFileInfo(_localFilePath).fileName() + " - " + hs.toUpper() + "|" + hash.toUpper());
+	return hs.compare(hash, Qt::CaseInsensitive) == 0;
 }
 
 bool RemoteFile::exists() const {
 	return QFile::exists(_localFilePath);
+}
+
+bool RemoteFile::downloaded() const {
+	return _downloaded;
+}
+
+void RemoteFile::setDownloaded(const bool downloaded) {
+	_downloaded = downloaded;
 }

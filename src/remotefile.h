@@ -36,6 +36,8 @@ public:
 	QString hashString(const QCryptographicHash::Algorithm &algorithm = QCryptographicHash::Sha256);
 	bool compareHash(const QString &hash, const bool &recalculate = false);
 	bool exists() const;
+	bool downloaded() const;
+	void setDownloaded(bool downloaded);
 
 	QUrl remoteLocation() const { return _remoteLocation; }
 	QString fileName() const { return _fileName; }
@@ -53,6 +55,7 @@ private:
 	QDir _basePath;
 	QString _localFilePath;
 	bool _memoryOnly;
+	bool _downloaded;
 	QLocale _systemLocale = QLocale::system();
 	QByteArray _bytes;
 	QString _error;

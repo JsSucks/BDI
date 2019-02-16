@@ -127,7 +127,7 @@ void Discord::locate() {
 void Discord::locate() { _installState = UNAVAILABLE; }
 #endif
 
-bool Discord::inject(const QString &stub, QJsonObject config, RemoteFile &coreZip, RemoteFile &clientZip) {
+bool Discord::inject(const QString &stub, QJsonObject config, const QString &corePath, const QString &clientPath) {
 	if(!_appDir.exists()) {
 		if (!_appDir.mkdir(".")) return false;
 	}

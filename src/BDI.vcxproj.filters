@@ -84,6 +84,12 @@
     <ClCompile Include="zip.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="asset.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -143,6 +149,12 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="userconfig.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="asset.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -39,7 +39,9 @@ struct Urls final {
 namespace Config {
 	void deserialize(const QString &configPath = "config.json");
 	QUrl repository();
+	QUrl repository(const QString &path);
 	QUrl ghuc(const QString &path);
+	QUrl release(const QString &path);
 	QVersionNumber installerVersion();
 	Urls urls();
 }

@@ -22,6 +22,7 @@
 #include "config.h"
 #include "userconfig.h"
 #include "zip.h"
+#include "asset.h"
 
 class MainWindow final : public QMainWindow {
 	Q_OBJECT
@@ -33,13 +34,16 @@ private:
 	Ui::MainWindowClass _ui;
 	About *_about;
 	UserConfig _userConfig;
+	QMap<QString, Asset> _assets;
+	Asset asset(const QString &id) const;
 	QJsonObject _coreObj;
 	QJsonObject _clientObj;
+	QJsonObject _remotes;
 	QVector<Discord*> _discords;
 	bool _remotesLoaded;
 	
 	void initOptionsPage() const;
-	void install(QVector<Discord*> discords) const;
+	void install(QVector<Discord*> &discords) const;
 
 protected:
 	int _mousePressX;
@@ -62,4 +66,7 @@ public slots:
 	void btnContinueClicked() const;
 	void installCheckboxCheckedChanged(bool checked) const;
 	void dataCheckboxCheckedChanged(bool checked) const;
+	void processRemotes(QVector<Discord *> discords) const;
+	void inject(QVector<Discord *> discords) const;
+
 };

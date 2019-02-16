@@ -19,6 +19,7 @@
 #include "product.h"
 #include "logger.h"
 #include "remotefile.h"
+#include "utils.h"
 
 class Discord final : public QObject {
 	Q_OBJECT
@@ -47,7 +48,8 @@ public:
 
 	QString applicationName() const;
 	void locate();
-	bool inject(const QString &stub, QJsonObject config, RemoteFile &coreZip, RemoteFile &clientZip);
+	// bool inject(const QString &stub, QJsonObject config, RemoteFile &coreZip, RemoteFile &clientZip);
+	bool inject(const QString &stub, QJsonObject config, const QString &corePath, const QString &clientPath);
 	bool remove();
 	QString channelString() const;
 
