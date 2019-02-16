@@ -26,9 +26,9 @@ public:
 	void autoInject(bool autoInject);
 	QJsonObject toObj() const;
 
-	QString installPath() const { return _installPath; }
+	QString installPath(const QString &channel = "") const;
 	void setInstallPath(const QString &installPath);
-	QString dataPath() const { return _dataPath; }
+	QString dataPath(const QString &channel = "") const;
 	void setDataPath(const QString &dataPath);
 
 	UserConfig *read(const QString &fPath = "userconfig.json");

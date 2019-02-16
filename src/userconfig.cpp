@@ -26,8 +26,18 @@ void UserConfig::autoInject(const bool autoInject) {
 	_autoInject = autoInject;
 }
 
+QString UserConfig::installPath(const QString &channel) const {
+	const auto ret = QDir::toNativeSeparators(_installPath + "/BetterDiscord");
+	return channel.isEmpty() ? ret : QDir::toNativeSeparators(ret + "/" + channel);
+}
+
 void UserConfig::setInstallPath(const QString &installPath) {
 	_installPath = installPath;
+}
+
+QString UserConfig::dataPath(const QString &channel) const {
+	const auto ret = QDir::toNativeSeparators(_dataPath + "/BetterDiscord");
+	return channel.isEmpty() ? ret : QDir::toNativeSeparators(ret + "/" + channel);
 }
 
 void UserConfig::setDataPath(const QString &dataPath) {
