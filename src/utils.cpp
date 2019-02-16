@@ -12,13 +12,12 @@
 
 void Utils::copyDir(const QString &src, const QString &dst) {
 	QDir dir(src);
-	if(!dir.exists())
-		return;
+	if(!dir.exists()) return;
 
 	foreach(QString d, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-		auto dst_path = dst + QDir::separator() + d;
-		dir.mkpath(dst_path);
-		copyDir(src + QDir::separator() + d, dst_path);
+		auto dstPath = dst + QDir::separator() + d;
+		dir.mkpath(dstPath);
+		copyDir(src + QDir::separator() + d, dstPath);
 	}
 
 	foreach(QString f, dir.entryList(QDir::Files)) {
