@@ -179,7 +179,7 @@ void MainWindow::inject() const {
 	}
 
 	auto clientAsset = asset("client");
-	if(_userConfig.useCommonDataPath() && !clientAsset.zip->isExtracted()) {
+	if(_userConfig.useCommonInstallPath() && !clientAsset.zip->isExtracted()) {
 		connect(clientAsset.zip, &Zip::extracted, this, &MainWindow::inject);
 		clientAsset.zip->extract(_userConfig.dataPath());
 		return;
