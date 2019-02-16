@@ -38,12 +38,11 @@ private:
 	Asset asset(const QString &id) const;
 	QJsonObject _remotes;
 	QVector<Discord*> _discords;
+	QVector<Discord*> *_toRemove;
+	QVector<Discord*> *_toInstall;
 	bool _remotesLoaded;
 	
 	void initOptionsPage() const;
-	void install(const QVector<Discord*> &discords) const;
-	void processRemotes(QVector<Discord *> discords) const;
-	void inject(QVector<Discord *> discords) const;
 
 protected:
 	int _mousePressX;
@@ -66,5 +65,8 @@ public slots:
 	void btnContinueClicked() const;
 	void installCheckboxCheckedChanged(bool checked) const;
 	void dataCheckboxCheckedChanged(bool checked) const;
+	void install() const;
+	void processRemotes() const;
+	void inject() const;
 
 };

@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	_ui.setupUi(this);
 	_ui.mainStack->setCurrentWidget(_ui.pageInitial);
 
+	_toInstall = new QVector<Discord*>();
+	_toRemove = new QVector<Discord*>();
+
 #ifdef TEST_MODE
 	_ui.centralWidget->setStyleSheet("#centralWidget { background: red; }");
 #else
@@ -95,18 +98,15 @@ void MainWindow::btnContinueClicked() const {
 	_ui.spinner->setMovie(mov);
 	mov->start();
 
-	QVector<Discord*> install;
-	QVector<Discord*> remove;
-
 	for(auto discord : _discords) {
 		discord->widget()->hideButtons();
 		discord->widget()->setStatus("");
 		if(discord->action() == Discord::A_REPAIR_INSTALL) {
 			_ui.productsToInstall->layout()->addWidget(discord->widget());
-			install.append(discord);
+			_toInstall->append(discord);
 		} else if(discord->action() == Discord::A_UNINSTALL) {
 			_ui.productsToRemove->layout()->addWidget(discord->widget());
-			remove.append(discord);
+			_toRemove->append(discord);
 		}
 	}
 
@@ -122,7 +122,7 @@ void MainWindow::btnContinueClicked() const {
 
 	_ui.mainStack->setCurrentWidget(_ui.pageInstall);
 
-	for(auto discord : remove) {
+	for(auto discord : *_toRemove) {
 		discord->widget()->setStatus("Removing...");
 		if(discord->remove()) {
 			discord->widget()->setStatus("Done");
@@ -131,26 +131,16 @@ void MainWindow::btnContinueClicked() const {
 		}
 	}
 
-	if(install.length() <= 0) return;
-	install.first()->widget()->setStatus("Pulling packages...");
+	if(_toInstall->length() <= 0) return;
+	_toInstall->first()->widget()->setStatus("Pulling packages...");
 
-	QTimer::singleShot(2000, [=]() {
-		this->install(install);
-	});
+	QTimer::singleShot(2000, this, &MainWindow::install);
 }
 
-void MainWindow::install(const QVector<Discord *> &discords) const {
-	connect(asset("stub").remote, &RemoteFile::finished, [=]() {
-		processRemotes(discords);
-	});
-
-	connect(asset("core").remote, &RemoteFile::finished, [=]() {
-		processRemotes(discords);
-	});
-
-	connect(asset("client").remote, &RemoteFile::finished, [=]() {
-		processRemotes(discords);
-	});
+void MainWindow::install() const {
+	connect(asset("stub").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
+	connect(asset("core").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
+	connect(asset("client").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
 
 	// Check if files exist
 	if(asset("core").localFileExists() && asset("core").compareHash()) {
@@ -172,34 +162,29 @@ void MainWindow::install(const QVector<Discord *> &discords) const {
 	asset("stub").remote->download();
 }
 
-void MainWindow::processRemotes(QVector<Discord *> discords) const {
+void MainWindow::processRemotes() const {
 	if(!asset("stub").remote->downloaded() || !asset("core").remote->downloaded() || !asset("client").remote->downloaded()) return;
 	Logger::Debug("Finished pulling packages");
 
-	discords.first()->widget()->setStatus("Installing...");
-	inject(discords);
+	_toInstall->first()->widget()->setStatus("Installing...");
+	inject();
 }
 
-void MainWindow::inject(QVector<Discord *> discords) const {
+void MainWindow::inject() const {
 	auto coreAsset = asset("core");
 	if(_userConfig.useCommonInstallPath() && !coreAsset.zip->isExtracted()) {
-		connect(coreAsset.zip, &Zip::extracted, [=]() {
-			inject(discords);
-		});
+		connect(coreAsset.zip, &Zip::extracted, this, &MainWindow::inject);
 		coreAsset.zip->extract(_userConfig.installPath());
 		return;
 	}
 
 	auto clientAsset = asset("client");
 	if(_userConfig.useCommonDataPath() && !clientAsset.zip->isExtracted()) {
-		connect(clientAsset.zip, &Zip::extracted, [=]() {
-			inject(discords);
-		});
+		connect(coreAsset.zip, &Zip::extracted, this, &MainWindow::inject);
 		clientAsset.zip->extract(_userConfig.dataPath());
 		return;
 	}
 }
-
 
 void MainWindow::btnOptionsClicked() const {
 	_ui.mainStack->setCurrentWidget(_ui.pageOptions);
