@@ -174,7 +174,6 @@ void MainWindow::processRemotes(QVector<Discord *> discords) const {
 	Logger::Debug("Finished pulling packages");
 
 	discords.first()->widget()->setStatus("Installing...");
-
 }
 
 void MainWindow::inject(QVector<Discord *> discords) const {
