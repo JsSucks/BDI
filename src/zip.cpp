@@ -71,6 +71,29 @@ void Zip::extractTarGz() {
 	}
 }
 
+#elif defined(Q_OS_DARWIN)
+void Zip::extract() {
+	// Since we have no zip support on osx just return targz
+	return extractTarGz();
+}
+
+void Zip::extractTarGz() {
+	auto gzProcess = new QProcess(this);
+	QStringList gzArgs{ "-zxf", _in };
+	Logger::Debug(_extractProgram + " " + gzArgs.join(" "));
+
+	connect(gzProcess, static_cast<void(QProcess:: *)(int, QProcess::ExitStatus)>(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus) {
+		delete gzProcess;
+		emit extracted(true);
+	});
+
+	gzProcess->start(_extractProgram, gzArgs);
+
+	if(!gzProcess->waitForStarted()) {
+		Logger::Debug("gzProcess failed to start!");
+		emit extracted(false);
+	}
+}
 #else
 void Zip::extract() {
 

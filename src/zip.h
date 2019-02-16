@@ -29,6 +29,8 @@ private:
 
 #if defined(Q_OS_WIN)
 	QString _extractProgram = "7za.exe";
+#elif defined(Q_OS_DARWIN)
+	QString _extractProgtam = "tar";
 #else
 #endif
 
