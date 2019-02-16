@@ -12,6 +12,8 @@
 #include <QFileDialog>
 #include "ui_pathchooser.h"
 
+#include "utils.h"
+
 class PathChooser final : public QWidget {
 	Q_OBJECT
 

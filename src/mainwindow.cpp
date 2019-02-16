@@ -37,16 +37,15 @@ void MainWindow::initOptionsPage() const {
 	_ui.commonData->setChecked(_userConfig.useCommonDataPath());
 	_ui.commonInstall->setChecked(_userConfig.useCommonInstallPath());
 	_ui.autoInject->setChecked(_userConfig.autoInject());
-
 	_ui.installPathChooser->initialize("Install Path:",
 		"* Location for BetterDiscord core files.",
 		_userConfig.installPath(),
-		_userConfig.useCommonInstallPath() ? "/BetterDiscord" : "/BetterDiscord/:channel");
+		_userConfig.useCommonInstallPath() ? "" : "/:channel");
 
 	_ui.dataPathChooser->initialize("Data Path:",
 		"* Location for BetterDiscord data such as plugins, themes and caches.",
 		_userConfig.dataPath(),
-		_userConfig.useCommonDataPath() ? "/BetterDiscord" : "/BetterDiscord/:channel");
+		_userConfig.useCommonDataPath() ? "" : "/:channel");
 }
 
 void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes) {
@@ -219,11 +218,11 @@ void MainWindow::btnCancelOptionsClicked() const {
 }
 
 void MainWindow::installCheckboxCheckedChanged(const bool checked) const {
-	checked ? _ui.installPathChooser->setSuffix("/BetterDiscord") : _ui.installPathChooser->setSuffix("/BetterDiscord/:channel");
+	checked ? _ui.installPathChooser->setSuffix("") : _ui.installPathChooser->setSuffix("/:channel");
 }
 
 void MainWindow::dataCheckboxCheckedChanged(const bool checked) const {
-	checked ? _ui.dataPathChooser->setSuffix("/BetterDiscord") : _ui.dataPathChooser->setSuffix("/BetterDiscord/:channel");
+	checked ? _ui.dataPathChooser->setSuffix("") : _ui.dataPathChooser->setSuffix("/:channel");
 }
 
 void MainWindow::captionCloseClicked() const {

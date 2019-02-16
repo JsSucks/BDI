@@ -24,3 +24,7 @@ void Utils::copyDir(const QString &src, const QString &dst) {
 		QFile::copy(src + QDir::separator() + f, dst + QDir::separator() + f);
 	}
 }
+
+bool Utils::pathEndsIn(const QString &path, const QString &suffix) {
+	return QDir::fromNativeSeparators(path).toLower().endsWith(suffix);
+}

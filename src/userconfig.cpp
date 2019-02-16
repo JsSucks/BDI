@@ -27,7 +27,7 @@ void UserConfig::autoInject(const bool autoInject) {
 }
 
 QString UserConfig::installPath(const QString &channel) const {
-	const auto ret = QDir::toNativeSeparators(_installPath + "/BetterDiscord");
+	const auto ret = QDir::toNativeSeparators(_installPath);
 	return channel.isEmpty() ? ret : QDir::toNativeSeparators(ret + "/" + channel);
 }
 
@@ -36,7 +36,7 @@ void UserConfig::setInstallPath(const QString &installPath) {
 }
 
 QString UserConfig::dataPath(const QString &channel) const {
-	const auto ret = QDir::toNativeSeparators(_dataPath + "/BetterDiscord");
+	const auto ret = QDir::toNativeSeparators(_dataPath);
 	return channel.isEmpty() ? ret : QDir::toNativeSeparators(ret + "/" + channel);
 }
 
@@ -113,7 +113,6 @@ QString UserConfig::defaultInstallPath() const {
 	QCoreApplication::setApplicationName("BetterDiscord");
 	QDir rDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
 	QCoreApplication::setApplicationName(appName);
-	Logger::Debug("wat:" + rDir.absolutePath());
 	return rDir.absolutePath();
 }
 

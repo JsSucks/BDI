@@ -25,25 +25,25 @@ void PathChooser::initialize(const QString &text, const QString &hint, const QSt
 	setHint(hint);
 }
 
-void PathChooser::setSuffix(const QString & suffix) {
+void PathChooser::setSuffix(const QString &suffix) {
 	_suffix = suffix;
 	if(_selectedPath.isEmpty()) return;
 	setText();
 }
 
-void PathChooser::setInitialPath(const QString & initialPath) {
+void PathChooser::setInitialPath(const QString &initialPath) {
 	if(!_selectedPath.isEmpty()) return;
-	_selectedPath = initialPath;
+	_selectedPath = Utils::pathEndsIn(initialPath, "/betterdiscord") ? initialPath : initialPath + "/BetterDiscord";
 	setText();
 }
 
-void PathChooser::setHint(const QString & hint) const {
+void PathChooser::setHint(const QString &hint) const {
 	_ui.lblHint->setText("");
 	_ui.teHint->setPlainText(hint);
 }
 
-void PathChooser::setPath(const QString & path) {
-	_selectedPath = path;
+void PathChooser::setPath(const QString &path) {
+	_selectedPath = Utils::pathEndsIn(path, "/betterdiscord") ? path : path + "/BetterDiscord";
 	setText();
 }
 
@@ -51,8 +51,7 @@ void PathChooser::browse() {
 	auto dialogResult = QFileDialog::getExistingDirectory(this->parentWidget(), "Choose path", _selectedPath);
 	if(dialogResult.isEmpty()) return;
 
-	_selectedPath = dialogResult;
-	setText();
+	setPath(dialogResult);
 }
 
 void PathChooser::setText() const {

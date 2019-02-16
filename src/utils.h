@@ -14,4 +14,5 @@
 
 namespace Utils {
 	void copyDir(const QString &src, const QString &dst);
+	bool pathEndsIn(const QString &path, const QString &suffix);
 }
