@@ -22,7 +22,8 @@ bool Zip::isExtracted() {
 
 
 #if defined(Q_OS_WIN)
-void Zip::extract() {
+void Zip::extract(const QString &out) {
+	if(!out.isEmpty()) _out = out;
 	if(QFileInfo(_in).fileName().endsWith(".tar.gz")) return extractTarGz();
 	auto extractProcess = new QProcess(this);
 

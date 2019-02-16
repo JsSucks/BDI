@@ -20,7 +20,7 @@ class Zip final : public QObject {
 	Q_OBJECT
 public:
 	Zip(const QString &in, const QString &out);
-	void extract();
+	void extract(const QString &out = "");
 	bool isExtracted();
 
 private:
