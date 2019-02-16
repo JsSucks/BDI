@@ -81,7 +81,8 @@ void Zip::extractTarGz() {
 }
 
 #elif defined(Q_OS_DARWIN)
-void Zip::extract() {
+void Zip::extract(const QString &out) {
+	if(!out.isEmpty()) _out = out;
 	// Since we have no zip support on osx just return targz
 	return extractTarGz();
 }
