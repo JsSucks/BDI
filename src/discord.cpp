@@ -155,6 +155,13 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 		return false;
 	}
 
+	QFile packageFile(_appDir.filePath("package.json"));
+	if(!packageFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+		Logger::Debug("Unable to write to: " + _appDir.filePath("package.json"));
+		emit injected(false);
+		return false;
+	}
+
 	auto options = config["options"].toObject();
 	auto paths = config["paths"].toObject();
 
@@ -174,6 +181,14 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 
 	QTextStream configOut(&configFile);
 	configOut << QJsonDocument(config).toJson(QJsonDocument::Indented);
+
+	QTextStream packageOut(&packageFile);
+	packageOut << QJsonDocument(QJsonObject{
+		{ "name", "betterdiscord" },
+		{ "description", "BetterDiscord" },
+		{ "main", "index.js" },
+		{ "private", true }
+	}).toJson(QJsonDocument::Indented);
 
 	_installState = INSTALLED;
 	emit injected(true);
