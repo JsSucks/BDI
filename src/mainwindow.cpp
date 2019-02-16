@@ -180,7 +180,7 @@ void MainWindow::inject() const {
 
 	auto clientAsset = asset("client");
 	if(_userConfig.useCommonDataPath() && !clientAsset.zip->isExtracted()) {
-		connect(coreAsset.zip, &Zip::extracted, this, &MainWindow::inject);
+		connect(clientAsset.zip, &Zip::extracted, this, &MainWindow::inject);
 		clientAsset.zip->extract(_userConfig.dataPath());
 		return;
 	}
