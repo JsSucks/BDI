@@ -41,7 +41,7 @@ private:
 	bool _remotesLoaded;
 	
 	void initOptionsPage() const;
-	void install(QVector<Discord*> &discords) const;
+	void install(const QVector<Discord*> &discords) const;
 	void processRemotes(QVector<Discord *> discords) const;
 	void inject(QVector<Discord *> discords) const;
 

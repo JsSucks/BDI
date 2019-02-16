@@ -133,10 +133,13 @@ void MainWindow::btnContinueClicked() const {
 
 	if(install.length() <= 0) return;
 	install.first()->widget()->setStatus("Pulling packages...");
-	this->install(install);
+
+	QTimer::singleShot(2000, [=]() {
+		this->install(install);
+	});
 }
 
-void MainWindow::install(QVector<Discord *> &discords) const {
+void MainWindow::install(const QVector<Discord *> &discords) const {
 	connect(asset("stub").remote, &RemoteFile::finished, [=]() {
 		processRemotes(discords);
 	});
