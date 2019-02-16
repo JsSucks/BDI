@@ -36,8 +36,6 @@ private:
 	UserConfig _userConfig;
 	QMap<QString, Asset> _assets;
 	Asset asset(const QString &id) const;
-	QJsonObject _coreObj;
-	QJsonObject _clientObj;
 	QJsonObject _remotes;
 	QVector<Discord*> _discords;
 	bool _remotesLoaded;
