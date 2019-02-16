@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	_remotesLoaded = false;
 	_ui.setupUi(this);
 	_ui.mainStack->setCurrentWidget(_ui.pageInitial);
+	_ui.btnExit->hide();
+	_ui.lblDone->hide();
 
 	_toInstall = new QVector<Discord*>();
 	_toRemove = new QVector<Discord*>();
@@ -126,7 +128,13 @@ void MainWindow::btnContinueClicked() const {
 		}
 	}
 
-	if(_toInstall->length() <= 0) return;
+	if(_toInstall->length() <= 0) {
+		_ui.btnExit->show();
+		_ui.spinner->hide();
+		_ui.lblDone->show();
+		return;
+	}
+
 	_toInstall->first()->widget()->setStatus("Pulling packages...");
 
 	QTimer::singleShot(2000, this, &MainWindow::install);
@@ -188,6 +196,10 @@ void MainWindow::inject() const {
 			discord->widget()->setStatus("Error!");
 		}
 	}
+
+	_ui.lblDone->show();
+	_ui.btnExit->show();
+	_ui.spinner->hide();
 }
 
 Asset MainWindow::asset(const QString &id) const {

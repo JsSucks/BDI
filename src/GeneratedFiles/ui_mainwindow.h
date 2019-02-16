@@ -89,9 +89,11 @@ public:
     QSpacerItem *verticalSpacer_2;
     QWidget *installFooter;
     QHBoxLayout *horizontalLayout_4;
+    QLabel *lblDone;
     QSpacerItem *horizontalSpacer_3;
     QLabel *spinner;
     QSpacerItem *horizontalSpacer_4;
+    QPushButton *btnExit;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
@@ -557,10 +559,28 @@ public:
 
         installFooter = new QWidget(pageInstall);
         installFooter->setObjectName(QStringLiteral("installFooter"));
+        installFooter->setStyleSheet(QLatin1String("QPushButton {\n"
+"	background: transparent;\n"
+"    color: #fff;\n"
+"    padding: 7px 10px;\n"
+"    min-width: 50px;\n"
+"	background: #17171c;\n"
+"	border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	background: rgb(35, 35, 38);\n"
+"	background: rgb(62, 204, 156)\n"
+"}"));
         horizontalLayout_4 = new QHBoxLayout(installFooter);
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        lblDone = new QLabel(installFooter);
+        lblDone->setObjectName(QStringLiteral("lblDone"));
+
+        horizontalLayout_4->addWidget(lblDone);
+
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_3);
@@ -574,6 +594,12 @@ public:
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_4);
+
+        btnExit = new QPushButton(installFooter);
+        btnExit->setObjectName(QStringLiteral("btnExit"));
+        btnExit->setEnabled(true);
+
+        horizontalLayout_4->addWidget(btnExit);
 
 
         verticalLayout_9->addWidget(installFooter);
@@ -594,8 +620,9 @@ public:
         QObject::connect(commonData, SIGNAL(toggled(bool)), MainWindowClass, SLOT(dataCheckboxCheckedChanged(bool)));
         QObject::connect(commonInstall, SIGNAL(toggled(bool)), MainWindowClass, SLOT(installCheckboxCheckedChanged(bool)));
         QObject::connect(btnContinue, SIGNAL(clicked()), MainWindowClass, SLOT(btnContinueClicked()));
+        QObject::connect(btnExit, SIGNAL(clicked()), MainWindowClass, SLOT(captionCloseClicked()));
 
-        mainStack->setCurrentIndex(1);
+        mainStack->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
@@ -620,7 +647,9 @@ public:
         btnApplyOptions->setText(QApplication::translate("MainWindowClass", "Apply", nullptr));
         label->setText(QApplication::translate("MainWindowClass", "Products to Remove", nullptr));
         label_4->setText(QApplication::translate("MainWindowClass", "Products to Install", nullptr));
+        lblDone->setText(QApplication::translate("MainWindowClass", "All Done", nullptr));
         spinner->setText(QString());
+        btnExit->setText(QApplication::translate("MainWindowClass", "Exit", nullptr));
     } // retranslateUi
 
 };
