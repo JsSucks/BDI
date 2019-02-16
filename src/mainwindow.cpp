@@ -174,10 +174,27 @@ void MainWindow::processRemotes(QVector<Discord *> discords) const {
 	Logger::Debug("Finished pulling packages");
 
 	discords.first()->widget()->setStatus("Installing...");
+	inject(discords);
 }
 
 void MainWindow::inject(QVector<Discord *> discords) const {
+	auto coreAsset = asset("core");
+	if(_userConfig.useCommonInstallPath() && !coreAsset.zip->isExtracted()) {
+		connect(coreAsset.zip, &Zip::extracted, [=]() {
+			inject(discords);
+		});
+		coreAsset.zip->extract(_userConfig.installPath());
+		return;
+	}
 
+	auto clientAsset = asset("client");
+	if(_userConfig.useCommonDataPath() && !clientAsset.zip->isExtracted()) {
+		connect(clientAsset.zip, &Zip::extracted, [=]() {
+			inject(discords);
+		});
+		clientAsset.zip->extract(_userConfig.dataPath());
+		return;
+	}
 }
 
 
