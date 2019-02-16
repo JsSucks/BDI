@@ -33,10 +33,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	splash->show();
 }
 
-Asset MainWindow::asset(const QString &id) const {
-	return _assets.find(id).value();
-}
-
 void MainWindow::initOptionsPage() const {
 	_ui.commonData->setChecked(_userConfig.useCommonDataPath());
 	_ui.commonInstall->setChecked(_userConfig.useCommonInstallPath());
@@ -193,6 +189,10 @@ void MainWindow::inject() const {
 			discord->widget()->setStatus("Error!");
 		}
 	}
+}
+
+Asset MainWindow::asset(const QString &id) const {
+	return _assets.find(id).value();
 }
 
 void MainWindow::btnOptionsClicked() const {

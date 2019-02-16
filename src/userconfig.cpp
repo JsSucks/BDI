@@ -58,7 +58,6 @@ QJsonObject UserConfig::toObj() const {
 	};
 }
 
-
 UserConfig *UserConfig::read(const QString &fPath) {
 	QFile file(fPath);
 	if(!file.open(QIODevice::ReadOnly)) {
@@ -76,8 +75,8 @@ UserConfig *UserConfig::read(const QString &fPath) {
 	_commonInstallPath = obj["_commonInstallPath"].toBool(true);
 	_commonDataPath = obj["_commonDataPath"].toBool(false);
 	_autoInject = obj["_autoInject"].toBool(true);
-	_installPath = obj["_installPath"].toString("default");
-	_dataPath = obj["_dataPath"].toString("default");
+	_installPath = obj["_installPath"].toString(defaultInstallPath());
+	_dataPath = obj["_dataPath"].toString(defaultDataPath());
 
 	return this;
 }
@@ -103,7 +102,34 @@ UserConfig *UserConfig::defaults() {
 	_commonInstallPath = true;
 	_commonDataPath = false;
 	_autoInject = true;
-	_installPath = "default";
-	_dataPath = "default";
+	_installPath = defaultInstallPath();
+	_dataPath = defaultDataPath();
 	return write();
 }
+
+#if defined(Q_OS_WIN)
+QString UserConfig::defaultInstallPath() const {
+	const auto appName = QCoreApplication::applicationName();
+	QCoreApplication::setApplicationName("BetterDiscord");
+	QDir rDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
+	QCoreApplication::setApplicationName(appName);
+	Logger::Debug("wat:" + rDir.absolutePath());
+	return rDir.absolutePath();
+}
+
+QString UserConfig::defaultDataPath() const {
+	const auto appName = QCoreApplication::applicationName();
+	QCoreApplication::setApplicationName("BetterDiscord");
+	QDir rDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
+	QCoreApplication::setApplicationName(appName);
+	return rDir.absolutePath();
+}
+#else
+QString UserConfig::defaultInstallPath() const {
+	return "not implemented";
+}
+
+QString UserConfig::defaultDataPath() const {
+	return "not implemented";
+}
+#endif

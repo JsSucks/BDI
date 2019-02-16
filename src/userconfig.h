@@ -10,9 +10,12 @@
 
 #pragma once
 
+#include <QtCore>
 #include <QString>
+
 #include "qtfs.hpp"
 #include "qtjson.hpp"
+#include "logger.h"
 
 class UserConfig final {
 public:
@@ -34,6 +37,9 @@ public:
 	UserConfig *read(const QString &fPath = "userconfig.json");
 	UserConfig *write(const QString &fPath = "userconfig.json");
 	UserConfig *defaults();
+
+	QString defaultInstallPath() const;
+	QString defaultDataPath() const;
 
 private:
 	bool _commonInstallPath;
