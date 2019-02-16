@@ -52,7 +52,7 @@ QJsonObject UserConfig::toObj() const {
 		{ "paths", QJsonObject{
 			{ "core", QDir::cleanPath(_installPath + "/core") },
 			{ "client", QDir::cleanPath(_installPath + "/client") },
-			{ "data", QDir::cleanPath(_dataPath) }
+			{ "data", QDir::cleanPath(_dataPath + "/data") }
 		} }
 	};
 }
