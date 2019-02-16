@@ -78,4 +78,7 @@ private:
 
 	QVersionNumber resolveVersion(const QString &versionString) const;
 	QDir resolveBaseDir() const;
+
+signals:
+	void injected(bool success);
 };

@@ -129,12 +129,14 @@ void Discord::locate() { _installState = UNAVAILABLE; }
 
 bool Discord::inject(const QString &stub, QJsonObject config, const QString &corePath, const QString &clientPath) {
 	if(!_appDir.exists()) {
+		emit injected(false);
 		if (!_appDir.mkdir(".")) return false;
 	}
 
 	QFile indexFile(_appDir.filePath("index.js"));
 	if (!indexFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
 		Logger::Debug("Unable to write to: " + _appDir.filePath("index.js"));
+		emit injected(false);
 		return false;
 	}
 
@@ -144,6 +146,7 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 	QFile configFile(_appDir.filePath("bd.json"));
 	if(!configFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
 		Logger::Debug("Unable to write to: " + _appDir.filePath("bd.json"));
+		emit injected(false);
 		return false;
 	}
 
@@ -168,6 +171,7 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 	configOut << QJsonDocument(config).toJson(QJsonDocument::Indented);
 
 	_installState = INSTALLED;
+	emit injected(true);
 	return true;
 }
 
