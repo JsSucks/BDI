@@ -52,8 +52,9 @@ QJsonObject UserConfig::toObj() const {
 			{ "autoInject", _autoInject }
 		} },
 		{ "paths", QJsonObject{
-			{ "core", _installPath },
-			{ "data", _dataPath }
+			{ "core", QDir::fromNativeSeparators(_installPath + "/core") },
+			{ "client", QDir::fromNativeSeparators(_installPath + "/client") },
+			{ "data", QDir::fromNativeSeparators(_dataPath) }
 		} }
 	};
 }
