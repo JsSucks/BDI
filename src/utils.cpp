@@ -26,5 +26,5 @@ void Utils::copyDir(const QString &src, const QString &dst) {
 }
 
 bool Utils::pathEndsIn(const QString &path, const QString &suffix) {
-	return QDir::fromNativeSeparators(path).toLower().endsWith(suffix);
+	return QDir::cleanPath(path).toLower().endsWith(suffix);
 }

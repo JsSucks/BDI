@@ -14,7 +14,7 @@ RemoteFile::RemoteFile(const QString &fileName, const QString &basePath, const Q
 	_downloaded = false;
 	_memoryOnly = memoryOnly;
 	_fileName = fileName;
-	_basePath = QDir(QDir::toNativeSeparators(basePath));
+	_basePath = QDir(QDir::cleanPath(basePath));
 	_remoteLocation = remoteLocation;
 
 	connect(&_manager, &QNetworkAccessManager::finished, this, &RemoteFile::downloadFinished);

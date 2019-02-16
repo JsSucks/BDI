@@ -59,14 +59,14 @@ void Discord::locate() {
 
 	_latestVersion = latestVersion;
 
-	auto rDir = QDir(QDir::toNativeSeparators(latestDir.absolutePath() + "/resources"));
+	auto rDir = QDir(QDir::cleanPath(latestDir.absolutePath() + "/resources"));
 
 	if(!rDir.exists()) {
 		_installState = UNAVAILABLE;
 		return;
 	}
 
-	_appDir = QDir(QDir::toNativeSeparators(rDir.absolutePath() + "/app"));
+	_appDir = QDir(QDir::cleanPath(rDir.absolutePath() + "/app"));
 
 	if(!_appDir.exists()) {
 		_installState = NOT_INSTALLED;
@@ -84,32 +84,32 @@ void Discord::locate() {
 void Discord::locate() {}
 #elif defined(Q_OS_DARWIN)
 void Discord::locate() {
-	_baseDir = QDir(QDir::toNativeSeparators("/Applications"));
+	_baseDir = QDir(QDir::cleanPath("/Applications"));
 
 	if(!_baseDir.exists()) {
 		_installState = UNAVAILABLE;
 		return;
 	}
 
-    auto bundleDir = QDir(QDir::toNativeSeparators(_baseDir.absolutePath() + "/" + applicationName()));
+    auto bundleDir = QDir(QDir::cleanPath(_baseDir.absolutePath() + "/" + applicationName()));
 
 	if(!bundleDir.exists()) {
-        _baseDir = QDir(QDir::toNativeSeparators(QDir::homePath() + "/Applications"));
-        bundleDir = QDir(QDir::toNativeSeparators(_baseDir.absolutePath() + "/" + applicationName()));
+        _baseDir = QDir(QDir::cleanPath(QDir::homePath() + "/Applications"));
+        bundleDir = QDir(QDir::cleanPath(_baseDir.absolutePath() + "/" + applicationName()));
         if(!bundleDir.exists()) {
             _installState = UNAVAILABLE;
 		    return;
         }
 	}
 
-	auto rDir = QDir(QDir::toNativeSeparators(bundleDir.absolutePath() + "/Contents/Resources"));
+	auto rDir = QDir(QDir::cleanPath(bundleDir.absolutePath() + "/Contents/Resources"));
 
 	if(!rDir.exists()) {
 		_installState = UNAVAILABLE;
 		return;
 	}
 
-	_appDir = QDir(QDir::toNativeSeparators(rDir.absolutePath() + "/app"));
+	_appDir = QDir(QDir::cleanPath(rDir.absolutePath() + "/app"));
 
 	if(!_appDir.exists()) {
 		_installState = NOT_INSTALLED;
@@ -285,7 +285,7 @@ QDir Discord::resolveBaseDir() const {
 	QDir rDir(QStandardPaths::locate(QStandardPaths::AppConfigLocation, "", QStandardPaths::LocateOption::LocateDirectory));
 #elif defined(Q_OS_DARWIN)
 	auto aDir = QDir(QStandardPaths::locate(QStandardPaths::ApplicationsLocation, "", QStandardPaths::LocateOption::LocateDirectory));
-	QDir rDir(QDir::toNativeSeparators(aDir.absolutePath() + applicationName()));
+	QDir rDir(QDir::cleanPath(aDir.absolutePath() + applicationName()));
 #endif
 	QCoreApplication::setApplicationName(appName);
 	return rDir;
