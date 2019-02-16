@@ -90,9 +90,6 @@
     <ClCompile Include="asset.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="path.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
@@ -158,9 +155,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="asset.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="path.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
