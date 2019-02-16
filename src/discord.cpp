@@ -166,15 +166,17 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 	auto paths = config["paths"].toObject();
 
 	if(options["commonCore"].toBool()) {
-		paths["core"] = paths["core"].toString() + "/BetterDiscord";
+		paths["core"] = QDir::cleanPath(paths["core"].toString());
+		paths["client"] = QDir::cleanPath(paths["client"].toString());
 	} else {
-		paths["core"] = paths["core"].toString() + "/BetterDiscord/" + _channel;
+		paths["core"] = QDir::cleanPath(paths["core"].toString() + _channel);
+		paths["client"] = QDir::cleanPath(paths["client"].toString() + _channel);
 	}
 
 	if(options["commonData"].toBool()) {
-		paths["data"] = paths["data"].toString() + "/BetterDiscord";
+		paths["data"] = QDir::cleanPath(paths["data"].toString());
 	} else {
-		paths["data"] = paths["data"].toString() + "/BetterDiscord/" + _channel;
+		paths["data"] = QDir::cleanPath(paths["data"].toString() + _channel);
 	}
 
 	config["paths"] = paths;

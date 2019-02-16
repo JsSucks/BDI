@@ -15,6 +15,7 @@
 
 #include "qtfs.hpp"
 #include "qtjson.hpp"
+#include "path.h"
 #include "logger.h"
 
 class UserConfig final {

@@ -27,8 +27,7 @@ void UserConfig::autoInject(const bool autoInject) {
 }
 
 QString UserConfig::installPath(const QString &channel) const {
-	const auto ret = QDir::toNativeSeparators(_installPath);
-	return channel.isEmpty() ? ret : QDir::toNativeSeparators(ret + "/" + channel);
+	return QDir::cleanPath(channel.isEmpty() ? _installPath : _installPath + "/" + channel);
 }
 
 void UserConfig::setInstallPath(const QString &installPath) {
@@ -36,8 +35,7 @@ void UserConfig::setInstallPath(const QString &installPath) {
 }
 
 QString UserConfig::dataPath(const QString &channel) const {
-	const auto ret = QDir::toNativeSeparators(_dataPath);
-	return channel.isEmpty() ? ret : QDir::toNativeSeparators(ret + "/" + channel);
+	return QDir::cleanPath(channel.isEmpty() ? _dataPath : _dataPath + "/" + channel);
 }
 
 void UserConfig::setDataPath(const QString &dataPath) {
@@ -52,9 +50,9 @@ QJsonObject UserConfig::toObj() const {
 			{ "autoInject", _autoInject }
 		} },
 		{ "paths", QJsonObject{
-			{ "core", QDir::fromNativeSeparators(_installPath + "/core") },
-			{ "client", QDir::fromNativeSeparators(_installPath + "/client") },
-			{ "data", QDir::fromNativeSeparators(_dataPath) }
+			{ "core", QDir::cleanPath(_installPath + "/core") },
+			{ "client", QDir::cleanPath(_installPath + "/client") },
+			{ "data", QDir::cleanPath(_dataPath) }
 		} }
 	};
 }
@@ -114,7 +112,7 @@ QString UserConfig::defaultInstallPath() const {
 	QCoreApplication::setApplicationName("BetterDiscord");
 	QDir rDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
 	QCoreApplication::setApplicationName(appName);
-	return rDir.absolutePath();
+	return QDir::cleanPath(rDir.absolutePath());
 }
 
 QString UserConfig::defaultDataPath() const {
@@ -122,7 +120,7 @@ QString UserConfig::defaultDataPath() const {
 	QCoreApplication::setApplicationName("BetterDiscord");
 	QDir rDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
 	QCoreApplication::setApplicationName(appName);
-	return rDir.absolutePath();
+	return QDir::cleanPath(rDir.absolutePath());
 }
 #else
 QString UserConfig::defaultInstallPath() const {
