@@ -51,6 +51,7 @@ void MainWindow::initOptionsPage() const {
 }
 
 void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &remotes) {
+	Logger::Debug(QJsonDocument(remotes).toJson());
 	initOptionsPage();
 	show();
 	raise();
