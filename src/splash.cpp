@@ -14,6 +14,14 @@
 
 Splash::Splash(QWidget *parent) : QWidget(parent) {
 	setWindowFlags(Qt::FramelessWindowHint);
+	if(!QDir("tmp").exists()) {
+		if(!QDir("tmp").mkpath(".")) {
+			Logger::Debug("Unable to create tmp dir");
+			qApp->exit(0);
+			return;
+		}
+	}
+
 	_ui.setupUi(this);
 	_ui.mainStack->setCurrentIndex(0);
 }
