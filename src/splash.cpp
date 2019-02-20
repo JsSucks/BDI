@@ -74,19 +74,31 @@ void Splash::mouseReleaseEvent(QMouseEvent *event) {
 void Splash::btnContinueClicked() {
 	_ui.mainStack->setCurrentIndex(1);
 	systemChecks();
-	_ui.pbarRemotes->setValue(50);
+
 #ifdef TEST_MODE
 	QFile rf("releaseinfo.json");
 	rf.open(QIODevice::ReadOnly | QIODevice::Text);
 	remotes(QJsonDocument::fromJson(rf.readAll()).object());
 #else
-	auto remotesFile = new RemoteFile(Config::ghuc(Config::urls().paths.releaseInfo));
-	connect(remotesFile, &RemoteFile::error, [](RemoteFile *remoteFile) {
-		Logger::Debug(remoteFile->errorMsg());
+	auto qnam = new QNetworkAccessManager(this);
+	QNetworkRequest req;
+	req.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	req.setUrl(QUrl("https://github.com/" + Config::activeRepo() + "/BetterDiscordApp/releases/latest"));
+	connect(qnam, &QNetworkAccessManager::finished, [&](QNetworkReply *reply) {
+		auto latestReleaseUrl = reply->url();
+		Logger::Debug("Latest Release: " + latestReleaseUrl.url());
+		_ui.pbarRemotes->setValue(50);
+
+		auto remotesFile = new RemoteFile(QUrl(latestReleaseUrl.url().replace("tag", "download") + "/releaseinfo.json"));
+		connect(remotesFile, &RemoteFile::error, [](RemoteFile *remoteFile) {
+			Logger::Debug(remoteFile->errorMsg());
+		});
+		connect(remotesFile, &RemoteFile::finished, [&](RemoteFile *remoteFile) {
+			remotes(QJsonDocument::fromJson(remoteFile->bytes()).object());
+		});
+		remotesFile->download();
 	});
-	connect(remotesFile, &RemoteFile::finished, [&](RemoteFile *remoteFile) {
-		remotes(QJsonDocument::fromJson(remoteFile->bytes()).object());
-	});
-	remotesFile->download();
+	qnam->get(req);
 #endif
+
 }

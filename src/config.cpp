@@ -74,4 +74,7 @@ namespace Config {
 	Urls urls() {
 		return URLS;
 	}
+	QString activeRepo() {
+		return REPOSITORY.active;
+	}
 }

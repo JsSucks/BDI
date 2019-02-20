@@ -26,7 +26,7 @@ void Zip::extract(const QString &out) {
 	if(!out.isEmpty()) _out = out;
 	if(QFileInfo(_in).fileName().endsWith(".tar.gz")) return extractTarGz();
 	auto extractProcess = new QProcess(this);
-
+	
 	QStringList args{"x", "-y", _in, "-o" + _out};
 
 	Logger::Debug(_extractProgram + " " + args.join(" "));

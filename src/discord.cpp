@@ -131,7 +131,7 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 	Logger::Debug(_channel + " injecting to: " + _appDir.absolutePath());
 	if(!_appDir.exists()) {
 		Logger::Debug(_channel + " _appDir does not exist");
-		if(!_appDir.mkdir(".")) {
+		if(!_appDir.mkpath(".")) {
 			Logger::Debug(_channel + " cannot create _appDir");
 			emit injected(false);
 			return false;

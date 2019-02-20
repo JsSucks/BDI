@@ -44,4 +44,6 @@ namespace Config {
 	QUrl release(const QString &path);
 	QVersionNumber installerVersion();
 	Urls urls();
+	QString activeRepo();
+
 }
