@@ -173,6 +173,10 @@ bool Discord::inject(const QString &stub, QJsonObject config, const QString &cor
 		paths["client"] = QDir::cleanPath(paths["client"].toString() + _channel);
 	}
 
+	QDir editorPath(paths["core"].toString());
+	editorPath.cdUp();
+	paths["editor"] = QDir::cleanPath(editorPath.absolutePath() + "/editor");
+
 	if(options["commonData"].toBool()) {
 		paths["data"] = QDir::cleanPath(paths["data"].toString());
 	} else {

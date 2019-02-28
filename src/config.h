@@ -16,7 +16,7 @@
 #include "qtfs.hpp"
 #include "qtjson.hpp"
 
-#define TEST_MODE
+// #define TEST_MODE
 
 struct Repository final {
 	QString name;

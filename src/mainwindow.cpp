@@ -65,7 +65,8 @@ void MainWindow::splashFinished(QVector<Discord*> &discords, const QJsonObject &
 		Asset asset(obj);
 		if(asset.id() == "stub") {
 			asset.remote = new RemoteFile(asset.raw());
-		} else {
+		}
+		else {
 			asset.remote = new RemoteFile(asset.fileName(), "tmp", asset.remoteLocation(), false);
 			asset.remote->loadLocal();
 			asset.zip = new Zip(asset.remote->localFilePath(), "tmp");
@@ -145,6 +146,7 @@ void MainWindow::install() const {
 	connect(asset("stub").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
 	connect(asset("core").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
 	connect(asset("client").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
+	connect(asset("editor").remote, &RemoteFile::finished, this, &MainWindow::processRemotes);
 
 	// Check if files exist
 	if(asset("core").localFileExists() && asset("core").compareHash()) {
@@ -163,11 +165,22 @@ void MainWindow::install() const {
 		asset("client").remote->download();
 	}
 
+	if(asset("editor").localFileExists() && asset("editor").compareHash()) {
+		Logger::Debug("Latest editor archive exists");
+		asset("editor").remote->setDownloaded(true);
+	} else {
+		Logger::Debug("Latest editor archive does not exist");
+		asset("editor").remote->download();
+	}
+
 	asset("stub").remote->download();
 }
 
 void MainWindow::processRemotes() const {
-	if(!asset("stub").remote->downloaded() || !asset("core").remote->downloaded() || !asset("client").remote->downloaded()) return;
+	if(!asset("stub").remote->downloaded() || 
+		!asset("core").remote->downloaded() || 
+		!asset("client").remote->downloaded() ||
+		!asset("editor").remote->downloaded()) return;
 	Logger::Debug("Finished pulling packages");
 
 	_toInstall->first()->widget()->setStatus("Installing...");
@@ -186,6 +199,13 @@ void MainWindow::inject() const {
 	if(_userConfig.useCommonInstallPath() && !clientAsset.zip->isExtracted()) {
 		connect(clientAsset.zip, &Zip::extracted, this, &MainWindow::inject);
 		clientAsset.zip->extract(_userConfig.installPath());
+		return;
+	}
+
+	auto editorAsset = asset("editor");
+	if(_userConfig.useCommonInstallPath() && !editorAsset.zip->isExtracted()) {
+		connect(editorAsset.zip, &Zip::extracted, this, &MainWindow::inject);
+		editorAsset.zip->extract(_userConfig.installPath());
 		return;
 	}
 
