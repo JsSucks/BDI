@@ -6,11 +6,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Packer {
     internal class Program {
-        private static void Main() {
-            _ = new Program();
+        private static void Main(string[] args) {
+            if (args.Length <= 0) {
+                Quit("No Qt bin path supplied");
+            }
+
+            _ = new Program(args[0]);
         }
 
-        private Program() {
+        private Program(string qtBinPath) {
             var configJson = FindConfig();
             if (configJson == null) Quit();
 
@@ -47,7 +51,6 @@ namespace Packer {
             Console.WriteLine("Saving config.json");
             File.WriteAllText(Path.Combine(releaseDir, "config.json"), configJson.ToString());
 
-            // TODO copy libs
             Console.WriteLine("Copying ssl libs");
             var packagesPath = FindPackages();
             Console.WriteLine($"Packagespath: {packagesPath}");
@@ -57,6 +60,35 @@ namespace Packer {
             if(!File.Exists(ssleay)) Quit("ssleay32.dll not found");
             File.Copy(libeay, Path.Combine(releaseDir, "libeay32.dll"));
             File.Copy(ssleay, Path.Combine(releaseDir, "ssleay32.dll"));
+
+            var qtLibs = new [] {
+                Path.Combine(qtBinPath, "bin", "Qt5Core.dll"),
+                Path.Combine(qtBinPath, "bin", "Qt5Gui.dll"),
+                Path.Combine(qtBinPath, "bin", "Qt5Network.dll"),
+                Path.Combine(qtBinPath, "bin", "Qt5Svg.dll"),
+                Path.Combine(qtBinPath, "bin", "Qt5Widgets.dll")
+            };
+
+            Console.WriteLine("Copying qt libs");
+
+            foreach (var qtLib in qtLibs) {
+                if(!File.Exists(qtLib)) Quit($"{qtLib} not found");
+            }
+
+            foreach (var qtLib in qtLibs) {
+                File.Copy(qtLib, Path.Combine(releaseDir, new FileInfo(qtLib).Name));
+            }
+
+            var qtPlatformPlugin = Path.Combine(qtBinPath, "plugins", "platforms", "qwindows.dll");
+            if (!File.Exists(qtPlatformPlugin)) {
+                Quit($"{qtPlatformPlugin} not found");
+            }
+
+            if (!Directory.Exists(Path.Combine(releaseDir, "platforms"))) {
+                Directory.CreateDirectory(Path.Combine(releaseDir, "platforms"));
+            }
+
+            File.Copy(qtPlatformPlugin, Path.Combine(releaseDir, "platforms", "qwindows.dll"));
 
             Console.WriteLine("All done");
             Console.WriteLine("Press any key to exit...");
